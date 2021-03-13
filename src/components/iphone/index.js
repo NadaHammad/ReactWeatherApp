@@ -1,0 +1,297 @@
+// import preact
+//import { h, render, Component } from "preact";
+// import stylesheets for ipad & button
+import "./style.less";
+import "../button/style_iphone.less";
+import background1 from "../../assets/backgrounds/clear.jpg";
+
+// import jquery for API calls
+import $ from "jquery";
+// import the Button component
+import Button from "../button";
+import DayView from "../dayview";
+import Notification from "../notification";
+//import Notifications, {notify} from 'react-notify-toast';
+import React, { useState, useEffect, useCallback } from "react";
+import ReactDOM from "react-dom";
+
+const Iphone = () => {
+  const [mounted, setMounted] = useState(true);
+  const [data, setData] = useState([]);
+  const [background, setBackground] = useState("container");
+  const [tempStyles, setTempStyles] = useState("");
+  let [weatherInfo, setWeatherInfo] = useState([]);
+  const parseResponse = (parsed_json) => {
+    //name not available in one call we could hard code it?
+    setMounted(false);
+    //var location = parsed_json['name'];
+    let location = "London";
+    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let conditions = parsed_json["current"]["weather"]["0"]["description"];
+    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+    //var rainpop =  parsed_json["daily"][0][`pop`];
+    let dailyrain = new Array(7);
+    //rain for the next days
+    for (let i = 0; i < 7; i++) {
+      dailyrain[i] = parsed_json["daily"][i]["pop"];
+      //console.log(dailyrain);
+    }
+    //var days = parsed_json["daily"]
+    // set states for fields so they could be rendered later on
+    setData({
+      locate: location,
+      temp: temp_c,
+      cond: conditions,
+      wid: id,
+      dailyrain,
+    });
+  };
+  // a call to fetch weather data via wunderground
+  const fetchWeatherData = useCallback(() => {
+    // API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
+    //var url = "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=6b825d5e524d540a69987f621c8f50dc";
+    let url =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&units=metric&appid=6b825d5e524d540a69987f621c8f50dc";
+    $.ajax({
+      url,
+      dataType: "jsonp",
+      success: parseResponse,
+      error(req, err) {
+        console.log("API call failed " + err);
+      },
+    });
+    // once the data grabbed, hide the button
+    setMounted(false);
+  }, []);
+  useEffect(() => {
+    if (mounted) {
+      fetchWeatherData();
+    }
+  }, [mounted, fetchWeatherData]);
+  console.log(data);
+
+  //   const tempStyles =
+  //     data && data.temp ? `${temperature} ${filled}` : "temperature";
+  useEffect(() => {
+    if (data.temp) {
+      setTempStyles(`${"temperature"} ${"filled"}`);
+      //this.state.wid = "601";
+
+      //NOT ALL CODES ARE IMPLEMENTED
+      //TODO?
+
+      if (data && data.wid == "800") {
+        setBackground("/clear.jpg");
+      } else if (data && data.wid == "801") {
+        setBackground("/fewClouds.jpg");
+      } else if (data && data.wid.charAt(0) == 8) {
+        setBackground("/cloudy.jpg");
+      } else if (
+        (data && data.wid.charAt(0) == 3) ||
+        (data && data.wid.charAt(0) == 5)
+      ) {
+        setBackground("/rain.jpg");
+      } else if (data && data.wid == "701") {
+        setBackground("/mist.jpg");
+      } else if (data && data.wid.charAt(0) == 6) {
+        setBackground("/snow.jpg");
+      }
+    } else {
+      setTempStyles("temperature");
+    }
+
+    const dayString = (dayint) => {
+      if (dayint % 7 === 0) {
+        return "Sunday";
+      } else if (dayint % 7 === 1) {
+        return "Monday";
+      } else if (dayint % 7 === 2) {
+        return "Tueday";
+      } else if (dayint % 7 === 3) {
+        return "Wednesday";
+      } else if (dayint % 7 === 4) {
+        return "Thursday";
+      } else if (dayint % 7 === 5) {
+        return "Friday";
+      } else if (dayint % 7 === 6) {
+        return "Saturday";
+      }
+    };
+    const today = new Date();
+
+    //checks if data has been retrivied as will throw undefined error beofre
+    //console.log(this.state.days);
+    let weatherInfo = [];
+    if (data && data.dailyrain && weatherInfo) {
+      weatherInfo.push(
+        <div> Today's chance of rain is {data.dailyrain[0] * 100}%</div>
+      );
+      for (let i = 1; i < 6; i++) {
+        weatherInfo.push(
+          <DayView
+            key={i}
+            day={dayString(today.getDay() + i)}
+            chance={data.dailyrain[i]}
+          ></DayView>
+        );
+      }
+      setWeatherInfo(<div>{weatherInfo}</div>);
+    }
+  }, [data]);
+
+  // formats date to display info
+
+  console.log(background);
+  return (
+    <div
+      className="containeriPhone"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        color: "#fff",
+        width: "414px",
+        height: "736px",
+        textAlign: "center",
+        paddingTop: "80px",
+        margin: "0 auto",
+        backgroundImage: `url(/img${background})`,
+      }}
+    >
+      <div className="header">
+        <div className="city">{data ? data.locate : ""}</div>
+        <div className="conditions">{data ? data.cond : ""}</div>
+        <span className={tempStyles}>{data ? data.temp : ""}</span>
+      </div>
+
+      <div className={"details"}></div>
+      <div className={"containeriPhone button"}>
+        {data && data.display ? (
+          <Button className={"button"} clickFunction={fetchWeatherData} />
+        ) : null}
+        {weatherInfo}
+        <Notification />
+      </div>
+    </div>
+  );
+};
+
+export default Iphone;
+
+// 		let container = style.container;
+
+// 		//const tempStyles = this.state.temp ? `${style.temperature} ${style.filled}` : style.temperature;
+// 		let tempStyles = "";
+// 		if (this.state.temp) {
+// 			tempStyles = `${style.temperature} ${style.filled}`;
+// 			//this.state.wid = "601";
+
+// 			//NOT ALL CODES ARE IMPLEMENTED
+// 			//TODO?
+
+// 			if (this.state.wid == "800") {
+// 				container = style.clear;
+// 			} else if (this.state.wid == "801") {
+// 				container = style.fewClouds;
+// 			} else if (this.state.wid.charAt(0) == 8) {
+// 				container = style.cloudy;
+// 			} else if (
+// 				this.state.wid.charAt(0) == 3 ||
+// 				this.state.wid.charAt(0) == 5
+// 			) {
+// 				container = style.rain;
+// 			} else if (this.state.wid == "701") {
+// 				container = style.mist;
+// 			} else if (this.state.wid.charAt(0) == 6) {
+// 				container = style.snow;
+// 			}
+// 		} else {
+// 			tempStyles = style.temperature;
+// 		}
+
+// 		//formats date to display info
+// 		const today = new Date();
+
+// 		let weatherInfo = [];
+// 		//checks if data has been retrivied as will throw undefined error beofre
+// 		//console.log(this.state.days);
+// 		if (this.state.dailyrain) {
+// 			weatherInfo.push(
+// 				<div> Today's chance of rain is {this.state.dailyrain[0] * 100}%</div>
+// 			);
+// 			for (let i = 1; i < 6; i++) {
+// 				weatherInfo.push(
+// 					<DayView
+// 						day={this.dayString(today.getDay() + i)}
+// 						chance={this.state.dailyrain[i]}
+// 					></DayView>
+// 				);
+// 			}
+// 			weatherInfo = <div>{weatherInfo}</div>;
+// 		}
+// 		// display all weather data
+
+// 		return (
+// 			<div class={container}>
+// 				{/* <Notifications /> */}
+// 				<div class={style.header}>
+// 					<div class={style.city}>{this.state.locate}</div>
+// 					<div class={style.conditions}>{this.state.cond}</div>
+// 					<span class={tempStyles}>{this.state.temp}</span>
+// 				</div>
+
+// 				<div class={style.details}></div>
+// 				<div class={style_iphone.container}>
+// 					{this.state.display ? (
+// 						<Button
+// 							class={style_iphone.button}
+// 							clickFunction={this.fetchWeatherData}
+// 						/>
+// 					) : null}
+// 					{weatherInfo}
+// 				</div>
+// 			</div>
+// 		);
+// 	}
+
+// 	parseResponse = (parsed_json) => {
+// 		//name not available in one call we could hard code it?
+// 		//var location = parsed_json['name'];
+// 		let location = "London";
+// 		let temp_c = Math.round(parsed_json["current"]["temp"]);
+// 		let conditions = parsed_json["current"]["weather"]["0"]["description"];
+// 		let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+// 		//var rainpop =  parsed_json["daily"][0][`pop`];
+// 		let dailyrain = new Array(7);
+// 		//rain for the next days
+// 		for (let i = 0; i < 7; i++) {
+// 			dailyrain[i] = parsed_json["daily"][i]["pop"];
+// 			//console.log(dailyrain);
+// 		}
+// 		//var days = parsed_json["daily"]
+// 		// set states for fields so they could be rendered later on
+// 		this.setState({
+// 			locate: location,
+// 			temp: temp_c,
+// 			cond: conditions,
+// 			wid: id,
+// 			dailyrain,
+// 		});
+// 	};
+// 	dayString = (dayint) => {
+// 		if (dayint % 7 === 0) {
+// 			return "Sunday";
+// 		} else if (dayint % 7 === 1) {
+// 			return "Monday";
+// 		} else if (dayint % 7 === 2) {
+// 			return "Tueday";
+// 		} else if (dayint % 7 === 3) {
+// 			return "Wednesday";
+// 		} else if (dayint % 7 === 4) {
+// 			return "Thursday";
+// 		} else if (dayint % 7 === 5) {
+// 			return "Friday";
+// 		} else if (dayint % 7 === 6) {
+// 			return "Saturday";
+// 		}
+// 	};
+// }
