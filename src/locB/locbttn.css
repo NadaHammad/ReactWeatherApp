@@ -1,0 +1,110 @@
+
+/* // Styles for Location BTTNS or BANNERS
+// THE STYLING for the banenrs in the index.js is on the other stylesheet called
+// STYLE.LESS
+// Banner classes are named as div.Banner! */
+
+
+button:focus {
+	outline: none;
+	box-shadow: none;
+  }
+
+.locbanner {
+	width: 150px;
+	background: white;
+	font-size:medium;
+	font-weight: bold;
+	color: rgb(0, 31, 204);
+	border-radius: 2ex 0 0 2ex;
+	border-color: none;
+	border-width: 5ch;
+	border-left: 1ch;
+	padding: 1px 3px 1px 20px ;
+	display: inline;
+    transition: none;
+	margin: 0ch;
+	border: none;
+}
+
+.area, .temp {
+	display: inline;
+}
+.temp{
+	position: relative;
+	right: 5px;
+	margin-left: 10px;
+}
+
+/* // MANAGE LOCATIONS BUTTON */
+.mngbttn button{
+	width: 130px;
+	background: white;
+	font-size:medium;
+	font-weight: bold;
+	color: rgb(0, 31, 204);
+	border-radius: 2ex 0 0 2ex;
+	border-color: none;
+	border-width: 5ch;
+	border-left: 1ch;
+    transition: none;
+	margin: 0ch;
+	padding: 0;
+	border: none;
+	display: inline;
+}
+.mngbttn button:hover{
+    color: rgb(255, 13, 13);
+}
+.mngbttn button:active{
+	color: aliceblue;
+	background-color: #005eb6;
+	box-shadow: 0 2px rgb(212, 212, 212);
+}
+.locP {
+	font-size: small;
+}
+
+
+/* // MENU BOX */
+.MenuBox {
+	background-color: rgb(170, 170, 170);
+	border-radius: 10px;
+	display: block;
+	position: absolute;
+	left:40%;
+	text-align:left;
+}
+.MenuBox section, h3{
+	padding: 8px;
+}
+p.titleP {
+	border:1px solid rgb(31, 31, 31);
+	color: black;
+	font-size: medium;
+}
+.areaP{
+	display: flex;
+	justify-content: space-between;
+}
+.areaP button{
+	border: none;
+	background-color: transparent;
+}
+.areaP p{
+	color: black;
+	border:1px solid rgb(31, 31, 31);
+}
+button.editB, button.delB{
+	border:1px solid rgb(31, 31, 31);
+}
+.editB{
+	color: rgb(4, 0, 255);
+	text-decoration: underline;
+}	
+.delB{
+	color: rgb(255, 0, 0);
+	text-decoration: underline;
+	margin-left: 6px;
+}	
+

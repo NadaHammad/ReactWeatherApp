@@ -1,5 +1,3 @@
-// import preact
-//import { h, render, Component } from "preact";
 // import stylesheets for ipad & button
 import "./style.less";
 import "../button/style_iphone.less";
@@ -15,22 +13,36 @@ import Notification from "../notification";
 import React, { useState, useEffect, useCallback } from "react";
 import ReactDOM from "react-dom";
 
+// Maki IMPORTS FOR LOCATION
+import Locbttn from '../../locB/locbttn';
+import ManageLoc from '../../locB/mnglocbttn';
+
+
+
+
+
+
 const Iphone = () => {
   const [mounted, setMounted] = useState(true);
   const [data, setData] = useState([]);
   const [background, setBackground] = useState("container");
   const [tempStyles, setTempStyles] = useState("");
   let [weatherInfo, setWeatherInfo] = useState([]);
+
   const parseResponse = (parsed_json) => {
+
     //name not available in one call we could hard code it?
     setMounted(false);
+
     //var location = parsed_json['name'];
     let location = "London";
     let temp_c = Math.round(parsed_json["current"]["temp"]);
     let conditions = parsed_json["current"]["weather"]["0"]["description"];
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+
     //var rainpop =  parsed_json["daily"][0][`pop`];
     let dailyrain = new Array(7);
+
     //rain for the next days
     for (let i = 0; i < 7; i++) {
       dailyrain[i] = parsed_json["daily"][i]["pop"];
@@ -46,6 +58,8 @@ const Iphone = () => {
       dailyrain,
     });
   };
+
+
   // a call to fetch weather data via wunderground
   const fetchWeatherData = useCallback(() => {
     // API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
@@ -60,15 +74,17 @@ const Iphone = () => {
         console.log("API call failed " + err);
       },
     });
+
     // once the data grabbed, hide the button
     setMounted(false);
   }, []);
+
   useEffect(() => {
     if (mounted) {
       fetchWeatherData();
     }
   }, [mounted, fetchWeatherData]);
-  console.log(data);
+  // console.log(data);
 
   //   const tempStyles =
   //     data && data.temp ? `${temperature} ${filled}` : "temperature";
@@ -117,6 +133,7 @@ const Iphone = () => {
         return "Saturday";
       }
     };
+
     const today = new Date();
 
     //checks if data has been retrivied as will throw undefined error beofre
@@ -157,6 +174,30 @@ const Iphone = () => {
         backgroundImage: `url(/img${background})`,
       }}
     >
+
+	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
+				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
+				<div class="Banner" >
+					{data.display ? null : <Locbttn/> }  
+				</div>
+
+				{/* LOCATION BUTTON 2 */}
+				<div class="Banner">
+					{data.display ? null : <Locbttn/> }  
+				</div>
+
+				{/* LOCATION BUTTON 3 */}
+				<div class="Banner" >
+					{data.display ? null : <Locbttn/> }  
+				</div>
+
+				<div class="Banner">
+					{data.display ? null : <ManageLoc/> }
+				</div>
+	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
+
+
+
       <div className="header">
         <div className="city">{data ? data.locate : ""}</div>
         <div className="conditions">{data ? data.cond : ""}</div>
@@ -166,9 +207,8 @@ const Iphone = () => {
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
         {data && data.display ? (
-          <Button className={"button"} clickFunction={fetchWeatherData} />
-        ) : null}
-        {weatherInfo}
+          <Button className={"button"} clickFunction={fetchWeatherData} />) : null}
+          {weatherInfo}
         <Notification />
       </div>
     </div>
