@@ -16,7 +16,7 @@ export default class ManageLoc extends React.Component{
     }
 
     render() {
-        console.log('this is the menu saying yo yo yo!');
+        //console.log('this is the menu saying yo yo yo!');
 
     return (
         // Renders a banner via 'DIV' and using 'p'
