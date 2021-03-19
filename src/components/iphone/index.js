@@ -137,12 +137,12 @@ const Iphone = () => {
 
   return (
     <div
-      className="containeriPhone"
+      // className="containeriPhone"
       style={{
         display: "flex",
         flexDirection: "column",
         color: "#fff",
-        width: "414px",
+        width: "500px",
         height: "736px",
         textAlign: "center",
         paddingTop: "80px",
@@ -153,9 +153,12 @@ const Iphone = () => {
 
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
 				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
-				<div className="Banner" >
-					{data.display ? null : <Locbttn/> } 
-				</div>
+        <div style={{margin:"0px", padding: "0px", display: "inline"}}><Notification/></div>
+        <div className="Banner" >
+				  {data.display ? null : <Locbttn/> } 
+          
+        </div>
+			
 
 				{/* LOCATION BUTTON 2 */}
 				<div className="Banner">
@@ -163,9 +166,12 @@ const Iphone = () => {
 				</div>
 
 				{/* LOCATION BUTTON 3 */}
+        
+       
 				<div className="Banner" >
-					{data.display ? null : <Locbttn/> }  
-				</div>
+				  {data.display ? null : <Locbttn/> }  
+        </div>
+				
 
 				<div className="Banner">
 					{data.display ? null : <ManageLoc/> }
@@ -190,7 +196,7 @@ const Iphone = () => {
           {!mounted? (
            <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp}></DayView>
           ) : null}
-        <Notification />
+        
       </div>
     </div>
   );

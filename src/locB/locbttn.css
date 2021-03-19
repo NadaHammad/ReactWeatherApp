@@ -4,27 +4,31 @@
 // STYLE.LESS
 // Banner classes are named as div.Banner! */
 
-
 button:focus {
-	outline: none;
-	box-shadow: none;
-  }
+  outline: none;
+  box-shadow: none;
+}
 
 .locbanner {
-	width: 150px;
-	background: white;
-	font-size:medium;
-	font-weight: bold;
-	color: rgb(0, 31, 204);
-	border-radius: 2ex 0 0 2ex;
-	border-color: none;
-	border-width: 5ch;
-	border-left: 1ch;
-	padding: 1px 3px 1px 20px ;
-	display: inline;
-    transition: none;
-	margin: 0ch;
-	border: none;
+  width: 150px;
+  background: white;
+  font-size: medium;
+  font-weight: bold;
+  color: rgb(0, 31, 204);
+  border-radius: 2ex 0 0 2ex;
+  border-color: none;
+  border-width: 5ch;
+  border-left: 1ch;
+  padding: 1px 3px 1px 20px;
+  display: inline;
+  transition: none;
+  margin: 0ch;
+  border: none;
+}
+
+.locbttn {
+  display: inline;
+  border: 1px solid rgb(3, 3, 3);
 }
 .locbttn {
 	display:inline ;
@@ -32,10 +36,10 @@ button:focus {
 .area, .temp {
 	display: inline;
 }
-.temp{
-	position: relative;
-	right: 5px;
-	margin-left: 10px;
+.temp {
+  position: relative;
+  right: 5px;
+  margin-left: 10px;
 }
 
 /* // MANAGE LOCATIONS BUTTON */
@@ -70,86 +74,85 @@ button:focus {
 	font-size: small;
 }
 
-
 /* // MENU BOX */
 .MenuBox {
-	background-color: rgb(255, 255, 255);
-	border: 2pt solid  rgb(212, 212, 212);
-	border-radius: 10px;
-	display: block;
-	position: absolute;
-	left:35%;
-	top:10%;
-	width: 65%;
-	text-align:left;
-	box-shadow: -3px 3px rgba(0, 0, 0, 0.603);
+  background-color: rgb(255, 255, 255);
+  border: 2pt solid rgb(212, 212, 212);
+  border-radius: 10px;
+  display: block;
+  position: absolute;
+  left: 35%;
+  top: 10%;
+  width: 65%;
+  text-align: left;
+  box-shadow: -3px 3px rgba(0, 0, 0, 0.603);
 }
-.MenuBox section, h4{
-	text-align: center;
-	color: black;
-	padding: 0;
-	margin: 0;
+.MenuBox section,
+h4 {
+  text-align: center;
+  color: black;
+  padding: 0;
+  margin: 0;
 }
 p.titleP {
-	/* border:1px solid rgb(31, 31, 31); */
-	color: black;
-	font-size: small;
-	text-align: left;
-	margin: 10px 0 3px 0;
+  /* border:1px solid rgb(31, 31, 31); */
+  color: black;
+  font-size: small;
+  text-align: left;
+  margin: 10px 0 3px 0;
 }
-.areaP{
-	display: flex;
-	justify-content: space-between;
+.areaP {
+  display: flex;
+  justify-content: space-between;
 }
-.areaP button{
-	border: none;
-	background-color: transparent;
+.areaP button {
+  border: none;
+  background-color: transparent;
 }
-.areaP p{
-	text-align: left;
-	color: black;
-	border: 1px solid rgb(211, 211, 211);
-	width: 70%;
-	height: 100%;
-	padding: 1px;
-	margin: 0 0 0 5px;
+.areaP p {
+  text-align: left;
+  color: black;
+  border: 1px solid rgb(211, 211, 211);
+  width: 70%;
+  height: 100%;
+  padding: 1px;
+  margin: 0 0 0 5px;
 }
-.concanMain{
-	/* border:1px solid rgb(31, 31, 31); */
-	padding: 10px 40px 5px 40px;
-	margin: 0 15px 0 15px;
+.concanMain {
+  /* border:1px solid rgb(31, 31, 31); */
+  padding: 10px 40px 5px 40px;
+  margin: 0 15px 0 15px;
 }
 .concan {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 /* button.editB, button.delB{
 	border:1px solid rgb(31, 31, 31);
 } */
-.can{
-	border: none;
-	background-color: transparent;
-	color: rgb(255, 0, 0);
-	text-decoration: underline;
-	font-weight: 700;
+.can {
+  border: none;
+  background-color: transparent;
+  color: rgb(255, 0, 0);
+  text-decoration: underline;
+  font-weight: 700;
 }
-.con{
-	border: none;
-	background-color: transparent;
-	color: rgb(0, 3, 192);
-	text-decoration: underline;
-	font-weight: 700;
+.con {
+  border: none;
+  background-color: transparent;
+  color: rgb(0, 3, 192);
+  text-decoration: underline;
+  font-weight: 700;
 }
-.editB{
-	padding: 0;
-	color: rgb(4, 0, 255);
-	text-decoration: underline;
-}	
-.delB{
-	padding: 0;
-	color: rgb(255, 0, 0);
-	text-decoration: underline;
-	margin-left: 6px;
-	margin-right: 2px;
-}	
-
+.editB {
+  padding: 0;
+  color: rgb(4, 0, 255);
+  text-decoration: underline;
+}
+.delB {
+  padding: 0;
+  color: rgb(255, 0, 0);
+  text-decoration: underline;
+  margin-left: 6px;
+  margin-right: 2px;
+}

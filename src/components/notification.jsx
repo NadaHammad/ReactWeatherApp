@@ -36,10 +36,10 @@ const Notification = () => {
 
   return (
     <>
-      <button className="btn btn-info" onClick={createNotification("info")}>
+      <button  style={{borderRadius: "25px", border: "2px solid red", marginRight: "-220px"}} className="btn btn-info" onClick={createNotification("info")}>
         Info
       </button>
-      <hr />
+      {/* <hr />
       <button
         className="btn btn-success"
         onClick={createNotification("success")}
@@ -56,7 +56,7 @@ const Notification = () => {
       <hr />
       <button className="btn btn-danger" onClick={createNotification("error")}>
         Error
-      </button>
+      </button> */}
 
       <NotificationContainer />
     </>
