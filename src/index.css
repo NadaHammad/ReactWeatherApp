@@ -23,13 +23,13 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 div.Banner {
 	text-align: right;
 	margin: 0;
-	margin-top: 5pt;
+	margin-top: 5px;
 	padding: 2;
 	position: relative;
 	top: -50pt;
 	/* border: 1px solid rgb(3, 3, 3); */
-
 }
+
 .bigTemp {
   position: absolute;
   font-size: 75px;
@@ -41,11 +41,11 @@ div.Banner {
   color: rgb(255, 255, 255);
 }
 .bigTemp{
-  top: 50px;
+  top: 50 px;
   left: 40%;
 }
 .city {
-  top: -225%;
+  top: -230%;
   right: 35%;
   margin: 0;
   margin-top: 5pt;

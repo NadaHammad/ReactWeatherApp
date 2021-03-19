@@ -154,22 +154,28 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
 				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
         {/* <div style={{margin:"0px", padding: "0px", display: "inline"}}><Notification/></div> */}
-        <div className="Banner" >
-				  {data.display ? null : <Locbttn/> } 
-          
+        <div >
+          <div className="Banner" >
+            <Notification/>
+            {data.display ? null : <Locbttn/> } 
+          </div>
         </div>
-			
 
 				{/* LOCATION BUTTON 2 */}
-				<div className="Banner">
-					{data.display ? null : <Locbttn/> }  
-				</div>
+        <div >
+          <div className="Banner" >
+            <Notification/>
+            {data.display ? null : <Locbttn/> } 
+          </div>
+        </div>
+
 
 				{/* LOCATION BUTTON 3 */}
-        
-       
-				<div className="Banner" >
-				  {data.display ? null : <Locbttn/> }  
+        <div >
+          <div className="Banner" >
+            <Notification/>
+            {data.display ? null : <Locbttn/> } 
+          </div>
         </div>
 				
 
