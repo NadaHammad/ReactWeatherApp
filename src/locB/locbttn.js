@@ -1,30 +1,23 @@
 import "./locbttn.css"; // import required Components from 'components/'
-import React from "react";
+import React, { useState } from 'react';
 
-
-
-export default class Locbttn extends React.Component{
-
-    // Two states to handle for now: Location of choice and temperature of said location of choice
-    state = {
-        area: 'testing', 
-        temperature: '100'
-    }
-
-    render() {
-        // console.log('Hello world!');
-
+export default function Locbttn(props) {
+    // Declare a new state variable, which we'll call "count"
+    const [area, setA]= useState("London");
+    const [temperature, setT ] = useState("20");
+  
+    // function handleAreaChange(e){
+    //     setA(e.target.value);
+    // }
+    // function handleTempChange(e){
+    //     setT(e.target.value);
+        
     return (
-        // Renders a banner via 'DIV' and using 'p'
-        <div>
-            <div  class="locbttn" >
-                <section class="locbanner">
-                    <p class="area" >{this.state.area}</p>
-                    <p class="temp">{this.state.temperature}</p>
-                </section>
-            </div>
+        <div  class="locbttn" >
+            <section class="locbanner">
+                <p class="area" >{area}</p>
+                <p class="temp" >{temperature}</p>
+            </section>
         </div>
-        );
-    }
-    
-}
+    );
+  }

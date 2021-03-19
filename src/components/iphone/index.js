@@ -18,6 +18,9 @@ import Locbttn from '../../locB/locbttn';
 import ManageLoc from '../../locB/mnglocbttn';
 
 
+//bootstrap?
+import Table from 'react-bootstrap/'; 
+
 
 
 
@@ -27,7 +30,7 @@ const Iphone = () => {
   const [data, setData] = useState([]);
   const [background, setBackground] = useState("container");
   const [tempStyles, setTempStyles] = useState("");
-  let [weatherInfo, setWeatherInfo] = useState([]);
+  //let [weatherInfo, setWeatherInfo] = useState([]);
 
   const parseResponse = (parsed_json) => {
 
@@ -40,22 +43,31 @@ const Iphone = () => {
     let conditions = parsed_json["current"]["weather"]["0"]["description"];
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
 
-    //var rainpop =  parsed_json["daily"][0][`pop`];
-    let dailyrain = new Array(7);
-
-    //rain for the next days
+    let iconArray = new Array(7);
     for (let i = 0; i < 7; i++) {
-      dailyrain[i] = parsed_json["daily"][i]["pop"];
-      //console.log(dailyrain);
+      iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
     }
-    //var days = parsed_json["daily"]
-    // set states for fields so they could be rendered later on
+
+    let dailyRain = new Array(7);
+    for (let i = 0; i < 7; i++) {
+      dailyRain[i] = parsed_json["daily"][i]["pop"];
+    }
+
+    //daily temperature
+    let dailyTemp = new Array(7);
+    for (let i = 0; i < 7; i++) {
+      dailyTemp[i] = parsed_json["daily"][i]["temp"]["day"];
+    }
+
+     // set states for fields so they could be rendered later on
     setData({
       locate: location,
       temp: temp_c,
       cond: conditions,
       wid: id,
-      dailyrain,
+      dailyRain,
+      dailyTemp,
+      iconArray,
     });
   };
 
@@ -84,14 +96,13 @@ const Iphone = () => {
       fetchWeatherData();
     }
   }, [mounted, fetchWeatherData]);
-  // console.log(data);
+  
 
-  //   const tempStyles =
-  //     data && data.temp ? `${temperature} ${filled}` : "temperature";
+
   useEffect(() => {
     if (data.temp) {
       setTempStyles(`${"temperature"} ${"filled"}`);
-      //this.state.wid = "601";
+      
 
       //NOT ALL CODES ARE IMPLEMENTED
       //TODO?
@@ -116,49 +127,17 @@ const Iphone = () => {
       setTempStyles("temperature");
     }
 
-    const dayString = (dayint) => {
-      if (dayint % 7 === 0) {
-        return "Sunday";
-      } else if (dayint % 7 === 1) {
-        return "Monday";
-      } else if (dayint % 7 === 2) {
-        return "Tueday";
-      } else if (dayint % 7 === 3) {
-        return "Wednesday";
-      } else if (dayint % 7 === 4) {
-        return "Thursday";
-      } else if (dayint % 7 === 5) {
-        return "Friday";
-      } else if (dayint % 7 === 6) {
-        return "Saturday";
-      }
-    };
 
-    const today = new Date();
+    // const today = new Date();
 
-    //checks if data has been retrivied as will throw undefined error beofre
-    //console.log(this.state.days);
-    let weatherInfo = [];
-    if (data && data.dailyrain && weatherInfo) {
-      weatherInfo.push(
-        <div> Today's chance of rain is {data.dailyrain[0] * 100}%</div>
-      );
-      for (let i = 1; i < 6; i++) {
-        weatherInfo.push(
-          <DayView
-            key={i}
-            day={dayString(today.getDay() + i)}
-            chance={data.dailyrain[i]}
-          ></DayView>
-        );
-      }
-      setWeatherInfo(<div>{weatherInfo}</div>);
-    }
+    // checks if data has been retrivied as will throw undefined error beofre
+    // console.log(this.state.days);
+    // let weatherInfo = [];
+    
   }, [data]);
 
   // formats date to display info
 
-  console.log(background);
   return (
     <div
       className="containeriPhone"
@@ -178,7 +157,7 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
 				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
 				<div class="Banner" >
-					{data.display ? null : <Locbttn/> }  
+					{data.display ? null : <Locbttn/> } 
 				</div>
 
 				{/* LOCATION BUTTON 2 */}
@@ -196,9 +175,7 @@ const Iphone = () => {
 				</div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
 
-
-
-      <div className="header">
+  <div className="header">
         <div className="city">{data ? data.locate : ""}</div>
         <div className="conditions">{data ? data.cond : ""}</div>
         <span className={tempStyles}>{data ? data.temp : ""}</span>
@@ -206,15 +183,17 @@ const Iphone = () => {
 
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
-        {data && data.display ? (
-          <Button className={"button"} clickFunction={fetchWeatherData} />) : null}
-          {weatherInfo}
+        {data && data.display? (
+          <Button className={"button"} clickFunction={fetchWeatherData} />
+          ) : null}
+          {!mounted? (
+           <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp}></DayView>
+          ) : null}
         <Notification />
       </div>
     </div>
   );
 };
-
 export default Iphone;
 
 // 		let container = style.container;

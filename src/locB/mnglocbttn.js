@@ -1,22 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import '../locB/locbttn.css';
 import LocMenu from './locmenu';
 
-export default class ManageLoc extends React.Component{
+export default function ManageLoc(props) {
 
-    // Two states to handle for now: Location of choice and temperature of said location of choice
-    state = {
-        displayMenu: false
-    }
-        
-    displayMenuCMD = () => {
-        this.setState({
-            displayMenu: !this.state.displayMenu
-        })
-    }
-
-    render() {
-        console.log('this is the menu saying yo yo yo!');
+    const displayMenu = useState("true");
 
     return (
         // Renders a banner via 'DIV' and using 'p'
@@ -28,10 +16,9 @@ export default class ManageLoc extends React.Component{
             </div>
 
             <div>
-                {this.state.displayMenu ?  <LocMenu/> : null }
+                {displayMenu.display ?  <LocMenu/> : null }
             </div>
         </div>
         );
-    }
     
 }
