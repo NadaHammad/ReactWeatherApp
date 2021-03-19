@@ -36,23 +36,21 @@ div.Banner {
   color: rgb(255, 255, 255);
 }
 .city{
-  position: absolute;
+  position: relative;
   font-size: 40px;
   color: rgb(255, 255, 255);
 }
 .bigTemp{
   top: 50px;
-  left: 42%;
+  left: 40%;
 }
 .city {
-  top: 10px;
-  left: 40%;
-  text-align: right;
+  top: -225%;
+  right: 35%;
   margin: 0;
   margin-top: 5pt;
   padding: 2;
   position: relative;
-  top: -50pt;
 }
 
 div.NextToBanner {
