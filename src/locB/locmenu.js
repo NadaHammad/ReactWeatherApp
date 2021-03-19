@@ -15,37 +15,37 @@ export default class LocMenu extends React.Component{
 
     return (
         // Renders a banner via 'DIV' and using 'p'
-            <div class="MenuBox">
+            <div className="MenuBox">
                 <h3>Choose Locations to Edit:</h3>
                     <section>
-                        <p class="titleP">Location1:</p>
-                            <section class="areaP">
+                        <p className="titleP">Location1:</p>
+                            <section className="areaP">
                                 <p>{this.state.area}</p>
                                 <section>
-                                    <button class="editB">edit</button>
-                                    <button class="delB">delete</button>
+                                    <button className="editB">edit</button>
+                                    <button className="delB">delete</button>
                                 </section>
                             </section>
                     </section>
 
                     <section>
-                        <p class="titleP"> Location2:</p>
-                            <section class="reaP">
+                        <p className="titleP"> Location2:</p>
+                            <section className="reaP">
                                 <p>{this.state.area}</p>
                                 <section>
-                                    <button class="editB">edit</button>
-                                    <button class="delB">delete</button>
+                                    <button className="editB">edit</button>
+                                    <button className="delB">delete</button>
                                 </section>
                             </section>
                     </section>
                     
                     <section>
-                        <p class="titleP">Location3:</p>
-                            <div class="areaP">
+                        <p className="titleP">Location3:</p>
+                            <div className="areaP">
                                 <p>{this.state.area}</p>
                                 <section>
-                                    <button class="editB">edit</button>
-                                    <button class="delB">delete</button>
+                                    <button className="editB">edit</button>
+                                    <button className="delB">delete</button>
                                 </section>
                             </div>
                     </section>

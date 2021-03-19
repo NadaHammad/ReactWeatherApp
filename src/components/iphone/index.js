@@ -169,9 +169,9 @@ const Iphone = () => {
 					{data.display ? null : <Locbttn/> }  
 				</div>
 
-				{/* <div className="Banner">
+				<div className="Banner">
 					{data.display ? null : <ManageLoc/> }
-				</div> */}
+				</div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
 
   <div className="header">
