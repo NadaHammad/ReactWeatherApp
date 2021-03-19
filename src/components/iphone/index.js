@@ -144,7 +144,7 @@ const Iphone = () => {
         display: "flex",
         flexDirection: "column",
         color: "#fff",
-        width: "414px",
+        width: "500px",
         height: "736px",
         textAlign: "center",
         paddingTop: "80px",
