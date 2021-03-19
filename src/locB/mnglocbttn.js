@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import '../locB/locbttn.css';
 import LocMenu from './locmenu';
+
+export const Context = createContext({});
 
 export default function ManageLoc(props) {
 

@@ -1,6 +1,4 @@
-// import stylesheets for ipad & button
-import "./style.less";
-import "../button/style_iphone.less";
+
 //import background1 from "../../assets/backgrounds/clear.jpg";
 
 // import jquery for API calls
@@ -174,10 +172,14 @@ const Iphone = () => {
 				</div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
 
-  <div className="header">
+      <div className="header">
         <div className="city">{data ? data.locate : ""}</div>
         <div className="conditions">{data ? data.cond : ""}</div>
-        <span className={tempStyles}>{data ? data.temp : ""}</span>
+        <span className="bigTemp">{data ? data.temp : ""}</span>
+        {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
+                          the explanation. line above this comment- the SPAN had this className
+                          but I changed it so I can be able to edit this. the style for this will #
+                          be inindex.CSS, NOT less */}
       </div>
 
       <div className={"details"}></div>

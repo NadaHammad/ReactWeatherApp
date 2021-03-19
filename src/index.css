@@ -19,7 +19,6 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
   box-sizing: border-box;
 }
 
-
 /* // MAKI STYLES ADDED for the Banner "Loaction buttons or button" */
 div.Banner {
 	text-align: right;
@@ -28,4 +27,24 @@ div.Banner {
 	padding: 2;
 	position: relative;
 	top: -50pt;
+	/* border: 1px solid rgb(3, 3, 3); */
+
+}
+.bigTemp {
+  position: absolute;
+  font-size: 75px;
+  color: rgb(255, 255, 255);
+}
+.city{
+  position: absolute;
+  font-size: 40px;
+  color: rgb(255, 255, 255);
+}
+.bigTemp{
+  top: 50px;
+  left: 42%;
+}
+.city {
+  top: 10px;
+  left: 40%;
 }

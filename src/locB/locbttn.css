@@ -26,7 +26,9 @@ button:focus {
 	margin: 0ch;
 	border: none;
 }
-
+.locbttn {
+	display:inline ;
+}
 .area, .temp {
 	display: inline;
 }
@@ -43,15 +45,16 @@ button:focus {
 	font-size:medium;
 	font-weight: bold;
 	color: rgb(0, 31, 204);
-	border-radius: 2ex 0 0 2ex;
+	border-radius: 1ex 0 0 1ex;
 	border-color: none;
 	border-width: 5ch;
 	border-left: 1ch;
     transition: none;
-	margin: 0ch;
+	margin: 0;
 	padding: 0;
 	border: none;
 	display: inline;
+	box-shadow: 0 2px rgb(122, 122, 122);
 }
 .mngbttn button:hover{
     color: rgb(255, 13, 13);
@@ -59,9 +62,11 @@ button:focus {
 .mngbttn button:active{
 	color: aliceblue;
 	background-color: #005eb6;
-	box-shadow: 0 2px rgb(212, 212, 212);
+	box-shadow: 0 2px rgb(187, 187, 187);
 }
 .locP {
+	padding: 0;
+	margin: 2px;
 	font-size: small;
 }
 
