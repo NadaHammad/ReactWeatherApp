@@ -5,30 +5,30 @@ import LocMenu from './locmenu';
 export default function ManageLoc(props) {
 
     // Two states to handle for now: Location of choice and temperature of said location of choice
-    state = {
-        displayMenu: false
-    }
+    // state = {
+    //     displayMenu: false
+    // }
         
-    displayMenuCMD = () => {
-        this.setState({
-            displayMenu: !this.state.displayMenu
-        })
-    }
+    // displayMenuCMD = () => {
+    //     this.setState({
+    //         displayMenu: !this.state.displayMenu
+    //     })
+    // }
 
-    render() {
-        //console.log('this is the menu saying yo yo yo!');
+    // render() 
+    //     //console.log('this is the menu saying yo yo yo!');
 
     return (
         // Renders a banner via 'DIV' and using 'p'
-        <div class="mngDIV">
-            <div class="mngbttn">
-                <button type="submit" onClick={this.displayMenuCMD}>
-                    <p class="locP">Manage Locations</p>
+        <div className="mngDIV">
+            <div className="mngbttn">
+                <button type="submit" >
+                    <p className="locP">Manage Locations</p>
                 </button>
             </div>
 
             <div>
-                {displayMenu.display ?  <LocMenu/> : null }
+                {/* {displayMenu.display ?  <LocMenu/> : null } */}
             </div>
         </div>
         );

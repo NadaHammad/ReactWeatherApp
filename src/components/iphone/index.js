@@ -19,7 +19,7 @@ import ManageLoc from '../../locB/mnglocbttn';
 
 
 //bootstrap?
-import Table from 'react-bootstrap/'; 
+// import Table from 'react-bootstrap/'; 
 
 
 
@@ -155,23 +155,23 @@ const Iphone = () => {
 
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
 				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
-				<div class="Banner" >
+				<div className="Banner" >
 					{data.display ? null : <Locbttn/> } 
 				</div>
 
 				{/* LOCATION BUTTON 2 */}
-				<div class="Banner">
+				<div className="Banner">
 					{data.display ? null : <Locbttn/> }  
 				</div>
 
 				{/* LOCATION BUTTON 3 */}
-				<div class="Banner" >
+				<div className="Banner" >
 					{data.display ? null : <Locbttn/> }  
 				</div>
 
-				<div class="Banner">
+				{/* <div className="Banner">
 					{data.display ? null : <ManageLoc/> }
-				</div>
+				</div> */}
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
 
   <div className="header">

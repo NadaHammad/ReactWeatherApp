@@ -13,10 +13,10 @@ export default function Locbttn(props) {
     //     setT(e.target.value);
         
     return (
-        <div  class="locbttn" >
-            <section class="locbanner">
-                <p class="area" >{area}</p>
-                <p class="temp" >{temperature}</p>
+        <div  className="locbttn" >
+            <section className="locbanner">
+                <p className="area" >{area}</p>
+                <p className="temp" >{temperature}</p>
             </section>
         </div>
     );

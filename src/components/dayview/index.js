@@ -2,7 +2,7 @@
 //import { h, render, Component } from 'preact';
 //import React from "react";
 //import { h, render, Component } from 'react';
-import Table from 'react-bootstrap/Table'; 
+// import Table from 'react-bootstrap/Table'; 
 import React, { useState, useEffect, useCallback } from "react";
 
 
