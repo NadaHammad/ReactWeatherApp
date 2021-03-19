@@ -3,8 +3,8 @@ import  './locbttn.css';
 
 export default function LocMenu(props){
 
-    const [area, setArea] = useState("tempA");
-    const [display, setD] = useState("tempD");
+    const [area, setAA] = useState("tempA");
+    // const [display, setDD] = useState("tempD");
 
     return (
         // Renders a banner via 'DIV' and using 'p'

@@ -5,7 +5,7 @@ import LocMenu from './locmenu';
 export default function ManageLoc(props) {
 
     const [displayMenu, setD] = useState("true");
-    
+
     return (
         // Renders a banner via 'DIV' and using 'p'
         <div className="mngDIV">
