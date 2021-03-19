@@ -1,7 +1,7 @@
 // import stylesheets for ipad & button
 import "./style.less";
 import "../button/style_iphone.less";
-import background1 from "../../assets/backgrounds/clear.jpg";
+//import background1 from "../../assets/backgrounds/clear.jpg";
 
 // import jquery for API calls
 import $ from "jquery";
@@ -59,7 +59,7 @@ const Iphone = () => {
       dailyTemp[i] = parsed_json["daily"][i]["temp"]["day"];
     }
 
-     // set states for fields so they could be rendered later on
+    // set states for fields so they could be rendered later on
     setData({
       locate: location,
       temp: temp_c,
@@ -96,13 +96,11 @@ const Iphone = () => {
       fetchWeatherData();
     }
   }, [mounted, fetchWeatherData]);
-  
 
 
   useEffect(() => {
     if (data.temp) {
       setTempStyles(`${"temperature"} ${"filled"}`);
-      
 
       //NOT ALL CODES ARE IMPLEMENTED
       //TODO?
@@ -128,11 +126,12 @@ const Iphone = () => {
     }
 
 
-    // const today = new Date();
 
-    // checks if data has been retrivied as will throw undefined error beofre
-    // console.log(this.state.days);
-    // let weatherInfo = [];
+    //const today = new Date();
+
+    //checks if data has been retrivied as will throw undefined error beofre
+    //console.log(this.state.days);
+    //let weatherInfo = [];
     
   }, [data]);
 
@@ -150,7 +149,7 @@ const Iphone = () => {
         textAlign: "center",
         paddingTop: "80px",
         margin: "0 auto",
-        backgroundImage: `url(/img${background})`,
+        backgroundImage: `url(img/${background})`,
       }}
     >
 
@@ -233,15 +232,15 @@ export default Iphone;
 // 		let weatherInfo = [];
 // 		//checks if data has been retrivied as will throw undefined error beofre
 // 		//console.log(this.state.days);
-// 		if (this.state.dailyrain) {
+// 		if (this.state.dailyRain) {
 // 			weatherInfo.push(
-// 				<div> Today's chance of rain is {this.state.dailyrain[0] * 100}%</div>
+// 				<div> Today's chance of rain is {this.state.dailyRain[0] * 100}%</div>
 // 			);
 // 			for (let i = 1; i < 6; i++) {
 // 				weatherInfo.push(
 // 					<DayView
 // 						day={this.dayString(today.getDay() + i)}
-// 						chance={this.state.dailyrain[i]}
+// 						chance={this.state.dailyRain[i]}
 // 					></DayView>
 // 				);
 // 			}
@@ -280,11 +279,11 @@ export default Iphone;
 // 		let conditions = parsed_json["current"]["weather"]["0"]["description"];
 // 		let id = parsed_json["current"]["weather"][`0`][`id`].toString();
 // 		//var rainpop =  parsed_json["daily"][0][`pop`];
-// 		let dailyrain = new Array(7);
+// 		let dailyRain = new Array(7);
 // 		//rain for the next days
 // 		for (let i = 0; i < 7; i++) {
-// 			dailyrain[i] = parsed_json["daily"][i]["pop"];
-// 			//console.log(dailyrain);
+// 			dailyRain[i] = parsed_json["daily"][i]["pop"];
+// 			//console.log(dailyRain);
 // 		}
 // 		//var days = parsed_json["daily"]
 // 		// set states for fields so they could be rendered later on
@@ -293,7 +292,7 @@ export default Iphone;
 // 			temp: temp_c,
 // 			cond: conditions,
 // 			wid: id,
-// 			dailyrain,
+// 			dailyRain,
 // 		});
 // 	};
 // 	dayString = (dayint) => {

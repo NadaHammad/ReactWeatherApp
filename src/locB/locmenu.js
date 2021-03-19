@@ -10,7 +10,7 @@ export default class LocMenu extends React.Component{
     }
 
     render() {
-        console.log('this si the menu saying yo yo yo!');
+        //console.log('this si the menu saying yo yo yo!');
 
 
     return (
