@@ -14,6 +14,8 @@ import ReactDOM from "react-dom";
 // Maki IMPORTS FOR LOCATION AND EXPORTS
 import Locbttn from '../../locB/locbttn';
 import ManageLoc from '../../locB/mnglocbttn';
+import SimpleAccordion from '../accordion'
+
 export const LocationList = React.createContext();
 
 //bootstrap?
@@ -316,7 +318,7 @@ const Iphone = () => {
 
       <div className="header">
         <div className="city">{data ? data.locate : ""}</div>
-        <div className="conditions">{data ? data.cond : ""}</div>
+        <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div> <br></br>
         <span className="bigTemp">{data ? data.temp : ""}ºC</span>
         {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
                           the explanation. line above this comment- the SPAN had this className
@@ -334,6 +336,16 @@ const Iphone = () => {
            <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp}></DayView>
           ) : null}
         
+      </div>
+      <br></br><br></br><br></br>
+      <div style={{textAlign: "center"}}>
+        <SimpleAccordion title='Chance of Rain' rainArray={data.dailyRain}/>
+        <SimpleAccordion title='Wind'>
+        <button style={{textAlign: "center", margin:"auto"}}>
+          do we want this
+        </button>
+        </SimpleAccordion>
+        <SimpleAccordion title='Humidity' text='hello'/>
       </div>
     </div>
   );
