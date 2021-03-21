@@ -4,7 +4,13 @@ import  './locbttn.css';
 export default function LocMenu(props){
 
     const [area, setAA] = useState("tempA");
-    // const [display, setDD] = useState("tempD");
+    const [editLoc, setEE] = useState("false");
+    const [display, setDD] = useState(eval(localStorage.getItem("d")));
+
+    const setset = () => {
+        localStorage.setItem("d",!display);
+        setDD(!display);
+    }
 
     return (
         // Renders a banner via 'DIV' and using 'p'
@@ -43,12 +49,20 @@ export default function LocMenu(props){
                             </div>
                     </section>
 
+                {props ? 
                     <div className="concanMain">
-                        <section className="concan">
-                            <button className="con" type="submit">Confirm</button>
-                            <button className="can" type="submit">Cancel</button>
-                        </section>
+                        { editLoc ? 
+                            <section className="canonly">
+                                <button type="submit" className="can" onClick={setset}>Cancel</button>
+                            </section> 
+                            :
+                            <section className="concan">
+                                <button className="con" type="submit">Confirm</button>
+                                <button className="can" type="submit">Cancel</button>
+                            </section> 
+                        }
                     </div>
+                :null}
             </div>
         );
 }
