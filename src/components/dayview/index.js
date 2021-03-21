@@ -3,12 +3,12 @@
 //import React from "react";
 //import { h, render, Component } from 'react';
 // import Table from 'react-bootstrap/Table'; 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 
 const DayView = ({ iconArray, rainArray, tempArray}) => {
   let day = new Date();
-  const [today,setToday] = useState(day);
+  const [today] = useState(day);
   var [listItems,setListItems] = useState(<table></table>);
 
   const dayString = (dayint) => {
@@ -63,7 +63,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
     //keys = [0,1,2,3,4,5,6];
     const iconPath = 'http://openweathermap.org/img/wn/';
     let iconRow = iconArray.map((icon,index) =>
-    <th key ={index}><img style = {{ width: "60px" }} src = {(iconPath + icon + "@2x.png")}></img></th>
+    <th key ={index}><img style = {{ width: "60px" }} alt = "weather icon" src = {(iconPath + icon + "@2x.png")}></img></th>
     );
     iconRow = (<tr key= "icons">{iconRow}</tr>);
 
@@ -99,7 +99,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
     */
   }
 
-  },[rainArray,tempArray]);
+  },[iconArray, rainArray, tempArray, today]);
   
   //console.log(rainArray);
   return (<div>{listItems}</div>);

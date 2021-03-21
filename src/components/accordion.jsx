@@ -5,7 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,27 +21,9 @@ const useStyles = makeStyles((theme) => ({
   const classes = useStyles();
 
   let day = new Date();
-  const [today,setToday] = useState(day);
+  const [today] = useState(day);
   var [listItems,setListItems] = useState(<table></table>);
 
-  const dayString = (dayint) => {
-    if (dayint % 7 === 0) {
-      return "Sunday";
-    } else if (dayint % 7 === 1) {
-      return "Monday";
-    } else if (dayint % 7 === 2) {
-      return "Tuesday";
-    } else if (dayint % 7 === 3) {
-      return "Wednesday";
-    } else if (dayint % 7 === 4) {
-      return "Thursday";
-    } else if (dayint % 7 === 5) {
-      return "Friday";
-    } else if (dayint % 7 === 6) {
-      return "Saturday";
-    }
-    
-  };
 
   useEffect(() => {
   if (rainArray) {
