@@ -235,7 +235,7 @@ const Iphone = () => {
       fetchWeatherLocation2();
       fetchWeatherLocation3();
     }
-  }, [mounted, fetchWeatherData]);
+  }, [mounted, fetchWeatherData, fetchWeatherLocation1, fetchWeatherLocation2, fetchWeatherLocation3]);
 
 
   useEffect(() => {
