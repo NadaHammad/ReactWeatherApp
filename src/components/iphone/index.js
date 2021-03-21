@@ -11,10 +11,12 @@ import Notification from "../notification";
 import React, { useState, useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
 
-// Maki IMPORTS FOR LOCATION
+// Maki IMPORTS FOR LOCATION AND EXPORTS
 import Locbttn from '../../locB/locbttn';
 import ManageLoc from '../../locB/mnglocbttn';
 import SimpleAccordion from '../accordion'
+
+export const LocationList = React.createContext();
 
 //bootstrap?
 // import Table from 'react-bootstrap/'; 
@@ -29,6 +31,127 @@ const Iphone = () => {
   const [background, setBackground] = useState("container");
   const [tempStyles, setTempStyles] = useState("");
   //let [weatherInfo, setWeatherInfo] = useState([]);
+
+
+	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
+	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
+	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
+		
+  
+  const [locationData1, setLocationData1] = useState([]); 
+  const [locationData2, setLocationData2] = useState([]); 
+  const [locationData3, setLocationData3] = useState([]); 
+
+  // MAKI CONSTS FOR USE in ther Manage Location
+  const parseLoc1 = (parsed_json) => {
+
+    let location = "Camden";
+    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let conditions = parsed_json["current"]["weather"]["0"]["description"];
+    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+    let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
+    
+    setLocationData1({
+      locate: location,
+      temp: temp_c,
+      cond: conditions,
+      i: icon,
+      idd : id
+    });
+  };
+
+  const parseLoc2 = (parsed_json) => {
+
+    let location = "Brent";
+    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let conditions = parsed_json["current"]["weather"]["0"]["description"];
+    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+    let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
+
+    setLocationData2({
+      locate: location,
+      temp: temp_c,
+      cond: conditions,
+      i: icon,
+      idd : id
+    });
+  };
+
+  const parseLoc3 = (parsed_json) => {
+
+    let location =  "Croydon";
+    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let conditions = parsed_json["current"]["weather"]["0"]["description"];
+    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+    let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
+
+    setLocationData3({
+      locate: location,
+      temp: temp_c,
+      cond: conditions,
+      i: icon,
+      idd : id
+    });
+  };
+  console.log("teasting if it works");
+  console.log(locationData1.temp);
+  console.log(locationData1.idd);
+  console.log(locationData2.locate);
+  console.log(locationData2.temp);
+  console.log(locationData2.idd);
+  console.log(locationData3.locate);
+  console.log(locationData3.temp);
+  console.log(locationData3.idd);
+
+  const fetchWeatherLocation1 = useCallback(() => {
+    let url =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=51.5455&lon=0.1628&units=metric&appid=79782262247ddb1d61a5a42406f46966";
+    $.ajax({
+      url,
+      dataType: "jsonp",
+      success: parseLoc1,
+      error(req, err) {
+        console.log("API call failed " + err);
+      },
+    });
+
+  }, []);
+
+  const fetchWeatherLocation2 = useCallback(() => {
+    let url =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=51.5673&lon=0.2711&units=metric&appid=79782262247ddb1d61a5a42406f46966";
+    $.ajax({
+      url,
+      dataType: "jsonp",
+      success: parseLoc2,
+      error(req, err) {
+        console.log("API call failed " + err);
+      },
+    });
+
+  }, []);
+
+  const fetchWeatherLocation3 = useCallback(() => {
+    let url =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=51.3762&lon=0.0982&units=metric&appid=79782262247ddb1d61a5a42406f46966";
+    $.ajax({
+      url,
+      dataType: "jsonp",
+      success: parseLoc3,
+      error(req, err) {
+        console.log("API call failed " + err);
+      },
+    });
+
+  }, []);
+
+
+	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
+	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
+	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
+		 
+
+
 
   const parseResponse = (parsed_json) => {
 
@@ -107,6 +230,10 @@ const Iphone = () => {
   useEffect(() => {
     if (mounted) {
       fetchWeatherData();
+      
+      fetchWeatherLocation1();
+      fetchWeatherLocation2();
+      fetchWeatherLocation3();
     }
   }, [mounted, fetchWeatherData]);
 
@@ -157,7 +284,7 @@ const Iphone = () => {
         display: "flex",
         flexDirection: "column",
         color: "#fff",
-        width: "500px",
+        width: "414px",
         height: "736px",
         textAlign: "center",
         paddingTop: "80px",
@@ -168,52 +295,66 @@ const Iphone = () => {
 
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
 				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
-        {/* <div style={{margin:"0px", padding: "0px", display: "inline"}}><Notification/></div> */}
-        <div >
-          <div className="Banner" >
-            <Notification location = {data.locate}/>
-            {data.display ? null : <Locbttn/> } 
-          </div>
-        </div>
+          <LocationList.Provider value={[locationData1, setLocationData1]}>
+            <div>
+              <div className="Banner" >
+                <Notification location = {locationData1.locate}/>
+                {data.display ? null : <Locbttn/> } 
+              </div>
+            </div>
+          </LocationList.Provider>
+          
+          {/* LOCATION BUTTON 2 */}
+          <LocationList.Provider value={[locationData2, setLocationData2]}>
+            <div>
+              <div className="Banner" >
+                {/* <Notification location = {locationData2.locate}/> */}
+                {data.display ? null : <Locbttn/> } 
+              </div>
+            </div>
+          </LocationList.Provider>
 
-				{/* LOCATION BUTTON 2 */}
-        <div >
-          <div className="Banner" >
-           
-            {data.display ? null : <Locbttn/> } 
-          </div>
-        </div>
+          {/* LOCATION BUTTON 3 */}
+          <LocationList.Provider value={[locationData3, setLocationData3]}>
+            <div>
+              <div className="Banner" >
+                <Notification location = {locationData3.locate}/>
+                {data.display ? null : <Locbttn/> } 
+              </div>
+            </div>
+          </LocationList.Provider>
 
-
-				{/* LOCATION BUTTON 3 */}
-        <div >
-          <div className="Banner" >
-            <Notification location = {data.locate}/>
-            {data.display ? null : <Locbttn/> } 
-          </div>
-        </div>
-				
-
-				<div className="Banner">
-					{data.display ? null : <ManageLoc/> }
-				</div>
+          <LocationList.Provider value={{loc1: [locationData1, setLocationData1], loc2: [locationData2, setLocationData2], loc3: [locationData3, setLocationData3]  }}>
+            <div className="Banner">
+              {data.display ? null : <ManageLoc/> }
+            </div>
+          </LocationList.Provider>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
+       
+        <div className="citytemp">
+          <div className="city">
+            {data ? data.locate : ""}
+          </div>
+          <div className="bigTemp">
+            {data ? data.temp : ""}ºC
+            {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
+                              the explanation. line above this comment- the SPAN had this className
+                              but I changed it so I can be able to edit this. the style for this will #
+                              be inindex.CSS, NOT less */}
+          </div>
+        </div>
 
       <div className="header">
-        <div className="city">{data ? data.locate : ""}</div>
+        
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div> <br></br>
-        <span className="bigTemp">{data ? data.temp : ""}</span>
-        {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
-                          the explanation. line above this comment- the SPAN had this className
-                          but I changed it so I can be able to edit this. the style for this will #
-                          be inindex.CSS, NOT less */}
       </div>
 
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
-        {data && data.display? (
+        {/* MAKI COMMENTED THE NEXT THREE LINES OUT TO SEE IF THE PROGRAM WOULD STILL WORK, WILL ASK IF WE NEED TO DELETE THIS LATER */}
+        {/* {data && data.display? (
           <Button className={"button"} clickFunction={fetchWeatherData} />
-          ) : null}
+          ) : null} */}
           {!mounted? (
            <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp}></DayView>
           ) : null}

@@ -3,7 +3,8 @@
 //import React from "react";
 //import { h, render, Component } from 'react';
 // import Table from 'react-bootstrap/Table'; 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import './dayview.css';
 
 
 const DayView = ({ iconArray, rainArray, tempArray}) => {
@@ -13,19 +14,19 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
 
   const dayString = (dayint) => {
     if (dayint % 7 === 0) {
-      return "Sunday";
+      return "Sun";
     } else if (dayint % 7 === 1) {
-      return "Monday";
+      return "Mon";
     } else if (dayint % 7 === 2) {
-      return "Tuesday";
+      return "Tues";
     } else if (dayint % 7 === 3) {
-      return "Wednesday";
+      return "Wed";
     } else if (dayint % 7 === 4) {
-      return "Thursday";
+      return "Thu";
     } else if (dayint % 7 === 5) {
-      return "Friday";
+      return "Fri";
     } else if (dayint % 7 === 6) {
-      return "Saturday";
+      return "Sat";
     }
     
   };
@@ -33,7 +34,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
   useEffect(() => {
   if (rainArray ){
 
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var months = ["Jan", "Feb", "Mar", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
 
     //variable for day names
     let days = new Array(7);
@@ -55,7 +56,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
       tempDate.setDate(tempDate.getDate()+1)
     }
     let dateRow = datesArray.map((date) =>
-      <th key= {date}>{date}</th>
+      <th className="tableDates" key= {date}>{date}</th>
     );
     dateRow = (<tr key= "dates">{dateRow}</tr>);
 
@@ -63,7 +64,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
     //keys = [0,1,2,3,4,5,6];
     const iconPath = 'http://openweathermap.org/img/wn/';
     let iconRow = iconArray.map((icon,index) =>
-    <th key ={index}><img style = {{ width: "60px" }} alt = "weather icon" src = {(iconPath + icon + "@2x.png")}></img></th>
+    <th className="tableIcon" key ={index}><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
     );
     iconRow = (<tr key= "icons">{iconRow}</tr>);
 
@@ -77,7 +78,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
 
 
     
-    setListItems(<table>{dayRow}<tbody>{dateRow}{iconRow}{tempRow}</tbody></table>)
+    setListItems(<table cellPadding="1" cellSpacing="0">{dayRow}<tbody>{dateRow}{iconRow}{tempRow}</tbody></table>)
     //console.log(rainArray);
 
     //setListItems(rainArray[1]);

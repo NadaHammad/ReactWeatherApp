@@ -35,11 +35,11 @@ const Notification = (props) => {
       }
     };
   };
-
+// , right: "67%", top: "-10%" marginRight: "-220px", 
   return (
     <>
-      <div style={{margin:"0px", padding: "0px",  position:"absolute", right: "67%", top: "-10%"}}>
-        <button style={{borderRadius: "30px", border: "2px solid red", marginRight: "-220px", fontWeight: "700"}} className="btn btn-warning" onClick={createNotification("info")}>
+      <div style={{margin:"0px", padding: "0px",  position:"absolute"}}>
+        <button style={{borderRadius: "30px", border: "2px solid red", fontWeight: "700"}} className="btn btn-warning" onClick={createNotification("info")}>
           !
         </button>
       </div>
