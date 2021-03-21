@@ -20,39 +20,30 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 }
 
 /* // MAKI STYLES ADDED for the Banner "Loaction buttons or button" */
-div.Banner {
+.Banner {
 	text-align: right;
 	margin: 0;
 	margin-top: 5px;
 	padding: 2;
 	position: relative;
 	top: -50pt;
-	/* border: 1px solid rgb(3, 3, 3); */
+  display: block;
+  float: right;
 }
-
 .bigTemp {
   position: absolute;
   font-size: 75px;
   color: rgb(255, 255, 255);
+  top: 50px;
+  left: 35%;
 }
 .city{
   position: relative;
   font-size: 40px;
   color: rgb(255, 255, 255);
-}
-.bigTemp{
-  top: 50px;
-  left: 40%;
-}
-.city {
   top: -230%;
   right: 35%;
   margin: 0;
   margin-top: 5pt;
   padding: 2;
-  position: relative;
-}
-
-div.NextToBanner {
-  display: inline;
 }

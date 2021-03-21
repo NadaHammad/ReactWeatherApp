@@ -9,27 +9,26 @@ button:focus {
 }
 
 .locbanner {
-  width: 150px;
-  background: white;
   font-size: medium;
   font-weight: bold;
-  color: rgb(0, 31, 204);
+  background: white;
   border-radius: 2ex 0 0 2ex;
-  border-color: none;
-  border-width: 5ch;
-  border-left: 1ch;
+  width: 160px;
+  color: rgb(0, 31, 204);
   padding: 1px 3px 1px 20px;
-  display: inline;
-  transition: none;
-  margin: 0ch;
-  border: none;
+  /* display: inline; */
+  float: right;
+  margin-left: 25px;
+  display: flex;
+  justify-content: space-between;
 }
-
-.locbttn {
-  display: inline;
+.locbanner p{
+  margin: 0;
+  padding: 0;
 }
 .locbttn {
-	display:inline ;
+  width: 70%;
+  display: inline;
 }
 .area, .temp {
 	display: inline;
@@ -74,6 +73,7 @@ button:focus {
 
 /* // MENU BOX */
 .MenuBox {
+  z-index: 1;
   background-color: rgb(255, 255, 255);
   border: 2pt solid rgb(212, 212, 212);
   border-radius: 10px;
@@ -111,7 +111,7 @@ p.titleP {
   text-align: left;
   color: black;
   border: 1px solid rgb(211, 211, 211);
-  width: 70%;
+  width: 80%;
   height: 100%;
   padding: 1px;
   margin: 0 0 0 5px;
@@ -128,10 +128,6 @@ p.titleP {
 .canonly {
   text-align: center;
 }
-
-/* button.editB, button.delB{
-	border:1px solid rgb(31, 31, 31);
-} */
 
 .can {
   border: none;
@@ -156,11 +152,10 @@ p.titleP {
   padding: 0;
   color: rgb(4, 0, 255);
   text-decoration: underline;
+  margin-right: 15px;
 }
-.delB {
-  padding: 0;
-  color: rgb(255, 0, 0);
-  text-decoration: underline;
-  margin-left: 6px;
-  margin-right: 2px;
+
+/* STYLING FOR THE EDIT PANEL */
+.editPanel{
+  color: black;
 }

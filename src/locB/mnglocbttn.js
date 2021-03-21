@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {   useContext,useState } from "react";
 import '../locB/locbttn.css';
 import LocMenu from './locmenu';
 // exporting context for the child components to import and use
