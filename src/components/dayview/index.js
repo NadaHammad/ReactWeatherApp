@@ -9,7 +9,7 @@ import './dayview.css';
 
 const DayView = ({ iconArray, rainArray, tempArray}) => {
   let day = new Date();
-  const [today,setToday] = useState(day);
+  const [today] = useState(day);
   var [listItems,setListItems] = useState(<table></table>);
 
   const dayString = (dayint) => {
@@ -100,7 +100,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
     */
   }
 
-  },[rainArray,tempArray]);
+  },[iconArray, rainArray, tempArray, today]);
   
   //console.log(rainArray);
   return (<div>{listItems}</div>);
