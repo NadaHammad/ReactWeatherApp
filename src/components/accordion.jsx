@@ -1,0 +1,101 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { useState, useEffect, useCallback } from "react";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
+
+ const SimpleAccordion=({children, title, text, rainArray})=> {
+  const classes = useStyles();
+
+  let day = new Date();
+  const [today,setToday] = useState(day);
+  var [listItems,setListItems] = useState(<table></table>);
+
+  const dayString = (dayint) => {
+    if (dayint % 7 === 0) {
+      return "Sunday";
+    } else if (dayint % 7 === 1) {
+      return "Monday";
+    } else if (dayint % 7 === 2) {
+      return "Tuesday";
+    } else if (dayint % 7 === 3) {
+      return "Wednesday";
+    } else if (dayint % 7 === 4) {
+      return "Thursday";
+    } else if (dayint % 7 === 5) {
+      return "Friday";
+    } else if (dayint % 7 === 6) {
+      return "Saturday";
+    }
+    
+  };
+
+  useEffect(() => {
+  if (rainArray) {
+
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    //variable for day number and month
+    let datesArray = new Array(14);
+    let tempDate = today;                                                                                                                                                                                                                             
+    for (let i = 0; i<7;i++){
+
+      datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
+      
+      tempDate.setDate(tempDate.getDate()+1)
+    }
+    let dateRow = datesArray.map((date) =>
+      <th key= {date}>{date}</th>
+    );
+    dateRow = (<tr key= "dates">{dateRow}</tr>);
+
+    //rainRow
+    let rainRow = rainArray.map((percentRain,index) =>
+    <th key= {index}>{Math.round(percentRain)}%</th>
+    );
+    rainRow = (<tr key= "temp">{rainRow}</tr>);
+    
+    setListItems(<table><tbody>{rainRow}{dateRow}</tbody></table>)
+
+  }
+
+  },[rainArray, today]);
+
+  children = listItems;
+
+  return (
+    <div className={classes.root}>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>{title}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+          {text}
+          </Typography>
+          <br></br>
+          {children}
+          
+        </AccordionDetails>
+      </Accordion>
+    </div>
+  );
+}
+export default SimpleAccordion
