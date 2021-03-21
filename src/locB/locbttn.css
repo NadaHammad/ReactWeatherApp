@@ -1,6 +1,5 @@
-/*  */
 /* // Styles for Location BTTNS or BANNERS
-// THE STYLING for the banenrs in the index.js is on the other stylesheet called
+// THE STYLING for the banners in the index.js is on the other stylesheet called
 // STYLE.LESS
 // Banner classes are named as div.Banner! */
 
@@ -81,7 +80,7 @@ button:focus {
   display: block;
   position: absolute;
   left: 35%;
-  top: 10%;
+  top: -10%;
   width: 65%;
   text-align: left;
   box-shadow: -3px 3px rgba(0, 0, 0, 0.603);

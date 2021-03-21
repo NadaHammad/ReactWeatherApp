@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React,{   useContext, useState } from "react";
+// exporting the context from parent component fotr the child component to use
+import { displayM } from "./mnglocbttn";
+
 import  './locbttn.css';
 
 export default function LocMenu(props){
 
     const [area, setAA] = useState("tempA");
     const [editLoc, setEE] = useState("false");
-    const [display, setDD] = useState(eval(localStorage.getItem("d")));
+    const [displayMenu, setD] = useContext(displayM);
 
     const setset = () => {
-        localStorage.setItem("d",!display);
-        setDD(!display);
+        setD(!displayMenu);
     }
 
     return (
