@@ -5,12 +5,14 @@ import {
   NotificationManager,
 } from "react-notifications";
 
-const Notification = () => {
+const Notification = (props) => {
   const createNotification = (type) => {
     return () => {
       switch (type) {
         case "info":
-          NotificationManager.info("Info message");
+          NotificationManager.warning(`WARNING! 
+          Current conditions in ${props.location} are devastating.\n 
+          REMINDER: Bring an umbrella!`);
           break;
         case "success":
           NotificationManager.success("Success message", "Title here");
@@ -37,8 +39,8 @@ const Notification = () => {
   return (
     <>
       <div style={{margin:"0px", padding: "0px",  position:"absolute", right: "67%", top: "-10%"}}>
-        <button  style={{borderRadius: "25px", border: "2px solid red", marginRight: "-220px"}} className="btn btn-info" onClick={createNotification("info")}>
-          Info
+        <button style={{borderRadius: "30px", border: "2px solid red", marginRight: "-220px", fontWeight: "700"}} className="btn btn-warning" onClick={createNotification("info")}>
+          !
         </button>
       </div>
       {/* <hr />

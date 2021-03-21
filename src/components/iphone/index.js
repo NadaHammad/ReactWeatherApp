@@ -75,7 +75,7 @@ const Iphone = () => {
     // API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
     //var url = "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=6b825d5e524d540a69987f621c8f50dc";
     let url =
-      "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&units=metric&appid=6b825d5e524d540a69987f621c8f50dc";
+      "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&units=metric&appid=79782262247ddb1d61a5a42406f46966";
     $.ajax({
       url,
       dataType: "jsonp",
@@ -156,7 +156,7 @@ const Iphone = () => {
         {/* <div style={{margin:"0px", padding: "0px", display: "inline"}}><Notification/></div> */}
         <div >
           <div className="Banner" >
-            <Notification/>
+            <Notification location = {data.locate}/>
             {data.display ? null : <Locbttn/> } 
           </div>
         </div>
@@ -164,7 +164,7 @@ const Iphone = () => {
 				{/* LOCATION BUTTON 2 */}
         <div >
           <div className="Banner" >
-            <Notification/>
+           
             {data.display ? null : <Locbttn/> } 
           </div>
         </div>
@@ -173,7 +173,7 @@ const Iphone = () => {
 				{/* LOCATION BUTTON 3 */}
         <div >
           <div className="Banner" >
-            <Notification/>
+            <Notification location = {data.locate}/>
             {data.display ? null : <Locbttn/> } 
           </div>
         </div>
