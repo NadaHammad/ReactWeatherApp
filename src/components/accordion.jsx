@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
- const SimpleAccordion=({children, title, text, rainArray})=> {
+ const SimpleAccordion=({children, title, text, dataArray})=> {
   const classes = useStyles();
 
   let day = new Date();
@@ -26,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 
   useEffect(() => {
-  if (rainArray) {
+  if (dataArray) {
 
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     //variable for day number and month
     let datesArray = new Array(14);
@@ -44,17 +44,25 @@ const useStyles = makeStyles((theme) => ({
     );
     dateRow = (<tr key= "dates">{dateRow}</tr>);
 
-    //rainRow
-    let rainRow = rainArray.map((percentRain,index) =>
-    <th key= {index}>{Math.round(percentRain)}%</th>
-    );
-    rainRow = (<tr key= "temp">{rainRow}</tr>);
+    //Row of data
+    if (title==="Wind") {
+        var dataRow = dataArray.map((metresPerSec,index) =>
+            <th key= {index}>{Math.round(metresPerSec)}m/s</th>
+        );
+        dataRow = (<tr key= "temp">{dataRow}</tr>);
+    } else {
+        dataRow = dataArray.map((percentData,index) =>
+            <th key= {index}>{Math.round(percentData)}%</th>
+        );
+        dataRow = (<tr key= "temp">{dataRow}</tr>);
+    }
     
-    setListItems(<table><tbody>{rainRow}{dateRow}</tbody></table>)
+    
+    setListItems(<table><tbody>{dataRow}{dateRow}</tbody></table>)
 
   }
 
-  },[rainArray, today]);
+  },[dataArray, title, today]);
 
   children = listItems;
 

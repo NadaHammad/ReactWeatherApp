@@ -9,7 +9,7 @@ import DayView from "../dayview";
 import Notification from "../notification";
 //import Notifications, {notify} from 'react-notify-toast';
 import React, { useState, useEffect, useCallback } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 
 // Maki IMPORTS FOR LOCATION
 import Locbttn from '../../locB/locbttn';
@@ -46,9 +46,22 @@ const Iphone = () => {
       iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
     }
 
+    //daily chance of rain
     let dailyRain = new Array(7);
     for (let i = 0; i < 7; i++) {
       dailyRain[i] = parsed_json["daily"][i]["pop"];
+    }
+
+    //daily humidity
+    let dailyHumidity = new Array(7);
+    for (let i = 0; i < 7; i++) {
+      dailyHumidity[i] = parsed_json["daily"][i]["humidity"];
+    }
+
+    //daily wind speed
+    let dailyWindSpeed = new Array(7);
+    for (let i = 0; i < 7; i++) {
+      dailyWindSpeed[i] = parsed_json["daily"][i]["wind_speed"];
     }
 
     //daily temperature
@@ -66,6 +79,8 @@ const Iphone = () => {
       dailyRain,
       dailyTemp,
       iconArray,
+      dailyHumidity,
+      dailyWindSpeed
     });
   };
 
@@ -206,13 +221,13 @@ const Iphone = () => {
       </div>
       <br></br><br></br><br></br>
       <div style={{textAlign: "center"}}>
-        <SimpleAccordion title='Chance of Rain' rainArray={data.dailyRain}/>
-        <SimpleAccordion title='Wind'>
+        <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
+        <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}>
         <button style={{textAlign: "center", margin:"auto"}}>
           do we want this
         </button>
         </SimpleAccordion>
-        <SimpleAccordion title='Humidity' text='hello'/>
+        <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
       </div>
     </div>
   );
