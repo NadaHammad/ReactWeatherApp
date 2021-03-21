@@ -269,7 +269,7 @@ const Iphone = () => {
         display: "flex",
         flexDirection: "column",
         color: "#fff",
-        width: "500px",
+        width: "414px",
         height: "736px",
         textAlign: "center",
         paddingTop: "80px",
@@ -315,15 +315,23 @@ const Iphone = () => {
             </div>
           </LocationList.Provider>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
+       
+        <div className="citytemp">
+          <div className="city">
+            {data ? data.locate : ""}
+          </div>
+          <div className="bigTemp">
+            {data ? data.temp : ""}ºC
+            {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
+                              the explanation. line above this comment- the SPAN had this className
+                              but I changed it so I can be able to edit this. the style for this will #
+                              be inindex.CSS, NOT less */}
+          </div>
+        </div>
 
       <div className="header">
-        <div className="city">{data ? data.locate : ""}</div>
+        
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div> <br></br>
-        <span className="bigTemp">{data ? data.temp : ""}ºC</span>
-        {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
-                          the explanation. line above this comment- the SPAN had this className
-                          but I changed it so I can be able to edit this. the style for this will #
-                          be inindex.CSS, NOT less */}
       </div>
 
       <div className={"details"}></div>
