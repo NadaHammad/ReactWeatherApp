@@ -1,6 +1,3 @@
-
-//import background1 from "../../assets/backgrounds/clear.jpg";
-
 // import jquery for API calls
 import $ from "jquery";
 // import the Button component
@@ -17,13 +14,6 @@ import ManageLoc from '../../locB/mnglocbttn';
 import SimpleAccordion from '../accordion'
 
 export const LocationList = React.createContext();
-
-//bootstrap?
-// import Table from 'react-bootstrap/'; 
-
-
-
-
 
 const Iphone = () => {
   const [mounted, setMounted] = useState(true);
@@ -163,7 +153,11 @@ const Iphone = () => {
     let location = "London";
     let temp_c = Math.round(parsed_json["current"]["temp"]);
     let conditions = parsed_json["current"]["weather"]["0"]["description"];
+    conditions = conditions.charAt(0).toUpperCase() + conditions.slice(1);
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+    let currentRain = parsed_json["hourly"][0]["pop"];
+    currentRain = (<b>{currentRain*100 + "%"}</b>);
+    currentRain = (<div>Current chance of rain: {currentRain}</div>);
 
     let iconArray = new Array(7);
     for (let i = 0; i < 7; i++) {
@@ -204,7 +198,8 @@ const Iphone = () => {
       dailyTemp,
       iconArray,
       dailyHumidity,
-      dailyWindSpeed
+      dailyWindSpeed,
+      currentRain
     });
   };
 
@@ -243,9 +238,6 @@ const Iphone = () => {
     if (data.temp) {
       setTempStyles(`${"temperature"} ${"filled"}`);
 
-      //NOT ALL CODES ARE IMPLEMENTED
-      //TODO?
-
       if (data && data.wid == "800") {
         setBackground("/clear.jpg");
       } else if (data && data.wid == "801") {
@@ -265,14 +257,6 @@ const Iphone = () => {
     } else {
       setTempStyles("temperature");
     }
-
-
-
-    //const today = new Date();
-
-    //checks if data has been retrivied as will throw undefined error beofre
-    //console.log(this.state.days);
-    //let weatherInfo = [];
     
   }, [data]);
 
@@ -344,12 +328,14 @@ const Iphone = () => {
                               be inindex.CSS, NOT less */}
           </div>
         </div>
-
+                              
       <div className="header">
         
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div> <br></br>
       </div>
-
+      
+      
+      <div className = "currentRain">{data ? data.currentRain: ""}</div>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
         {/* MAKI COMMENTED THE NEXT THREE LINES OUT TO SEE IF THE PROGRAM WOULD STILL WORK, WILL ASK IF WE NEED TO DELETE THIS LATER */}
@@ -366,7 +352,7 @@ const Iphone = () => {
         <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
         <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}>
         <button style={{textAlign: "center", margin:"auto"}}>
-          do we want this
+          do we want this i dont think so
         </button>
         </SimpleAccordion>
         <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
@@ -375,122 +361,3 @@ const Iphone = () => {
   );
 };
 export default Iphone;
-
-// 		let container = style.container;
-
-// 		//const tempStyles = this.state.temp ? `${style.temperature} ${style.filled}` : style.temperature;
-// 		let tempStyles = "";
-// 		if (this.state.temp) {
-// 			tempStyles = `${style.temperature} ${style.filled}`;
-// 			//this.state.wid = "601";
-
-// 			//NOT ALL CODES ARE IMPLEMENTED
-// 			//TODO?
-
-// 			if (this.state.wid == "800") {
-// 				container = style.clear;
-// 			} else if (this.state.wid == "801") {
-// 				container = style.fewClouds;
-// 			} else if (this.state.wid.charAt(0) == 8) {
-// 				container = style.cloudy;
-// 			} else if (
-// 				this.state.wid.charAt(0) == 3 ||
-// 				this.state.wid.charAt(0) == 5
-// 			) {
-// 				container = style.rain;
-// 			} else if (this.state.wid == "701") {
-// 				container = style.mist;
-// 			} else if (this.state.wid.charAt(0) == 6) {
-// 				container = style.snow;
-// 			}
-// 		} else {
-// 			tempStyles = style.temperature;
-// 		}
-
-// 		//formats date to display info
-// 		const today = new Date();
-
-// 		let weatherInfo = [];
-// 		//checks if data has been retrivied as will throw undefined error beofre
-// 		//console.log(this.state.days);
-// 		if (this.state.dailyRain) {
-// 			weatherInfo.push(
-// 				<div> Today's chance of rain is {this.state.dailyRain[0] * 100}%</div>
-// 			);
-// 			for (let i = 1; i < 6; i++) {
-// 				weatherInfo.push(
-// 					<DayView
-// 						day={this.dayString(today.getDay() + i)}
-// 						chance={this.state.dailyRain[i]}
-// 					></DayView>
-// 				);
-// 			}
-// 			weatherInfo = <div>{weatherInfo}</div>;
-// 		}
-// 		// display all weather data
-
-// 		return (
-// 			<div class={container}>
-// 				{/* <Notifications /> */}
-// 				<div class={style.header}>
-// 					<div class={style.city}>{this.state.locate}</div>
-// 					<div class={style.conditions}>{this.state.cond}</div>
-// 					<span class={tempStyles}>{this.state.temp}</span>
-// 				</div>
-
-// 				<div class={style.details}></div>
-// 				<div class={style_iphone.container}>
-// 					{this.state.display ? (
-// 						<Button
-// 							class={style_iphone.button}
-// 							clickFunction={this.fetchWeatherData}
-// 						/>
-// 					) : null}
-// 					{weatherInfo}
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-
-// 	parseResponse = (parsed_json) => {
-// 		//name not available in one call we could hard code it?
-// 		//var location = parsed_json['name'];
-// 		let location = "London";
-// 		let temp_c = Math.round(parsed_json["current"]["temp"]);
-// 		let conditions = parsed_json["current"]["weather"]["0"]["description"];
-// 		let id = parsed_json["current"]["weather"][`0`][`id`].toString();
-// 		//var rainpop =  parsed_json["daily"][0][`pop`];
-// 		let dailyRain = new Array(7);
-// 		//rain for the next days
-// 		for (let i = 0; i < 7; i++) {
-// 			dailyRain[i] = parsed_json["daily"][i]["pop"];
-// 			//console.log(dailyRain);
-// 		}
-// 		//var days = parsed_json["daily"]
-// 		// set states for fields so they could be rendered later on
-// 		this.setState({
-// 			locate: location,
-// 			temp: temp_c,
-// 			cond: conditions,
-// 			wid: id,
-// 			dailyRain,
-// 		});
-// 	};
-// 	dayString = (dayint) => {
-// 		if (dayint % 7 === 0) {
-// 			return "Sunday";
-// 		} else if (dayint % 7 === 1) {
-// 			return "Monday";
-// 		} else if (dayint % 7 === 2) {
-// 			return "Tueday";
-// 		} else if (dayint % 7 === 3) {
-// 			return "Wednesday";
-// 		} else if (dayint % 7 === 4) {
-// 			return "Thursday";
-// 		} else if (dayint % 7 === 5) {
-// 			return "Friday";
-// 		} else if (dayint % 7 === 6) {
-// 			return "Saturday";
-// 		}
-// 	};
-// }
