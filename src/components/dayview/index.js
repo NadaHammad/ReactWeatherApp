@@ -70,7 +70,7 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
 
     //tempRow
     let tempRow = tempArray.map((temp,index) =>
-    <th key= {index}>{Math.round(temp)}°</th>
+    <th key= {index}>{Math.round(temp)}°C</th>
     );
     tempRow = (<tr key= "temp">{tempRow}</tr>);
 

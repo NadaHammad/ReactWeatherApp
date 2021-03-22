@@ -159,3 +159,18 @@ p.titleP {
 .editPanel{
   color: black;
 }
+.titleE{
+  font-size: small;
+}
+.areaP textarea {
+  resize: none;
+  color: black;
+  margin: 10px;
+  margin-top: 0"";
+}
+.f{
+  text-align: left;
+  margin-left: 10px;
+  display: block;
+  float: inline-start;
+}
