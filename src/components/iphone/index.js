@@ -158,7 +158,7 @@ const Iphone = () => {
     conditions = conditions.charAt(0).toUpperCase() + conditions.slice(1);
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
     let currentRain = parsed_json["hourly"][0]["pop"];
-    currentRain = (<b>{currentRain*100 + "%"}</b>);
+    currentRain = (<b style ={{fontSize: "200%"}}>{currentRain*100 + "%"}</b>);
     currentRain = (<div>Current chance of rain: {currentRain}</div>);
 
     let iconArray = new Array(7);

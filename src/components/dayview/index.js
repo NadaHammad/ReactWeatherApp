@@ -25,6 +25,9 @@ const DayView = ({ iconArray, rainArray, tempArray}) => {
     }
     
   };
+  const hourlyTemp = ((index) => {
+    
+  },[]);
   useEffect(() => {
   if (rainArray ){
 
