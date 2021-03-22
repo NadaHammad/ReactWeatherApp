@@ -4,12 +4,15 @@ import { displayM } from "./mnglocbttn";
 import {LocationList} from "../components/iphone/index";
 import  './locbttn.css';
 import EditMenu from './editpanel';
+export const LocalVal = React.createContext();
+
 
 export default function LocMenu(props){
 
-    const [editLoc, setEE] = useState("false");
+    const [editLoc, setE] = useState("false");
     const [displayMenu, setD] = useContext(displayM);
-
+    
+    const [newA, setA] = useState("empty");
 
     // a const for managing locations on the Location banner
     const {loc1, loc2, loc3}  = React.useContext(LocationList);
@@ -17,74 +20,79 @@ export default function LocMenu(props){
     const [locationData2, setLocationData2]  = loc2;
     const [locationData3, setLocationData3]  = loc3;
 
-    console.log("Hi its me");
-    console.log(locationData1.locate);
-    console.log(locationData2.locate);
-    console.log(locationData3.locate);
+
+    const [locVal, setLocVal] = useState("0");
+
 
     const setset = () => {
         setD(!displayMenu);
     }
 
     const setEdit = () => {
-        setEE(!editLoc);
+        setE(!editLoc);
     }
-
-
+    const setEdit1 = () => {
+        setE(!editLoc);
+        setLocVal(1);
+    }
+    const setEdit2 = () => {
+        setE(!editLoc);
+        setLocVal(2);
+    }
+    const setEdit3 = () => {
+        setE(!editLoc);
+        setLocVal(3);
+    }
+    
     return (
         // Renders a banner via 'DIV' and using 'p'
             <div className="MenuBox">
                 {editLoc ?
-                <div>
-                    <h4>Choose Locations to Edit:</h4>
+                    <div>
+                        <h4>Choose Locations to Edit:</h4>
 
-                        <section>
-                            <p className="titleP">Location1:</p>
-                                <section className="areaP">
-                                    <p>{locationData1.locate}</p>
-                                    <section>
-                                        <button type="submit" className="editB" onClick={setEdit}>edit</button>
+                            <section>
+                                <p className="titleP">Location1:</p>
+                                    <section className="areaP">
+                                        <p>{locationData1.locate}</p>
+                                        <section>
+                                            <button type="submit" className="editB" onClick={setEdit1}>edit</button>
+                                        </section>
                                     </section>
-                                </section>
-                        </section>
+                            </section>
 
-                        <section>
-                            <p className="titleP"> Location2:</p>
-                                <section className="areaP">
-                                    <p>{locationData2.locate}</p>
-                                    <section>
-                                        <button type="submit" className="editB" onClick={setEdit}>edit</button>
+                            <section>
+                                <p className="titleP"> Location2:</p>
+                                    <section className="areaP">
+                                        <p>{locationData2.locate}</p>
+                                        <section>
+                                            <button type="submit" className="editB" onClick={setEdit2}>edit</button>
+                                        </section>
                                     </section>
-                                </section>
-                        </section>
-                        
-                        <section>
-                            <p className="titleP">Location3:</p>
-                                <div className="areaP">
-                                    <p>{locationData3.locate}</p>
-                                    <section>
-                                        <button type="submit" className="editB" onClick={setEdit}>edit</button>
-                                    </section>
-                                </div>
-                        </section>
-                    </div>
+                            </section>
+                            
+                            <section>
+                                <p className="titleP">Location3:</p>
+                                    <div className="areaP">
+                                        <p>{locationData3.locate}</p>
+                                        <section>
+                                            <button type="submit" className="editB" onClick={setEdit3}>edit</button>
+                                        </section>
+                                    </div>
+                            </section>
+                        </div>
                     : 
-                    <EditMenu/>
-
-                    }
-
-                    <div className="concanMain">
-                        { editLoc ? 
-                            <section className="canonly">
-                                <button type="submit" className="can" onClick={setset}>Cancel</button>
-                            </section> 
-                            :
-                            <section className="concan">
-                                <button className="con" type="submit">Confirm</button>
-                                <button className="can" type="submit" onClick={setEdit}>Back</button>
-                            </section> 
-                        }
+                    <LocalVal.Provider value={{locV: [locVal, setLocVal], editV: [editLoc, setE], areaV: [newA, setA] }}>
+                        <EditMenu/>
+                    </LocalVal.Provider>
+                }
+                        {editLoc? 
+                            <div className="concanMain">
+                                    <section className="canonly">
+                                        <button type="submit" className="can" onClick={setset}>Cancel</button>
+                                    </section> 
+                            </div>
+                        : null}
                     </div>
-            </div>
         );
 }

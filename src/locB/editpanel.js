@@ -1,13 +1,13 @@
-import React,{   useContext, useState } from "react";
+import React,{   useContext,useEffect,  useState, useCallback }from "react";
 // exporting the context from parent component fotr the child component to use
-import { displayM } from "./mnglocbttn";
+import $ from "jquery";
 import {LocationList} from "../components/iphone/index";
+import {LocalVal} from "./locmenu";
 import  './locbttn.css';
 
 export default function EditMenu(props){
-
-    const [editLoc, setEE] = useState("false");
-    const [displayMenu, setD] = useContext(displayM);
+    // LIST OF BOROUGHS TO DISPLAY
+    let b =[["Camden","51.5455","0.1628"], ["Brent","51.5455","0.1628"], ["Croydon","51.5455","0.1628"]];
 
 
     // a const for managing locations on the Location banner
@@ -16,26 +16,138 @@ export default function EditMenu(props){
     const [locationData2, setLocationData2]  = loc2;
     const [locationData3, setLocationData3]  = loc3;
 
-    console.log("Hi its me");
-    console.log(locationData1.locate);
-    console.log(locationData2.locate);
-    console.log(locationData3.locate);
 
-    const setset = () => {
-        setD(!displayMenu);
+    const { locV, editV , areaV}= useContext(LocalVal);
+    const [locVal, setLocVal] = locV;
+    const [editLoc, setE] = editV;
+    const [newA, setA] = areaV;
+
+    const [locationDisplay, setLocDisplay] = useState("");
+
+    const back = () => {
+        setLocVal(0);
+        setE(!editLoc);
     }
 
-    const setEdit = () => {
-        setEE(!editLoc);
-    }
 
+    const setName = () => {
+        var areaName = document.getElementById("locationName").value;
+        if( areaName != ""){
+            setA(areaName);
+            if(locVal == 1){
+                fetchweth();
+            } else if (locVal == 2){
+                setLocationData2({locate: areaName});
+            } else {
+                setLocationData3({locate: areaName});
+            }
+        setLocVal(0);
+        setE(!editLoc);
+        } 
+        if (areaName == ""){
+            alert("please leave a name and choose location!");
+        }
+    };
+
+
+    
+    const  parse = (parsed_json) => {
+        let location =  newA;
+        let temp_c = Math.round(parsed_json["current"]["temp"]);
+        let conditions = parsed_json["current"]["weather"]["0"]["description"];
+        let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+        let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
+
+        if(locVal == 1){
+            setLocationData1({
+                locate: location,
+                temp: temp_c,
+                cond: conditions,
+                i: icon,
+                idd : id
+              });
+        } else if (locVal == 2){
+            setLocationData2({
+                locate: location,
+                temp: temp_c,
+                cond: conditions,
+                i: icon,
+                idd : id
+              });
+        } else {
+            setLocationData3({
+                locate: location,
+                temp: temp_c,
+                cond: conditions,
+                i: icon,
+                idd : id
+              });
+        }
+
+    };
+
+
+    {/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
+	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
+	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
+        const fetchweth =  useCallback(() => {
+            var inp = document.getElementById("boroughOptions").value;
+            let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + b[inp][1] + "&lon=" + b[inp][2]  +"&units=metric&appid=79782262247ddb1d61a5a42406f46966";
+            
+            $.ajax({
+            url,
+            dataType: "jsonp",
+            success: parse,
+                error(req, err) {
+                    console.log("API call failed " + err);
+                },
+            });
+        }, []);
+      
+
+	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
+	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
+	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
+		 
+    useEffect(() => {
+        if(locVal == 1){
+            setLocDisplay(locationData1.locate);
+        } else if(locVal == 2){
+            setLocDisplay(locationData2.locate);
+        } else {
+            setLocDisplay(locationData3.locate);        
+        }
+    });
+    
 
     return (
         // Renders a banner via 'DIV' and using 'p'
+        <div>
             <div className="editPanel">
-                <section className="titleP">
+                <section className="titleE">
                     <p>*Enter a nickname for the location chosen</p>
+                                <section className="areaP">
+                                    <textarea rows="1" cols="25" id="locationName" placeholder={locationDisplay}></textarea>
+                                </section>
+                                <form >
+                                    <select className="f" id="boroughOptions">
+                                        <option value="0" >Camden</option>
+                                        <option value="1" >Brent</option>
+                                        <option value="2" >Croydon</option>
+                                    </select>
+
+                                    <div className="concanMain">
+                                        <section className="concan">
+                                            <button className="con" type="button" onClick={setName}>Confirm</button>
+                                            <button className="can" type="button" onClick={back}>Back</button>
+                                        </section> 
+                                    </div>
+
+
+                                </form>
                 </section>
             </div>
+            
+        </div>
         );
 }

@@ -93,6 +93,7 @@ const Iphone = () => {
       idd : id
     });
   };
+<<<<<<< HEAD
   // console.log("teasting if it works");
   // console.log(locationData1.temp);
   // console.log(locationData1.idd);
@@ -103,6 +104,9 @@ const Iphone = () => {
   // console.log(locationData3.temp);
   // console.log(locationData3.idd);
 
+=======
+  
+>>>>>>> f8fb6750be68018b001869a2ae05353420746c83
   const fetchWeatherLocation1 = useCallback(() => {
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.5455&lon=0.1628&units=metric&appid=79782262247ddb1d61a5a42406f46966";
@@ -235,7 +239,7 @@ const Iphone = () => {
       fetchWeatherLocation2();
       fetchWeatherLocation3();
     }
-  }, [mounted, fetchWeatherData, fetchWeatherLocation1, fetchWeatherLocation2, fetchWeatherLocation3]);
+  }, [mounted, fetchWeatherData]);
 
 
   useEffect(() => {
