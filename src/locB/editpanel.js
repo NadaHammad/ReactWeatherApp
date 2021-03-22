@@ -7,20 +7,19 @@ import  './locbttn.css';
 
 export default function EditMenu(props){
     // LIST OF BOROUGHS TO DISPLAY
-    let b =[["Camden","51.5455","0.1628"], ["Brent","51.5455","0.1628"], ["Croydon","51.5455","0.1628"]];
+    let b =[["Camden","51.5455","0.1628"], ["Brent","51.5673","0.2711"], ["Croydon","51.3762","0.0982"], ["Sutton","51.3614","0.1940"], ["Harrow","51.5806","0.3420"], ["Cali","36.7783", "119.4179"], ["Manila","14.5995","120.9842"] ];
 
 
     // a const for managing locations on the Location banner
-    const {loc1, loc2, loc3}  = React.useContext(LocationList);
+    const {loc1, loc2, loc3, nickname}  = React.useContext(LocationList);
     const [locationData1, setLocationData1]  = loc1;
     const [locationData2, setLocationData2]  = loc2;
     const [locationData3, setLocationData3]  = loc3;
 
 
-    const { locV, editV , areaV}= useContext(LocalVal);
+    const { locV, editV }= useContext(LocalVal);
     const [locVal, setLocVal] = locV;
     const [editLoc, setE] = editV;
-    const [newA, setA] = areaV;
 
     const [locationDisplay, setLocDisplay] = useState("");
 
@@ -33,7 +32,7 @@ export default function EditMenu(props){
     const setName = () => {
         var areaName = document.getElementById("locationName").value;
         if( areaName != ""){
-            setA(areaName);
+            localStorage.setItem("nickname", areaName)
             if(locVal == 1){
                 fetchweth();
             } else if (locVal == 2){
@@ -52,11 +51,12 @@ export default function EditMenu(props){
 
     
     const  parse = (parsed_json) => {
-        let location =  newA;
-        let temp_c = Math.round(parsed_json["current"]["temp"]);
+        let location =  localStorage.getItem("nickname");
+        let temp_c = Math.round(parsed_json["current"]["temp"] * 10)/10;
         let conditions = parsed_json["current"]["weather"]["0"]["description"];
         let id = parsed_json["current"]["weather"][`0`][`id`].toString();
         let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
+
 
         if(locVal == 1){
             setLocationData1({
@@ -117,6 +117,7 @@ export default function EditMenu(props){
         } else {
             setLocDisplay(locationData3.locate);        
         }
+        localStorage.setItem("nickname", '');
     });
     
 
@@ -134,6 +135,10 @@ export default function EditMenu(props){
                                         <option value="0" >Camden</option>
                                         <option value="1" >Brent</option>
                                         <option value="2" >Croydon</option>
+                                        <option value="3" >Sutton</option>
+                                        <option value="4" >Harrow</option>
+                                        <option value="5" >Cali</option>
+                                        <option value="6" >Manila</option>
                                     </select>
 
                                     <div className="concanMain">

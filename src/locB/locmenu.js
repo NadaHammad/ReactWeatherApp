@@ -82,7 +82,7 @@ export default function LocMenu(props){
                             </section>
                         </div>
                     : 
-                    <LocalVal.Provider value={{locV: [locVal, setLocVal], editV: [editLoc, setE], areaV: [newA, setA] }}>
+                    <LocalVal.Provider value={{locV: [locVal, setLocVal], editV: [editLoc, setE] }}>
                         <EditMenu/>
                     </LocalVal.Provider>
                 }

@@ -4,7 +4,7 @@ import {LocationList} from "../components/iphone/index";
 
 export default function Locbttn(props) {
     const [locationData, setLocationData]  =  React.useContext(LocationList);
-    
+
     return (
         <div  className="locbttn" >
             <div className="locbanner">
