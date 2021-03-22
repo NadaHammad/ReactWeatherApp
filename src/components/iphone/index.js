@@ -28,6 +28,8 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 		
   
+  
+
   const [locationData1, setLocationData1] = useState([]); 
   const [locationData2, setLocationData2] = useState([]); 
   const [locationData3, setLocationData3] = useState([]); 
@@ -36,7 +38,7 @@ const Iphone = () => {
   const parseLoc1 = (parsed_json) => {
 
     let location = "Camden";
-    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let temp_c = Math.round(parsed_json["current"]["temp"]* 10)/10;
     let conditions = parsed_json["current"]["weather"]["0"]["description"];
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
     let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
@@ -53,7 +55,7 @@ const Iphone = () => {
   const parseLoc2 = (parsed_json) => {
 
     let location = "Brent";
-    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let temp_c = Math.round(parsed_json["current"]["temp"]* 10)/10;
     let conditions = parsed_json["current"]["weather"]["0"]["description"];
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
     let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
@@ -70,7 +72,7 @@ const Iphone = () => {
   const parseLoc3 = (parsed_json) => {
 
     let location =  "Croydon";
-    let temp_c = Math.round(parsed_json["current"]["temp"]);
+    let temp_c = Math.round(parsed_json["current"]["temp"]* 10)/10;
     let conditions = parsed_json["current"]["weather"]["0"]["description"];
     let id = parsed_json["current"]["weather"][`0`][`id`].toString();
     let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
