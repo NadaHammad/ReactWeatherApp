@@ -11,8 +11,6 @@ export default function LocMenu(props){
 
     const [editLoc, setE] = useState("false");
     const [displayMenu, setD] = useContext(displayM);
-    
-    const [newA, setA] = useState("empty");
 
     // a const for managing locations on the Location banner
     const {loc1, loc2, loc3}  = React.useContext(LocationList);

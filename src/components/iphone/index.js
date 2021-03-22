@@ -26,9 +26,6 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 		
-  
-  
-
   const [locationData1, setLocationData1] = useState([]); 
   const [locationData2, setLocationData2] = useState([]); 
   const [locationData3, setLocationData3] = useState([]); 
@@ -84,15 +81,6 @@ const Iphone = () => {
       idd : id
     });
   };
-  // console.log("teasting if it works");
-  // console.log(locationData1.temp);
-  // console.log(locationData1.idd);
-  // console.log(locationData2.locate);
-  // console.log(locationData2.temp);
-  // console.log(locationData2.idd);
-  // console.log(locationData3.locate);
-  // console.log(locationData3.temp);
-  // console.log(locationData3.idd);
 
   
   const fetchWeatherLocation1 = useCallback(() => {

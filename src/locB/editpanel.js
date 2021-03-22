@@ -11,7 +11,7 @@ export default function EditMenu(props){
 
 
     // a const for managing locations on the Location banner
-    const {loc1, loc2, loc3, nickname}  = React.useContext(LocationList);
+    const {loc1, loc2, loc3}  = React.useContext(LocationList);
     const [locationData1, setLocationData1]  = loc1;
     const [locationData2, setLocationData2]  = loc2;
     const [locationData3, setLocationData3]  = loc3;
