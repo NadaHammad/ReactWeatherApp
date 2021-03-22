@@ -51,6 +51,7 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 }
 .currentRain{
   position: relative;
-  right:-20%;
   bottom: 1%;
+  text-align: right;
+  padding-right: 10px;
 }

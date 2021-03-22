@@ -16,7 +16,6 @@ button:focus {
   width: 160px;
   color: rgb(0, 31, 204);
   padding: 1px 3px 1px 20px;
-  /* display: inline; */
   float: right;
   margin-left: 25px;
   display: flex;
@@ -50,7 +49,7 @@ button:focus {
 	border-color: none;
 	border-width: 5ch;
 	border-left: 1ch;
-    transition: none;
+  transition: none;
 	margin: 0;
 	padding: 0;
 	border: none;

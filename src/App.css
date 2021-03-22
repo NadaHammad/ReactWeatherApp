@@ -1,13 +1,18 @@
 /*  */
 .App {
   text-align: center;
+  box-sizing: border-box;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
+/* Uncomment the next few lines to see which 
+components are going out of the body display */
+/* *{
+  border:1px solid rgb(31, 31, 31);
+} */
 
 .App-header {
   background-color: #282c34;

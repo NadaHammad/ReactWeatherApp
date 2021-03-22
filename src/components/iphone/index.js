@@ -30,7 +30,7 @@ const Iphone = () => {
   const [locationData2, setLocationData2] = useState([]); 
   const [locationData3, setLocationData3] = useState([]); 
 
-  // MAKI CONSTS FOR USE in ther Manage Location
+  // MAKI CONSTS FOR USE in the Manage Location
   const parseLoc1 = (parsed_json) => {
 
     let location = "Camden";
@@ -253,7 +253,7 @@ const Iphone = () => {
 
   return (
     <div
-      // className="containeriPhone"
+    // This is the styling for the whole page
       style={{
         display: "flex",
         flexDirection: "column",
@@ -324,7 +324,7 @@ const Iphone = () => {
       </div>
       
       
-      <div className = "currentRain">{data ? data.currentRain: ""}</div>
+      <div className="currentRain">{data ? data.currentRain: ""}</div>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
         {/* MAKI COMMENTED THE NEXT THREE LINES OUT TO SEE IF THE PROGRAM WOULD STILL WORK, WILL ASK IF WE NEED TO DELETE THIS LATER */}
