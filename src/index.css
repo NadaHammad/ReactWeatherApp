@@ -51,3 +51,8 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
   top: 3%;
   display: block;
 }
+.currentRain{
+  position: relative;
+  right:-25%;
+  bottom: 1%;
+}
