@@ -47,6 +47,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
     if (index == 0){ 
       console.log(timeDifference);
       for(let i = 0;i < timeDifference;i++){
+        console.log(i);
         timeArray.push(formatTime(today.getHours()+i));
         hourArray.push(hourlyTemp[i]["temp"]);
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
@@ -55,7 +56,13 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
 
       //row for showing time
       let timeRow = timeArray.map((time,index) =>
-      <th key= {index}>{time > start && time <= 23 ?  "Today " : "Tomorrow "}{time}:00</th>
+      { 
+        console.log(time > start && time <= 23);
+        if(time > start && time <= 23 ){
+          <th className="timess" key= {index}>"Today"{time}:00</th>
+          // <th className="timess" key= {index}>{time > start && time <= 23 ?  "Today " : "Tomorrow "}{time}:00</th>
+        }
+      }
       );
       timeRow = (<thead key= "thead"><tr key= "timeRow">{timeRow}</tr></thead>);
 

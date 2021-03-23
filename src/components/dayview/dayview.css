@@ -22,3 +22,7 @@ td {
 .tableIcon {
   border-top: none;
 }
+.timess {
+  font-size: smaller;
+  width: 100%;
+}
