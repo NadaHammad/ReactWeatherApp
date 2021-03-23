@@ -25,7 +25,11 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
-		
+	
+  let iconPath = 'http://openweathermap.org/img/wn/';
+  const [iconR, setR] = useState("0");
+
+
   const [locationData1, setLocationData1] = useState([]); 
   const [locationData2, setLocationData2] = useState([]); 
   const [locationData3, setLocationData3] = useState([]); 
@@ -147,6 +151,7 @@ const Iphone = () => {
     let currentRain = parsed_json["hourly"][0]["pop"];
     currentRain = (<b style ={{fontSize: "200%"}}>{currentRain*100 + "%"}</b>);
     currentRain = (<div>Current chance of rain: {currentRain}</div>);
+    let ii = parsed_json["current"]["weather"]["0"]["icon"];
 
     let iconArray = new Array(7);
     for (let i = 0; i < 7; i++) {
@@ -180,6 +185,9 @@ const Iphone = () => {
       dailyTemp[i] = parsed_json["daily"][i]["temp"]["day"];
     }
 
+    
+    setR(ii);
+    console.log(iconPath+iconR+"@2x.png");
     // set states for fields so they could be rendered later on
     setData({
       locate: location,
@@ -214,6 +222,8 @@ const Iphone = () => {
 
     // once the data grabbed, hide the button
     setMounted(false);
+
+    
   }, []);
 
   useEffect(() => {
@@ -223,6 +233,8 @@ const Iphone = () => {
       fetchWeatherLocation1();
       fetchWeatherLocation2();
       fetchWeatherLocation3();
+      
+
     }
   }, [mounted, fetchWeatherData]);
 
@@ -323,11 +335,12 @@ const Iphone = () => {
         </div>
                               
       <div className="header">
+        <div style={{backgroundColor:"rgba(170, 170, 170, 0.677)"}}className="icon" >{data ? <img style = {{ width: "30%"}} src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
         <br></br>
-        <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div> <br></br>
+        <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div>
       </div>
       
-      <br></br><br></br><br></br>
+      <br></br>
       <div className="currentRain">{data ? data.currentRain: ""}</div>
       <br></br>
       <div className={"details"}></div>
