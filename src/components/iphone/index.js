@@ -336,8 +336,7 @@ const Iphone = () => {
           ) : null}
         
       </div>
-      <br></br><br></br><br></br>
-      <div style={{textAlign: "center"}}>
+      <br></br>
         <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
         <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}>
         <button style={{textAlign: "center", margin:"auto"}}>
@@ -345,7 +344,6 @@ const Iphone = () => {
         </button>
         </SimpleAccordion>
         <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
-      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useState, useEffect } from "react";
+import './accordionstyle.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,9 +41,9 @@ const useStyles = makeStyles((theme) => ({
       tempDate.setDate(tempDate.getDate()+1)
     }
     let dateRow = datesArray.map((date) =>
-      <th key= {date}>{date}</th>
+      <th  className="datess" key= {date}>{date}</th>
     );
-    dateRow = (<tr key= "dates">{dateRow}</tr>);
+    dateRow = (<tr  key= "dates">{dateRow}</tr>);
 
     //Row of data
     if (title==="Wind") {
@@ -55,10 +56,8 @@ const useStyles = makeStyles((theme) => ({
             <th key= {index}>{Math.round(percentData)}%</th>
         );
         dataRow = (<tr key= "temp">{dataRow}</tr>);
-    }
-    
-    
-    setListItems(<table><tbody>{dataRow}{dateRow}</tbody></table>)
+    }    
+    setListItems(<table  cellPadding="1" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
 
   }
 
@@ -66,26 +65,32 @@ const useStyles = makeStyles((theme) => ({
 
   children = listItems;
 
-  return (
-    <div className={classes.root}>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          {text}
-          </Typography>
-          <br></br>
-          {children}
-          
-        </AccordionDetails>
-      </Accordion>
-    </div>
+  return (<div className="styleAcc">
+            <div className={classes.root}>
+              <Accordion>
+                    <AccordionSummary 
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                      className="styleBanner"
+                    >
+                      <div className="styleHeading">
+                        <Typography className={classes.heading}>{title}</Typography>
+                      </div>
+                    </AccordionSummary>
+
+                {/* Displays details of the chanceof rain, or wind or humidity */}
+                <AccordionDetails className="styleDetails">
+                  <Typography className="styleTop">
+                  {text}
+                  </Typography>
+                  <br></br>
+                  {children}
+                    
+                  </AccordionDetails>
+              </Accordion>
+            </div>
+          </div>
   );
 }
 export default SimpleAccordion
