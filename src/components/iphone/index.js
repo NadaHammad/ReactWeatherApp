@@ -335,13 +335,11 @@ const Iphone = () => {
         </div>
                               
       <div className="header">
-        <div style={{marginBottom:"-30px"}} className="icon" >{data ? <img style = {{ width: "30%"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
+        <div style={{margin:"0"}} className="icon" >{data ? <img style = {{ width: "15%"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div>
       </div>
       
-      <br></br>
       <div className="currentRain">{data ? data.currentRain: ""}</div>
-      <br></br>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
         {/* MAKI COMMENTED THE NEXT THREE LINES OUT TO SEE IF THE PROGRAM WOULD STILL WORK, WILL ASK IF WE NEED TO DELETE THIS LATER */}

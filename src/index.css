@@ -30,11 +30,10 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
   float: right;
 }
 .bigTemp {
-  font-size: 75px;
+  font-size: 65px;
   color: rgb(255, 255, 255);
   margin-left: 30px;
   text-shadow: 3px 3px rgba(43, 43, 43, 0.685);
-
 }
 .city{
   position: relative;
@@ -60,6 +59,10 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
   font-weight: bold;
   text-shadow: 1px 1px rgb(63, 63, 63);
 }
+.icon, .conditions {
+  background-color: rgba(143, 143, 143, 0.534);
+}
+/* For the display of hourly table */
 .scrollbar{
   overflow-x: scroll;
   width: 414px;
@@ -68,4 +71,21 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 }
 .scrollbar::-webkit-scrollbar {
   display: none;
+}
+.timess, .tomtom2, .tableDates{
+  font-size: small;
+}
+.tomtom, #startTime, #lastRoww {
+  border-left: 1pt solid rgb(255, 255, 255);
+}
+.lastRoww{
+  padding-bottom: 19px;
+}
+.column{
+  text-align: center;
+}
+table{
+  height: 120px;
+  padding: 0;
+  margin: 0;
 }

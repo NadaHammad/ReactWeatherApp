@@ -13,8 +13,6 @@ export default function EditMenu(props){
         ["Croydon","51.3762","0.0982"], 
         ["Sutton","51.3614","0.1940"], 
         ["Harrow","51.5806","0.3420"],
-        ["Cali","36.7783", "119.4179"],
-        ["Manila","14.5995","120.9842"] 
         ];
 
 
@@ -145,8 +143,6 @@ export default function EditMenu(props){
                                         <option value="2" >Croydon</option>
                                         <option value="3" >Sutton</option>
                                         <option value="4" >Harrow</option>
-                                        <option value="5" >Cali</option>
-                                        <option value="6" >Manila</option>
                                     </select>
 
                                     <div className="concanMain">

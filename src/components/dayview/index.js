@@ -42,41 +42,43 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
     let hourArray = [];
     let iconArray = [];
 
+    let iconStart = "";
+
 
     //shows the current days hourly temp
     if (index == 0){ 
-      console.log(timeDifference);
       for(let i = 0;i < timeDifference;i++){
-        console.log(i);
         timeArray.push(formatTime(today.getHours()+i));
         hourArray.push(hourlyTemp[i]["temp"]);
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
-       
+        if(formatTime(today.getHours()+i) == 0){
+          iconStart = i;
+        }
       }
 
 
-      let dayRow = (<thead key= "thead"><tr><th colSpan ={timeDifference - start}>Today</th><th colSpan ={start}>Tomorrow</th></tr></thead>);
+      let dayRow = (<thead key= "thead"><tr><th  colSpan ={timeDifference - start}>Today</th> <th className="tomtom" colSpan ={start}>Tomorrow</th></tr></thead>);
       //row for showing time
       let timeRow = timeArray.map((time,index) =>
-      <th className="timess" key= {index}>{time}:00</th>
+      <th  className="timess" id={(time == 0) ?"startTime": "none"} key= {index}>{time}:00</th>
       );
       timeRow = (<tr key= "timeRow">{timeRow}</tr>);
       ;
       //row for showing time
       const iconPath = 'http://openweathermap.org/img/wn/';
       let iconRow = iconArray.map((icon,index) =>
-      <th className="tableIcon" key ={index} onClick={() => hourlyInfo(index)} ><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
+      <th className="tableIcon" id={(iconStart == index) ? "startTime": "none"}  key ={index} onClick={() => hourlyInfo(index)} ><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
       );
       iconRow = (<tr key= "iconRow">{iconRow}</tr>);
 
       //row for showing temperature
       let tempRow = hourArray.map((temp,index) =>
-      <th key= {index}>{Math.round(temp)}°C</th>
+      <th id={(iconStart == index) ? "lastRoww": "none"} className="lastRoww" key= {index}>{Math.round(temp)}°C</th>
       );
       tempRow = (<tr key= "tempRow">{tempRow}</tr>);
       
       //showing hourly display
-      setHourlyTable(<table className="scrollbar" onClick = {() => setHourDisplay(false)} cellPadding="1" cellSpacing="1">{dayRow}<tbody>{timeRow}{iconRow}{tempRow}</tbody></table>);
+      setHourlyTable(<table className="scrollbar" onClick = {() => setHourDisplay(false)} cellPadding="1" cellSpacing="0">{dayRow}<tbody>{timeRow}{iconRow}{tempRow}</tbody></table>);
       setHourDisplay(true);
     }
 
@@ -90,9 +92,9 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
 
       }
-      let dayRow = (<thead key= "thead"><tr ><th key= "dayRow" colSpan ={timeArray.length-1} >Tomorrow</th></tr></thead>);
+      let dayRow = (<thead key= "thead"><tr ><th className="tomtom2" key= "dayRow" colSpan ={timeArray.length-1} >Tomorrow</th></tr></thead>);
       let timeRow = timeArray.map((time,index) =>
-      <th key= {index}>{time}:00</th>
+      <th className="timess" key= {index}>{time}:00</th>
       );
 
       //row for showing tomorrow
@@ -151,7 +153,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
     //keys = [0,1,2,3,4,5,6];
     const iconPath = 'http://openweathermap.org/img/wn/';
     let iconRow = iconArray.map((icon,index) =>
-    <th className="tableIcon" key ={index} onClick={() => hourlyInfo(index)} ><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
+    <th  key ={index} onClick={() => hourlyInfo(index)} ><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
     );
     iconRow = (<tr key= "iconRow">{iconRow}</tr>);
 
