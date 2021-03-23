@@ -279,7 +279,7 @@ const Iphone = () => {
     
 
 
-    <div className="imageee"
+    <div
     // This is the styling for the whole page
       style={{
         display: "flex",
