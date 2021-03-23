@@ -10,11 +10,21 @@ import { useState, useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
+    fontWeight: "700",
+    
   },
+  accordion: {
+    backgroundColor: "#969696",
+    opacity: 0.849,
+    color: "white",
+    fontWeight: "900",
+    // border: "1px solid rgb(255, 255, 255)",
+    padding: "2px 0 2px 0",
+  }
 }));
 
  const SimpleAccordion=({children, title, text, dataArray})=> {
@@ -68,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
   return (
     <div className={classes.root}>
-      <Accordion>
+      <Accordion className={classes.accordion}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
