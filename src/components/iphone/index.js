@@ -187,7 +187,7 @@ const Iphone = () => {
 
     
     setR(ii);
-    console.log(iconPath+iconR+"@2x.png");
+    //console.log(iconPath+iconR+"@2x.png");
     // set states for fields so they could be rendered later on
     setData({
       locate: location,
@@ -236,7 +236,7 @@ const Iphone = () => {
       
 
     }
-  }, [mounted, fetchWeatherData]);
+  }, [mounted, fetchWeatherData, fetchWeatherLocation1, fetchWeatherLocation2, fetchWeatherLocation3]);
 
 
   useEffect(() => {
