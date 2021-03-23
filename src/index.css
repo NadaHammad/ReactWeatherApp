@@ -56,3 +56,12 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
   text-align: right;
   padding-right: 10px;
 }
+.scrollbar{
+  overflow-x: scroll;
+  width: 413px;
+  display: block;
+
+}
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}

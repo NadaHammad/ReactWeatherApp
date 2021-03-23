@@ -153,6 +153,9 @@ const Iphone = () => {
       iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
     }
 
+
+    let hourlyTemp = parsed_json["hourly"];
+
     //daily chance of rain
     let dailyRain = new Array(7);
     for (let i = 0; i < 7; i++) {
@@ -188,7 +191,8 @@ const Iphone = () => {
       iconArray,
       dailyHumidity,
       dailyWindSpeed,
-      currentRain
+      currentRain,
+      hourlyTemp
     });
   };
 
@@ -332,7 +336,7 @@ const Iphone = () => {
           <Button className={"button"} clickFunction={fetchWeatherData} />
           ) : null} */}
           {!mounted? (
-           <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp}></DayView>
+           <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp} hourlyTemp ={data.hourlyTemp}></DayView>
           ) : null}
         
       </div>

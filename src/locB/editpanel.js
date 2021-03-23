@@ -7,7 +7,15 @@ import  './locbttn.css';
 
 export default function EditMenu(props){
     // LIST OF BOROUGHS TO DISPLAY
-    let b =[["Camden","51.5455","0.1628"], ["Brent","51.5673","0.2711"], ["Croydon","51.3762","0.0982"], ["Sutton","51.3614","0.1940"], ["Harrow","51.5806","0.3420"], ["Cali","36.7783", "119.4179"], ["Manila","14.5995","120.9842"] ];
+    let b =[
+        ["Camden","51.5455","0.1628"],
+        ["Brent","51.5673","0.2711"], 
+        ["Croydon","51.3762","0.0982"], 
+        ["Sutton","51.3614","0.1940"], 
+        ["Harrow","51.5806","0.3420"],
+        ["Cali","36.7783", "119.4179"],
+        ["Manila","14.5995","120.9842"] 
+        ];
 
 
     // a const for managing locations on the Location banner
