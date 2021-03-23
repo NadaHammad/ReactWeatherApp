@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "900",
     // border: "1px solid rgb(255, 255, 255)",
     padding: "2px 0 2px 0",
+    textAlign: "center !important",
   }
 }));
 

@@ -3,10 +3,11 @@ table {
   position: relative;
   background-color: rgba(150, 150, 150, 0.849);
 }
-th{
-    /* border: 1px solid rgb(255, 255, 255); */
-    font-size: small;
-    padding: 2px 0 2px 0;
+th {
+  /* border: 1px solid rgb(255, 255, 255); */
+  font-size: small;
+  padding: 2px 9px 2px 9px;
+  text-align: left;
 }
 tr {
   font-size: x-small;

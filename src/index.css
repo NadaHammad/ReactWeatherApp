@@ -62,7 +62,7 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 }
 .scrollbar{
   overflow-x: scroll;
-  width: 100%;
+  width: 414px;
   display: block;
 
 }
