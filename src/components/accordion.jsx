@@ -24,8 +24,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     fontWeight: "900",
     // border: "1px solid rgb(255, 255, 255)",
-    padding: "2px 0 2px 0",
-    textAlign: "center !important",
+    padding: "2px 0 2px 0"
   }
 }));
 
@@ -77,25 +76,27 @@ const useStyles = makeStyles((theme) => ({
   children = listItems;
 
   return (
-    <div className={classes.root}>
-      <Accordion className={classes.accordion}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-          <Typography className={classes.heading}>{title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          {text}
-          </Typography>
-          <br></br>
-          {children}
-          
-        </AccordionDetails>
-      </Accordion>
-    </div>
+      <div className={classes.root}>
+        <Accordion className={classes.accordion}>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <div className="t1">
+              <Typography id="try" className={classes.heading}>{title}</Typography>
+            </div>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>
+            {text}
+            </Typography>
+            <br></br>
+            {children}
+            
+          </AccordionDetails>
+        </Accordion>
+      </div>
   );
 }
 export default SimpleAccordion

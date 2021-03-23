@@ -1,53 +1,19 @@
-.styleAcc div div div div div{
-    color: rgb(255, 255, 255);
-    background-color: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+#try  {
+    display: block;
+    float:right;
     width: 100%;
+    /* border:1px solid rgb(31, 31, 31);
+    background-color: brown; */
 }
-
-.styleAcc div div div{
-    display: inline-flex;
-    text-align: right;
-}
-.styleAcc div div div div{
-    background-color: rgba(255, 35, 35, 0);
-}
-.styleAcc div div {  
-    background-color:rgba(173, 173, 173, 0.829) ;
-}
-
-/* STYLING FOR THE BANNER NAMES CHANCE OF RAIN, HUMIDITY AND ETC */
-.styleAcc div div div{  
-    background-color: rgba(255, 0, 0, 0) ;
-}
-.styleHeading {
-    margin: 0;
-    padding: 0;
-    /* background-color:rgba(112, 112, 112, 0.829) ; */
-}
-.styleHeading p{
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    
-}
-.styleDetails{
-    background-color:rgba(112, 112, 112, 0.932) ;
-    color: rgb(14, 132, 235);
-    margin: 0;
-    padding: 0;
-}
-.styleBanner{
+.t1 {
     text-align: center;
-    color: rgb(0, 0, 0);
     display: inline;
+    width: 100%;
+    /* padding-left: 100px; */
 }
-.styleTop {
-    margin: 0;
-    padding: 0;
+#panel1a-header{
+    text-align: center;
 }
 /* *{
   border:1px solid rgb(31, 31, 31);
-} */
+}  */
