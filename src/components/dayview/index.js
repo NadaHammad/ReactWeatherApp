@@ -54,18 +54,14 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
        
       }
 
+
+      let dayRow = (<thead key= "thead"><tr><th colSpan ={timeDifference - start}>Today</th><th colSpan ={start}>Tomorrow</th></tr></thead>);
       //row for showing time
       let timeRow = timeArray.map((time,index) =>
-      { 
-        console.log(time > start && time <= 23);
-        if(time > start && time <= 23 ){
-          <th className="timess" key= {index}>"Today"{time}:00</th>
-          // <th className="timess" key= {index}>{time > start && time <= 23 ?  "Today " : "Tomorrow "}{time}:00</th>
-        }
-      }
+      <th className="timess" key= {index}>{time}:00</th>
       );
-      timeRow = (<thead key= "thead"><tr key= "timeRow">{timeRow}</tr></thead>);
-
+      timeRow = (<tr key= "timeRow">{timeRow}</tr>);
+      ;
       //row for showing time
       const iconPath = 'http://openweathermap.org/img/wn/';
       let iconRow = iconArray.map((icon,index) =>
@@ -80,7 +76,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
       tempRow = (<tr key= "tempRow">{tempRow}</tr>);
       
       //showing hourly display
-      setHourlyTable(<table className="scrollbar" onClick = {() => setHourDisplay(false)} cellPadding="1" cellSpacing="0">{timeRow}<tbody>{iconRow}{tempRow}</tbody></table>);
+      setHourlyTable(<table className="scrollbar" onClick = {() => setHourDisplay(false)} cellPadding="1" cellSpacing="1">{dayRow}<tbody>{timeRow}{iconRow}{tempRow}</tbody></table>);
       setHourDisplay(true);
     }
 
@@ -94,10 +90,13 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
 
       }
+      let dayRow = (<thead key= "thead"><tr ><th key= "dayRow" colSpan ={timeArray.length-1} >Tomorrow</th></tr></thead>);
       let timeRow = timeArray.map((time,index) =>
-      <th key= {index}>{"Tomorrow "}{time}:00</th>
+      <th key= {index}>{time}:00</th>
       );
-      timeRow = (<thead key= "thead"><tr key= "timeRow">{timeRow}</tr></thead>);
+
+      //row for showing tomorrow
+      timeRow = (<tr key= "timeRow">{timeRow}</tr>);
 
       //row for showing time
       const iconPath = 'http://openweathermap.org/img/wn/';
@@ -113,7 +112,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
       tempRow = (<tr key= "tempRow">{tempRow}</tr>);
       
       //showing hourly display
-      setHourlyTable(<table className="scrollbar" onClick = {() => setHourDisplay(false)} cellPadding="1" cellSpacing="0">{timeRow}<tbody>{iconRow}{tempRow}</tbody></table>);
+      setHourlyTable(<table className="scrollbar" onClick = {() => setHourDisplay(false)} cellPadding="1" cellSpacing="0">{dayRow}<tbody>{timeRow}{iconRow}{tempRow}</tbody></table>);
       setHourDisplay(true);
 
     }
