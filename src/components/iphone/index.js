@@ -335,8 +335,7 @@ const Iphone = () => {
         </div>
                               
       <div className="header">
-        <div style={{backgroundColor:"rgba(170, 170, 170, 0.677)"}}className="icon" >{data ? <img style = {{ width: "30%"}} src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
-        <br></br>
+        <div style={{marginBottom:"-30px"}} className="icon" >{data ? <img style = {{ width: "30%"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div>
       </div>
       
