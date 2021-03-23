@@ -11,11 +11,21 @@ import './accordionstyle.css';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
+    
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
+    fontWeight: "700",
+    
   },
+  accordion: {
+    backgroundColor: "#969696",
+    opacity: 0.849,
+    color: "white",
+    fontWeight: "900",
+    // border: "1px solid rgb(255, 255, 255)",
+    padding: "2px 0 2px 0",
+  }
 }));
 
  const SimpleAccordion=({children, title, text, dataArray})=> {
@@ -41,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       tempDate.setDate(tempDate.getDate()+1)
     }
     let dateRow = datesArray.map((date) =>
-      <th  className="datess" key= {date}>{date}</th>
+      <th  key= {date}>{date}</th>
     );
     dateRow = (<tr  key= "dates">{dateRow}</tr>);
 
@@ -65,32 +75,26 @@ const useStyles = makeStyles((theme) => ({
 
   children = listItems;
 
-  return (<div className="styleAcc">
-            <div className={classes.root}>
-              <Accordion>
-                    <AccordionSummary 
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                      className="styleBanner"
-                    >
-                      <div className="styleHeading">
-                        <Typography className={classes.heading}>{title}</Typography>
-                      </div>
-                    </AccordionSummary>
-
-                {/* Displays details of the chanceof rain, or wind or humidity */}
-                <AccordionDetails className="styleDetails">
-                  <Typography className="styleTop">
-                  {text}
-                  </Typography>
-                  <br></br>
-                  {children}
-                    
-                  </AccordionDetails>
-              </Accordion>
-            </div>
-          </div>
+  return (
+    <div className={classes.root}>
+      <Accordion className={classes.accordion}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography className={classes.heading}>{title}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+          {text}
+          </Typography>
+          <br></br>
+          {children}
+          
+        </AccordionDetails>
+      </Accordion>
+    </div>
   );
 }
 export default SimpleAccordion

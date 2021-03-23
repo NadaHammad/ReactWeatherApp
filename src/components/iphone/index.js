@@ -323,12 +323,13 @@ const Iphone = () => {
         </div>
                               
       <div className="header">
-        
+        <br></br>
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div> <br></br>
       </div>
       
-      
+      <br></br><br></br><br></br>
       <div className="currentRain">{data ? data.currentRain: ""}</div>
+      <br></br>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
         {/* MAKI COMMENTED THE NEXT THREE LINES OUT TO SEE IF THE PROGRAM WOULD STILL WORK, WILL ASK IF WE NEED TO DELETE THIS LATER */}
@@ -341,13 +342,11 @@ const Iphone = () => {
         
       </div>
       <br></br>
+      <div style={{textAlign: "center"}}>
         <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
-        <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}>
-        <button style={{textAlign: "center", margin:"auto"}}>
-          do we want this i dont think so
-        </button>
-        </SimpleAccordion>
+        <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}/>
         <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
+      </div>
     </div>
   );
 };
