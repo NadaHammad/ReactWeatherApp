@@ -278,7 +278,7 @@ const Iphone = () => {
     document.body.style.backgroundRepeat ="no-repeat",
 
 
-    <div 
+    <div
     // This is the styling for the whole page
       style={{
         display: "flex",
