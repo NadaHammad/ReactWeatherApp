@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#969696",
     opacity: 0.849,
     color: "white",
-    fontWeight: "900",
+    fontWeight: "800",
     // border: "1px solid rgb(255, 255, 255)",
     padding: "2px 0 2px 0"
   }
@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
       tempDate.setDate(tempDate.getDate()+1)
     }
     let dateRow = datesArray.map((date) =>
-      <th  key= {date}>{date}</th>
+      <th   key= {date}>{date}</th>
     );
-    dateRow = (<tr  key= "dates">{dateRow}</tr>);
+    dateRow = (<tr key= "dates">{dateRow}</tr>);
 
     //Row of data
     if (title==="Wind") {
@@ -63,11 +63,11 @@ const useStyles = makeStyles((theme) => ({
         dataRow = (<tr key= "temp">{dataRow}</tr>);
     } else {
         dataRow = dataArray.map((percentData,index) =>
-            <th key= {index}>{Math.round(percentData)}%</th>
+            <th  key= {index}>{Math.round(percentData)}%</th>
         );
         dataRow = (<tr key= "temp">{dataRow}</tr>);
     }    
-    setListItems(<table  cellPadding="1" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
+    setListItems(<table className="t4" cellPadding="0" cellSpacing="0"><tbody >{dataRow}{dateRow}</tbody></table>)
 
   }
 
@@ -76,16 +76,14 @@ const useStyles = makeStyles((theme) => ({
   children = listItems;
 
   return (
-      <div className={classes.root}>
+      <div  className={classes.root}>
         <Accordion className={classes.accordion}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <div className="t1">
-              <Typography id="try" className={classes.heading}>{title}</Typography>
-            </div>
+              <Typography  className={classes.heading}>{title}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>

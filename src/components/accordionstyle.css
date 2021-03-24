@@ -1,16 +1,7 @@
-#try  {
-    display: block;
-    float:right;
-    width: 100%;
-    /* border:1px solid rgb(31, 31, 31);
-    background-color: brown; */
-}
-.t1 {
-    width: 100%;
-}
 #panel1a-header{
     text-align: center;
 }
-/* *{
-  border:1px solid rgb(31, 31, 31);
-}  */
+.t4{
+    height: 100%;
+    width: 100%;
+}

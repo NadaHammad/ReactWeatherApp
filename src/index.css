@@ -71,13 +71,14 @@ FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 .scrollbar::-webkit-scrollbar {
   display: none;
 }
-.timess, .tomtom2, .tableDates{
+.timess, .tomtom2,  .tableDates{
   font-size: small;
 }
-.tomtom2{
+.tomtom3, .tomtom2{
+  /* padding: 2px 9px 2px 9px; */
   text-align: left;
 }
-.tomtom, #startTime, #lastRoww {
+.tomtom3, #startTime, #lastRoww {
   border-left: 1pt solid rgb(255, 255, 255);
 }
 .lastRoww{
