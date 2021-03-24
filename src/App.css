@@ -1,5 +1,29 @@
-/*  */
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro.ttf") format("opentype");
+}
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Black.otf") format("opentype");
+    src: url("util/SF-Pro-Rounded-Black.otf") format("opentype");
+    color: black;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Bold.otf") format("opentype");
+    src: url("util/SF-Pro-Rounded-Bold.otf") format("opentype");
+    font-weight: bold;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Medium.otf") format("opentype");
+    font-size: medium
+}
+
 .App {
+  font-family: "SFPro";
   text-align: center;
   box-sizing: border-box;
 }
@@ -8,7 +32,7 @@
   height: 40vmin;
   pointer-events: none;
 }
-/* Uncomment the next few lines to see which 
+/* Uncomment the next few lines to see which
 components are going out of the body display */
 /* *{
   border:1px solid rgb(31, 31, 31);

@@ -1,17 +1,41 @@
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro.ttf") format("opentype");
+}
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Black.otf") format("opentype");
+    src: url("util/SF-Pro-Rounded-Black.otf") format("opentype");
+    color: black;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Bold.otf") format("opentype");
+    src: url("util/SF-Pro-Rounded-Bold.otf") format("opentype");
+    font-weight: bold;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Medium.otf") format("opentype");
+    font-size: medium
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: "SFPro", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: "SFPro", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-/* THIS IS ADDED TO MANAGE THE IMAGE ON THE SCREEN. 
+/* THIS IS ADDED TO MANAGE THE IMAGE ON THE SCREEN.
 FOR MORE INFO TEST IT BY COMMENTING THIS SECTION */
 * {
   box-sizing: border-box;

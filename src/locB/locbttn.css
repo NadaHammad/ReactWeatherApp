@@ -2,6 +2,29 @@
 // THE STYLING for the banners in the index.js is on the other stylesheet called
 // STYLE.LESS
 // Banner classes are named as div.Banner! */
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro.ttf") format("opentype");
+}
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro-Display-Black.otf") format("opentype");
+    src: url("../util/SF-Pro-Rounded-Black.otf") format("opentype");
+    color: black;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro-Display-Bold.otf") format("opentype");
+    src: url("../util/SF-Pro-Rounded-Bold.otf") format("opentype");
+    font-weight: bold;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro-Display-Medium.otf") format("opentype");
+    font-size: medium
+}
 
 button:focus {
   outline: none;
@@ -9,6 +32,7 @@ button:focus {
 }
 
 .locbanner {
+  font-family: "SFPro";
   font-size: medium;
   font-weight: bold;
   background: white;
@@ -42,6 +66,7 @@ button:focus {
 .mngbttn button{
 	width: 130px;
 	background: white;
+  font-family: "SFPro";
 	font-size:medium;
 	font-weight: bold;
 	color: rgb(0, 31, 204);
@@ -94,6 +119,7 @@ h4 {
 p.titleP {
   /* border:1px solid rgb(31, 31, 31); */
   color: black;
+  font-family: "SFPro";
   font-size: small;
   text-align: left;
   margin: 10px 0 3px 0;
