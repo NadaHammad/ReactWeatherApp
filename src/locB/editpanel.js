@@ -152,7 +152,6 @@ export default function EditMenu(props){
                                         </section> 
                                     </div>
 
-
                                 </form>
                 </section>
             </div>

@@ -57,7 +57,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
       }
 
 
-      let dayRow = (<thead key= "thead"><tr><th  colSpan ={timeDifference - start}>Today</th> <th className="tomtom3" colSpan ={start}>Tomorrow</th></tr></thead>);
+      let dayRow = (<thead key= "thead"><tr><th className="twoday" colSpan ={timeDifference - start}>Today</th><th className="tomtom3" colSpan ={start}>Tomorrow</th></tr></thead>);
       //row for showing time
       let timeRow = timeArray.map((time,index) =>
       <th  className="timess" id={(time == 0) ?"startTime": "none"} key= {index}>{time}:00</th>
@@ -92,7 +92,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
 
       }
-      let dayRow = (<thead key= "thead"><tr ><th className="tomtom2" key= "dayRow" colSpan ={timeArray.length-1} >Tomorrow</th></tr></thead>);
+      let dayRow = (<thead key= "thead"><tr><th className="tomtom2" key= "dayRow" colSpan ={timeArray.length-1} >Tomorrow</th></tr></thead>);
       let timeRow = timeArray.map((time,index) =>
       <th className="timess" key= {index}>{time}:00</th>
       );

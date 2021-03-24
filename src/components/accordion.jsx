@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       tempDate.setDate(tempDate.getDate()+1)
     }
     let dateRow = datesArray.map((date) =>
-      <th   key= {date}>{date}</th>
+      <th  key= {date}>{date}</th>
     );
     dateRow = (<tr key= "dates">{dateRow}</tr>);
 
@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
         );
         dataRow = (<tr key= "temp">{dataRow}</tr>);
     }    
-    setListItems(<table className="t4" cellPadding="0" cellSpacing="0"><tbody >{dataRow}{dateRow}</tbody></table>)
+    setListItems(<table className="t4" cellPadding="0" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
 
   }
 
