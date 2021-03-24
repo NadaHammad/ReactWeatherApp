@@ -10,7 +10,7 @@ export default function Locbttn(props) {
             <div className="locbanner">
                 <p className="area" >{locationData.locate}</p>
                 <p className="temp" >{locationData.temp}ºC</p>
-            </div>
+            </div> 
         </div>
     );
-  }
+  } 

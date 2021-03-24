@@ -42,9 +42,9 @@ export default function EditMenu(props){
             if(locVal == 1){
                 fetchweth();
             } else if (locVal == 2){
-                setLocationData2({locate: areaName});
+                fetchweth();
             } else {
-                setLocationData3({locate: areaName});
+                fetchweth();
             }
         setLocVal(0);
         setE(!editLoc);
@@ -63,6 +63,8 @@ export default function EditMenu(props){
         let id = parsed_json["current"]["weather"][`0`][`id`].toString();
         let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
 
+        console.log(locVal);
+        console.log("testing");
 
         if(locVal == 1){
             setLocationData1({
@@ -99,7 +101,8 @@ export default function EditMenu(props){
         const fetchweth =  useCallback(() => {
             var inp = document.getElementById("boroughOptions").value;
             let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + b[inp][1] + "&lon=" + b[inp][2]  +"&units=metric&appid=79782262247ddb1d61a5a42406f46966";
-            
+            console.log("hi");
+            console.log(locVal);
             $.ajax({
             url,
             dataType: "jsonp",
@@ -124,6 +127,7 @@ export default function EditMenu(props){
             setLocDisplay(locationData3.locate);        
         }
         localStorage.setItem("nickname", '');
+        console.log(locVal);
     });
     
 
