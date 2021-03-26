@@ -2,12 +2,13 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 
-class LineChart extends React.Component {
-  state = {
+export default function LineChart() {
+  const state = {
     dataLine: {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
         {
+          color: "white",
           label: "My First dataset",
           fill: true,
           lineTension: 0.3,
@@ -53,14 +54,12 @@ class LineChart extends React.Component {
     }
   };
 
-  render() {
+  
     return (
       <MDBContainer>
         <h3 className="mt-5">Line chart</h3>
-        <Line data={this.state.dataLine} options={{ responsive: true }} />
+        <Line data={state.dataLine} options={{ responsive: true }} />
       </MDBContainer>
     );
-  }
+  
 }
-
-export default LineChart;
