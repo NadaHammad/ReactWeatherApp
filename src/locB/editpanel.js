@@ -54,7 +54,6 @@ export default function EditMenu(props){
         }
     };
 
-
     
     const  parse = (parsed_json) => {
         let location =  localStorage.getItem("nickname");

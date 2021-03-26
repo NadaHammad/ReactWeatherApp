@@ -269,7 +269,7 @@ const Iphone = () => {
 
   return (
     document.body.style.backgroundImage = `url(img/${background})`,
-    document.body.style.backgroundSize = '414px 736px',
+    document.body.style.backgroundSize = '414px 100%',
     document.body.style.display = "block",
     document.body.style.textAlign = "center",
     document.body.style.flexDirection ="column",
