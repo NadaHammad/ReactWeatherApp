@@ -6,6 +6,7 @@ import Notification from "../notification";
 //import Notifications, {notify} from 'react-notify-toast';
 import React, { useState, useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
+import TempChart from "../tempChart";
 
 // Maki IMPORTS FOR LOCATION AND EXPORTS
 import Locbttn from '../../locB/locbttn';
@@ -13,6 +14,7 @@ import ManageLoc from '../../locB/mnglocbttn';
 import SimpleAccordion from '../accordion'
 
 export const LocationList = React.createContext();
+export const hourlyT = React.createContext();
 
 const Iphone = () => {
   const [mounted, setMounted] = useState(true);
@@ -26,6 +28,10 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	
+  const [hourT, setH] = useState(); // This si the constant value, that is passed as context to TempChart. This displays the hourly temperature
+  const [displayGraph, setDisplayGraph] = useState(false);
+
+
   let iconPath = 'http://openweathermap.org/img/wn/';
   const [iconR, setR] = useState("0");
 
@@ -130,6 +136,12 @@ const Iphone = () => {
   }, []);
 
 
+  const displayGraphs = () => {
+    setDisplayGraph(!displayGraph);
+    console.log(displayGraph);
+  }
+
+
 	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
 	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
 	{/* --------- END END END ------------------------    LOCATION DATA FETCHING    ---------------------- END END END  -------------------------------- */}
@@ -160,6 +172,11 @@ const Iphone = () => {
 
 
     let hourlyTemp = parsed_json["hourly"];
+    let hArray = new Array(12);
+    for (let i = 0; i < 12; i++) {
+      hArray[i] = parsed_json["hourly"][i]["temp"];
+    }
+    setH(hArray);
 
     //daily chance of rain
     let dailyRain = new Array(7);
@@ -230,6 +247,7 @@ const Iphone = () => {
     if (mounted) {
       fetchWeatherData();
       
+
       fetchWeatherLocation1();
       fetchWeatherLocation2();
       fetchWeatherLocation3();
@@ -269,17 +287,16 @@ const Iphone = () => {
 
   return (
     document.body.style.backgroundImage = `url(img/${background})`,
-    document.body.style.backgroundSize = '414px 736px',
-    document.body.style.display = "flex",
+    document.body.style.backgroundSize = '414px 100%',
+    document.body.style.display = "block",
     document.body.style.textAlign = "center",
     document.body.style.flexDirection ="column",
     document.body.style.backgroundAttachment ="fixed",
-    document.body.style.backgroundPosition ="center",
+    document.body.style.backgroundPosition ="center top",
     document.body.style.backgroundRepeat ="no-repeat",
     
 
-
-    <div className="imageee"
+    <div
     // This is the styling for the whole page
       style={{
         display: "flex",
@@ -329,6 +346,12 @@ const Iphone = () => {
               {data.display ? null : <ManageLoc/> }
             </div>
           </LocationList.Provider>
+        
+          <div className="Banner">
+            <div className="mngbttn">
+              <button onClick={displayGraphs}> Graph View </button>
+            </div>
+          </div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
        
         <div className="citytemp">
@@ -345,10 +368,11 @@ const Iphone = () => {
         </div>
                               
       <div className="header">
-        <div style={{margin:"0"}} className="icon" >{data ? <img style = {{ width: "30%"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
+        <div className="icon" >{data ? <img style = {{ width: "30%", marginBottom: "-30px"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div>
       </div>
-      
+      <br></br>
+      <br></br>
       <div className="currentRain">{data ? data.currentRain: ""}</div>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
@@ -362,11 +386,24 @@ const Iphone = () => {
         
       </div>
       <br></br>
-      <div style={{textAlign: "center"}}>
-        <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
-        <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}/>
-        <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
-      </div>
+
+
+        {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
+      { displayGraph?
+        <hourlyT.Provider value={{deet: [hourT, setH]}}>
+          <div>
+            <TempChart/>
+          </div> 
+        </hourlyT.Provider>
+      : 
+      
+        <div style={{textAlign: "center"}}>
+          <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
+          <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}/>
+          <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
+        </div>
+      }
+
     </div>
   );
 };
