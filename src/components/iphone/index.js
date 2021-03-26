@@ -368,7 +368,10 @@ const Iphone = () => {
         <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}/>
         <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
       </div>
-      <div><LineChart/></div>
+      <div><LineChart rain={data.dailyRain} humidity={data.dailyHumidity}/> 
+        <br></br>
+        <LineChart temp={data.hourlyTemp}/>
+      </div>
     </div>
   );
 };
