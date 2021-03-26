@@ -6,6 +6,7 @@ import Notification from "../notification";
 //import Notifications, {notify} from 'react-notify-toast';
 import React, { useState, useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
+import LineChart from "../lineChart";
 
 // Maki IMPORTS FOR LOCATION AND EXPORTS
 import Locbttn from '../../locB/locbttn';
@@ -269,17 +270,16 @@ const Iphone = () => {
 
   return (
     document.body.style.backgroundImage = `url(img/${background})`,
-    document.body.style.backgroundSize = '414px 736px',
-    document.body.style.display = "flex",
+    document.body.style.backgroundSize = '414px 100%',
+    document.body.style.display = "block",
     document.body.style.textAlign = "center",
     document.body.style.flexDirection ="column",
     document.body.style.backgroundAttachment ="fixed",
-    document.body.style.backgroundPosition ="center",
+    document.body.style.backgroundPosition ="center top",
     document.body.style.backgroundRepeat ="no-repeat",
     
 
-
-    <div className="imageee"
+    <div
     // This is the styling for the whole page
       style={{
         display: "flex",
@@ -345,10 +345,11 @@ const Iphone = () => {
         </div>
                               
       <div className="header">
-        <div style={{margin:"0"}} className="icon" >{data ? <img style = {{ width: "30%"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
+        <div className="icon" >{data ? <img style = {{ width: "30%", marginBottom: "-30px"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div>
       </div>
-      
+      <br></br>
+      <br></br>
       <div className="currentRain">{data ? data.currentRain: ""}</div>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
@@ -367,6 +368,7 @@ const Iphone = () => {
         <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}/>
         <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>
       </div>
+      <div><LineChart/></div>
     </div>
   );
 };
