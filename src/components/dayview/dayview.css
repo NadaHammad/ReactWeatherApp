@@ -26,3 +26,7 @@ td {
 .tableIcon {
   border-top: none;
 }
+
+#hTemp{
+  padding: 5px 0 0 0;
+}

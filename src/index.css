@@ -116,3 +116,10 @@ table{
   padding: 0;
   margin: 0;
 }
+/* FOR THE LINE CHART */
+.lineC {
+  color: white;
+  background-color: rgba(163, 163, 163, 0.973);
+  border-radius: 6px;
+  margin: 2px;
+}
