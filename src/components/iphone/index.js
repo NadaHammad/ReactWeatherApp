@@ -390,11 +390,18 @@ const Iphone = () => {
 
         {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
       { displayGraph?
-        <hourlyT.Provider value={{deet: [hourT, setH]}}>
-          <div>
-            <TempChart/>
-          </div> 
-        </hourlyT.Provider>
+        <div>
+          <hourlyT.Provider value={{deet: [hourT, setH]}}>
+              <TempChart/>
+          </hourlyT.Provider>
+
+          
+            <div>
+              <LineChart rain={data.dailyRain} humidity={data.dailyHumidity}/> 
+                <br></br>
+              <LineChart temp={data.hourlyTemp}/>
+            </div>
+        </div>
       : 
       
         <div style={{textAlign: "center"}}>
