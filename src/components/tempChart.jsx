@@ -1,25 +1,25 @@
-import React,  { useEffect, useState } from "react";
+import React,  { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
-
+// Imports for use in the file
 import {hourlyT} from './iphone/index';
+import {Chart} from 'react-chartjs-2';
 
 const TempChart = () => {
+  Chart.defaults.global.defaultFontColor = 'white';
   
-  const {deet}  = React.useContext(hourlyT);
+  const {deet, timings}  = React.useContext(hourlyT);
   const [hourT, setH] = deet;
+  const [hourtimings, setHourTimings] = timings; 
  
-  const hours = () => {
-    
-  }
 
 
   const state = {
     dataLine: {
-      labels: [0,1,2,3,4,5,6,7,8,9,10,11],
+      labels: hourtimings ,
       datasets: [
         {
-          label: "Temperature",
+          label: "Temperature in Celsius",
           fill: true,
           lineTension: 0.3,
           backgroundColor: "rgba(226, 0, 0, .3)",
@@ -44,20 +44,29 @@ const TempChart = () => {
   
   };
 
-  const options = {
-    scales: {
-        yAxes: [{
-          
-            ticks: {
-                stepSize: 0.5,
-            }
-        }]
-    }
-}
+
     return (
       <MDBContainer className="lineC">
-        <h3 id="hTemp" className="mt-5">Hourly Temperature in Celsius</h3>
-        <Line data={state.dataLine} options={options} />
+        <h3 id="hTemp" className="mt-5">12-hour Temperature View</h3>
+        <Line data={state.dataLine} options={{ responsive: true, 
+
+        scales: {
+          yAxes: [{
+            ticks:{
+            fontSize: '11'
+            }
+
+          }],
+
+          xAxes: [{
+            ticks:{
+              fontSize: '11'
+            }
+          }]
+        
+        }
+
+          }} />
       </MDBContainer>
     );
 }

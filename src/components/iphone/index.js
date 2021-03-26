@@ -7,8 +7,9 @@ import Notification from "../notification";
 import React, { useState, useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
 import TempChart from "../tempChart";
+import LineChart from "../lineChart";
 
-// Maki IMPORTS FOR LOCATION AND EXPORTS
+// IMPORTS AND EXPORTS FOR LOCATION
 import Locbttn from '../../locB/locbttn';
 import ManageLoc from '../../locB/mnglocbttn';
 import SimpleAccordion from '../accordion'
@@ -21,14 +22,16 @@ const Iphone = () => {
   const [data, setData] = useState([]);
   const [background, setBackground] = useState("container");
   const [tempStyles, setTempStyles] = useState("");
-  //let [weatherInfo, setWeatherInfo] = useState([]);
 
 
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	
-  const [hourT, setH] = useState(); // This si the constant value, that is passed as context to TempChart. This displays the hourly temperature
+  const [hourtimings, setHourTimings] = useState();
+  let day = new Date();
+  const [today] = useState(day);
+  const [hourT, setH] = useState(); // This is the constant value, that is passed as context to TempChart. This displays the hourly temperature
   const [displayGraph, setDisplayGraph] = useState(false);
 
 
@@ -40,7 +43,7 @@ const Iphone = () => {
   const [locationData2, setLocationData2] = useState([]); 
   const [locationData3, setLocationData3] = useState([]); 
 
-  // MAKI CONSTS FOR USE in the Manage Location
+  // CONSTS FOR USE in the Manage Location
   const parseLoc1 = (parsed_json) => {
 
     let location = "Camden";
@@ -136,9 +139,8 @@ const Iphone = () => {
   }, []);
 
 
-  const displayGraphs = () => {
+  const displayGraphsFX = () => {
     setDisplayGraph(!displayGraph);
-    console.log(displayGraph);
   }
 
 
@@ -170,13 +172,31 @@ const Iphone = () => {
       iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
     }
 
-
+    // THIS LINE OF CODE, IS ONLY FOR TEMPCHART
+    // Setting the hourly temperatures for 12 hours only
     let hourlyTemp = parsed_json["hourly"];
     let hArray = new Array(12);
     for (let i = 0; i < 12; i++) {
       hArray[i] = parsed_json["hourly"][i]["temp"];
     }
     setH(hArray);
+
+    let timeArray = new Array(12);
+    let num = today.getHours();
+    for(let i = 0; i < 12; i++){
+      let A = num + i;
+      if(A  < 24){ 
+        timeArray[i] = A + ":00";
+      } else {
+        if(A == 0){
+
+        }
+        timeArray[i] = (A - 24) + ":00";
+      }
+    }
+    setHourTimings(timeArray);
+    // THIS IS THE END OF THE LINE FOR TEMPCHART CODE
+
 
     //daily chance of rain
     let dailyRain = new Array(7);
@@ -224,8 +244,6 @@ const Iphone = () => {
 
   // a call to fetch weather data via wunderground
   const fetchWeatherData = useCallback(() => {
-    // API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
-    //var url = "http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=6b825d5e524d540a69987f621c8f50dc";
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&units=metric&appid=79782262247ddb1d61a5a42406f46966";
     $.ajax({
@@ -247,12 +265,10 @@ const Iphone = () => {
     if (mounted) {
       fetchWeatherData();
       
-
       fetchWeatherLocation1();
       fetchWeatherLocation2();
       fetchWeatherLocation3();
-      
-
+    
     }
   }, [mounted, fetchWeatherData, fetchWeatherLocation1, fetchWeatherLocation2, fetchWeatherLocation3]);
 
@@ -311,7 +327,6 @@ const Iphone = () => {
     >
 
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
-				{/* Maki added this as a template for now for the loaction banner. must be fixed with styling */}
           <LocationList.Provider value={[locationData1, setLocationData1]}>
             <div>
               <div className="Banner" >
@@ -349,7 +364,7 @@ const Iphone = () => {
         
           <div className="Banner">
             <div className="mngbttn">
-              <button onClick={displayGraphs}> Graph View </button>
+              <button onClick={displayGraphsFX}> {displayGraph? "Graph View" : "Normal View"} </button>
             </div>
           </div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
@@ -360,10 +375,6 @@ const Iphone = () => {
           </div>
           <div className="bigTemp">
             {data ? data.temp : ""}ºC
-            {/* {tempStyles} <-------------- ASK MAKI ABOUT THIS if you dont understand
-                              the explanation. line above this comment- the SPAN had this className
-                              but I changed it so I can be able to edit this. the style for this will #
-                              be inindex.CSS, NOT less */}
           </div>
         </div>
                               
@@ -376,10 +387,6 @@ const Iphone = () => {
       <div className="currentRain">{data ? data.currentRain: ""}</div>
       <div className={"details"}></div>
       <div className={"containeriPhone button"}>
-        {/* MAKI COMMENTED THE NEXT THREE LINES OUT TO SEE IF THE PROGRAM WOULD STILL WORK, WILL ASK IF WE NEED TO DELETE THIS LATER */}
-        {/* {data && data.display? (
-          <Button className={"button"} clickFunction={fetchWeatherData} />
-          ) : null} */}
           {!mounted? (
            <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp} hourlyTemp ={data.hourlyTemp}></DayView>
           ) : null}
@@ -388,10 +395,10 @@ const Iphone = () => {
       <br></br>
 
 
-        {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
+    {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
       { displayGraph?
         <div>
-          <hourlyT.Provider value={{deet: [hourT, setH]}}>
+          <hourlyT.Provider value={{deet: [hourT, setH], timings: [hourtimings, setHourTimings]}}>
               <TempChart/>
           </hourlyT.Provider>
 
@@ -399,7 +406,6 @@ const Iphone = () => {
             <div>
               <LineChart rain={data.dailyRain} humidity={data.dailyHumidity}/> 
                 <br></br>
-              <LineChart temp={data.hourlyTemp}/>
             </div>
         </div>
       : 

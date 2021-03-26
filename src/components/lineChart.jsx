@@ -2,8 +2,10 @@ import React from "react";
 import { Line } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 import { useState, useEffect, useCallback } from "react";
+import {Chart} from 'react-chartjs-2';
 
 const LineChart= ({rain, humidity, temp}) => {
+  Chart.defaults.global.defaultFontColor = 'white';
 
   let day = new Date();
   const [today] = useState(day);
@@ -82,8 +84,8 @@ const LineChart= ({rain, humidity, temp}) => {
 
   
     return (
-      <MDBContainer>
-        <h3 className="mt-5">Chance of Rain and Humidity data</h3>
+      <MDBContainer className="lineC">
+        <h3 id="hTemp" className="mt-5">Chance of Rain and Humidity data</h3>
         <Line data={state.dataLine} options={{ responsive: true }} />
       </MDBContainer>
     );
