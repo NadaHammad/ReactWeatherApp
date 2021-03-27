@@ -46,7 +46,7 @@ const formatData= data.map((element)=>(
     }
     return (
       <>
-      <MDBContainer> 
+      <MDBContainer id="lineC"> 
           {/* the title prop is used to give each chart a different title */}
         <h3 className="mt-5">{title}</h3>        
         {data? <Line data={state.dataLine} options={{ responsive: true }} /> :""}      

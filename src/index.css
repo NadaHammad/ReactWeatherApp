@@ -117,9 +117,9 @@ table{
   margin: 0;
 }
 /* FOR THE LINE CHART */
-.lineC {
+#lineC {
   color: white;
-  background-color: rgba(163, 163, 163, 0.973);
+  background-color: rgba(163, 163, 163, 0.733);
   border-radius: 6px;
   margin: 2px;
 }
