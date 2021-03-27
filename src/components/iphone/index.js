@@ -7,41 +7,49 @@ import React, { useState, useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
 import LineChart from "../lineChart";
 
-// IMPORTS AND EXPORTS FOR LOCATION
+// IMPORTS AND EXPORTS FOR LOCATION BANNERS 
 import Locbttn from '../../locB/locbttn';
 import ManageLoc from '../../locB/mnglocbttn';
 import SimpleAccordion from '../accordion'
 
 export const LocationList = React.createContext();
-export const hourlyT = React.createContext();
 
+
+
+
+// The IPHONE HOOK
 const Iphone = () => {
+
   const [mounted, setMounted] = useState(true);
-  const [data, setData] = useState([]);
-  const [background, setBackground] = useState("container");
+  const [data, setData] = useState([]); // holds data of London weather 
+  const [background, setBackground] = useState("container"); // holds the data for background image. This changes based on weather conditions
+
+
 
 
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
-	
+	// An array holding the current time until the time after 12 hours. Thsi is used in the lineChart
   const [hourtimings, setHourTimings] = useState();
+
   //Today's date
   let day = new Date();
  
   const [hourT, setH] = useState(); // This is the constant value, that is passed as context to TempChart. This displays the hourly temperature
   const [displayGraph, setDisplayGraph] = useState(false);
 
-
+  // This holds the icon of the current weather condition of London 
   let iconPath = 'http://openweathermap.org/img/wn/';
   const [iconR, setR] = useState("0");
 
-
+  // These constants hold the weather data of the 3 LOCATIONS that are displayed in the Loncation Banners
   const [locationData1, setLocationData1] = useState([]); 
   const [locationData2, setLocationData2] = useState([]); 
   const [locationData3, setLocationData3] = useState([]); 
 
   // CONSTS FOR USE in the Manage Location
+  // We first pass the 3 INITIAL LOCATIONS [CAMDEN, BRENT, AND CROYDON]
   const parseLoc1 = (parsed_json) => {
 
     let location = "Camden";
@@ -94,6 +102,8 @@ const Iphone = () => {
   };
 
   
+
+  // We first call the API to retrive weather conditions for CAMDEN
   const fetchWeatherLocation1 = useCallback(() => {
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.5455&lon=0.1628&units=metric&appid=79782262247ddb1d61a5a42406f46966";
@@ -108,6 +118,7 @@ const Iphone = () => {
 
   }, []);
 
+  // retrives data for BRENT
   const fetchWeatherLocation2 = useCallback(() => {
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.5673&lon=0.2711&units=metric&appid=79782262247ddb1d61a5a42406f46966";
@@ -121,7 +132,7 @@ const Iphone = () => {
     });
 
   }, []);
-
+  // retrieves data for CROYDON
   const fetchWeatherLocation3 = useCallback(() => {
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.3762&lon=0.0982&units=metric&appid=79782262247ddb1d61a5a42406f46966";
@@ -136,7 +147,7 @@ const Iphone = () => {
 
   }, []);
 
-
+  // This function is used to switch the displaying of the ACCORDION and the GRAPHS 
   const displayGraphsFX = () => {
     setDisplayGraph(!displayGraph);
   }
@@ -152,15 +163,15 @@ const Iphone = () => {
   
 
 
-  // a call to fetch weather data via wunderground
+  // a call to fetch weather data via underground
   const fetchWeatherData = useCallback(() => {
 
     const parseResponse = (parsed_json) => {
 
-      //name not available in one call we could hard code it?
       setMounted(false);
   
-      //var location = parsed_json['name'];
+      // This line fo code, retrives Current temperature in London,
+      // condition description, chance of Rain for the day, and weather ID
       let location = "London";
       let temp_c = Math.round(parsed_json["current"]["temp"]);
       let conditions = parsed_json["current"]["weather"]["0"]["description"];
@@ -171,13 +182,15 @@ const Iphone = () => {
       currentRain = (<div>Current chance of rain: {currentRain}</div>);
       let ii = parsed_json["current"]["weather"]["0"]["icon"];
   
+      //  An array that holds the icons that visuall ydisplay the weather conditions for the 7 day period
       let iconArray = new Array(7);
       for (let i = 0; i < 7; i++) {
         iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
       }
   
-      // THIS LINE OF CODE, IS ONLY FOR TEMPCHART
+      // THIS LINE OF CODE, IS ADDED FOR LINECHART
       // Setting the hourly temperatures for 12 hours only
+      // This lone of code, gets the hourly temperature readings for 12 HOURS ONLY
       let hourlyTemp = parsed_json["hourly"];
       let hArray = new Array(12);
       for (let i = 0; i < 12; i++) {
@@ -185,6 +198,7 @@ const Iphone = () => {
       }
       setH(hArray);
   
+      //  This code, gets the 12-hour hour stamps, starting from the current hour and ending to the end of the 12-hours
       let timeArray = new Array(12);
       let num = day.getHours();
       for(let i = 0; i < 12; i++){
@@ -226,7 +240,7 @@ const Iphone = () => {
         dailyTemp[i] = parsed_json["daily"][i]["temp"]["day"];
       }
   
-      
+      //  sets the icons
       setR(ii);
   
       // set states for fields so they could be rendered later on
@@ -247,7 +261,7 @@ const Iphone = () => {
 
 
 
-
+    // Fetches weather data for London
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&units=metric&appid=79782262247ddb1d61a5a42406f46966";
     $.ajax({
@@ -265,6 +279,7 @@ const Iphone = () => {
     
   }, [day]);
 
+  // Fetches data once the component is mounted
   useEffect(() => {
     if (mounted) {
       fetchWeatherData();
@@ -272,11 +287,10 @@ const Iphone = () => {
       fetchWeatherLocation1();
       fetchWeatherLocation2();
       fetchWeatherLocation3();
-    
     }
   }, [mounted, fetchWeatherData, fetchWeatherLocation1, fetchWeatherLocation2, fetchWeatherLocation3]);
 
-
+  // Once data [weather condtions] have been set. Then set tje BACKGROUND depending on weather condition ID 
   useEffect(() => {
     if (data.temp) {
 
@@ -302,8 +316,8 @@ const Iphone = () => {
     
   }, [data]);
 
-  // formats date to display info
 
+  // formats date to display info
   let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
   //variable for day number and month
@@ -364,6 +378,12 @@ const Iphone = () => {
     >
 
 	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
+	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
+	{/* -------------------------------------------    LOCATION BUTTONS OR BANNERS    ------------------------------------------------------------ */}
+        {/* The locations buttons are WRAPPED by a context called LocationList that passes the weather conditions of the 3 LOCATIONS
+           by wrapping them in a context, we can immediately and flexibly render any changes on the LOCATION BANNERS */}
+           
+          {/* LOCATION BUTTON 1 */}
           <LocationList.Provider value={[locationData1, setLocationData1]}>
             <div>
               <div className="Banner" >
@@ -399,13 +419,20 @@ const Iphone = () => {
             </div>
           </LocationList.Provider>
         
+          {/* THE BUTTON THAT HANDLES the switching of displays of ACCORDION and the GRAPHS */}
           <div className="Banner">
             <div className="mngbttn">
               <button onClick={displayGraphsFX}> {displayGraph? "Normal View" : "Graph View"} </button>
             </div>
           </div>
+
+	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
+	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
        
+
+
+       {/* DISPLAY THE TEMPERATURE OF LONDON AND THE NAME */}
         <div className="citytemp">
           <div className="city">
             {data ? data.locate : ""}
@@ -414,23 +441,27 @@ const Iphone = () => {
             {data ? data.temp : ""}ºC
           </div>
         </div>
-                              
+
+      {/* displays the header that contains ICON and CONDITIONS of weather in LONDON */}
       <div className="header">
         <div className="icon" >{data ? <img style = {{ width: "30%", marginBottom: "-30px"}} alt = "current weather icon" src = {(iconPath + iconR + "@2x.png")}></img> : ""}</div> 
         <div className="conditions" style={{fontWeight:"bold"}}>{data ? data.cond : ""}</div>
       </div>
+
       <br></br>
       <br></br>
+
+      {/* DISPLAYS THE CURRENT CHANCE OF RAINN INN LONDON */}
       <div className="currentRain">{data ? data.currentRain: ""}</div>
-      <div className={"details"}></div>
+
+      {/* RENDERS the 7-day VIEW OF TEMPERATURE IN LONDON */}
       <div className={"containeriPhone button"}>
           {!mounted? (
            <DayView iconArray= {data.iconArray} rainArray={data.dailyRain} tempArray ={data.dailyTemp} hourlyTemp ={data.hourlyTemp}></DayView>
           ) : null}
-        
       </div>
-      <br></br>
 
+      <br></br>
 
     {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
       { displayGraph?
