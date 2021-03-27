@@ -31,12 +31,13 @@ const useStyles = makeStyles((theme) => ({
  const SimpleAccordion=({children, title, text, dataArray})=> {
   const classes = useStyles();
 
-  let day = new Date();
+  
   
   var [listItems,setListItems] = useState(<table></table>);
 
 
   useEffect(() => {
+  let day = new Date();
   if (dataArray) {
 
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -71,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
   }
 
-  },[dataArray, title, day]);
+  },[dataArray, title]);
 
   children = listItems;
 
