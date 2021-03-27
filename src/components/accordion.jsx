@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
         dataRow = (<tr key= "temp">{dataRow}</tr>);
       }    
       //add rows to table body
-      setListItems(<table className="t4" cellPadding="0" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
+      setListItems(<table className="acc_table" cellPadding="0" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
     }
     //dependencies
   },[dataArray, title]);

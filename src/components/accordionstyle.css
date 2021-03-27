@@ -1,7 +1,9 @@
+/* The style for the Accordion Banners! */
 #panel1a-header{
     text-align: center;
 }
-.t4{
+/* STYLE for the table inside of Accordion */
+.acc_table{ 
     height: 100%;
     width: 100%;
 }
