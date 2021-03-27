@@ -2,12 +2,20 @@ import React from "react";
 import { Line , Chart} from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 
+//A generic line graph. Uses any data provided to it through props
 const LineGraph=({data, title})=> {
+
+    //default font colour - a styling choice
 Chart.defaults.global.defaultFontColor = 'white';
 
-
+//structured so that data prop is a list of objects where each object is a line in the line graph. This is so that
+//we can generalise the graph. Doesn't matter if the x axis or y axis is different because this will be specified
+//in the object itself elsewhere. The lineChart itself will use any type of data provided to it.
 const formatData= data.map((element)=>(
     {
+        //each line in the line graph will be given the following attributes:
+        //element.type is the name of the data series for the current line
+        //element.y is the y axis data series
         label: element.type,
         fill: true,
         lineTension: 0.3,
@@ -32,13 +40,14 @@ const formatData= data.map((element)=>(
 
     const state={
         dataLine: {
-        labels: data[0].x,
+        labels: data[0].x, //data[0].x will give the x axis for the first object in the list of objects in data
         datasets: formatData
         }
     }
     return (
       <>
       <MDBContainer> 
+          {/* the title prop is used to give each chart a different title */}
         <h3 className="mt-5">{title}</h3>        
         {data? <Line data={state.dataLine} options={{ responsive: true }} /> :""}      
         </MDBContainer>
