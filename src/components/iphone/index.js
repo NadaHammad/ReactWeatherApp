@@ -405,7 +405,7 @@ const Iphone = () => {
         
           <div className="Banner">
             <div className="mngbttn">
-              <button onClick={displayGraphsFX}> {displayGraph? "Graph View" : "Normal View"} </button>
+              <button onClick={displayGraphsFX}> {displayGraph? "Normal View" : "Graph View"} </button>
             </div>
           </div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
