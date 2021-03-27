@@ -1,9 +1,16 @@
 import React,{   useContext, useState } from "react";
-// exporting the context from parent component fotr the child component to use
+
+// IMPORT the context from parent components to the child component to use
 import { displayM } from "./mnglocbttn";
 import {LocationList} from "../components/iphone/index";
+
+// IMPORT THE STYLE FOR USE
 import  './locbttn.css';
+
+//  Import the Panel needed for editing the locations
 import EditMenu from './editpanel';
+
+//  Exporting the Location Value
 export const LocalVal = React.createContext();
 
 
