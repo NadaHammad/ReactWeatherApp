@@ -30,7 +30,7 @@ const Iphone = () => {
 	
   const [hourtimings, setHourTimings] = useState();
   let day = new Date();
-  const [today] = useState(day);
+ 
   const [hourT, setH] = useState(); // This is the constant value, that is passed as context to TempChart. This displays the hourly temperature
   const [displayGraph, setDisplayGraph] = useState(false);
 
@@ -182,7 +182,7 @@ const Iphone = () => {
     setH(hArray);
 
     let timeArray = new Array(12);
-    let num = today.getHours();
+    let num = day.getHours();
     for(let i = 0; i < 12; i++){
       let A = num + i;
       if(A  < 24){ 
@@ -304,10 +304,13 @@ const Iphone = () => {
 
     //variable for day number and month
   let datesArray = new Array(7);
-  let tempDate = today;                                                                                                                                                                                                                             
+  let tempDate = day;  
+  console.log(day);                                                                                                                                                                                                                           
   for (let i = 0; i<7;i++){
 
     datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
+    console.log(tempDate.getMonth());
+    console.log(datesArray);
     tempDate.setDate(tempDate.getDate()+1)
   }
 
