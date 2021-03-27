@@ -54,16 +54,10 @@ const Iphone = () => {
 
     let location = "Camden";
     let temp_c = Math.round(parsed_json["current"]["temp"]* 10)/10;
-    let conditions = parsed_json["current"]["weather"]["0"]["description"];
-    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
-    let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
     
     setLocationData1({
       locate: location,
       temp: temp_c,
-      cond: conditions,
-      i: icon,
-      idd : id
     });
   };
 
@@ -71,16 +65,10 @@ const Iphone = () => {
 
     let location = "Brent";
     let temp_c = Math.round(parsed_json["current"]["temp"]* 10)/10;
-    let conditions = parsed_json["current"]["weather"]["0"]["description"];
-    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
-    let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
 
     setLocationData2({
       locate: location,
       temp: temp_c,
-      cond: conditions,
-      i: icon,
-      idd : id
     });
   };
 
@@ -88,16 +76,10 @@ const Iphone = () => {
 
     let location =  "Croydon";
     let temp_c = Math.round(parsed_json["current"]["temp"]* 10)/10;
-    let conditions = parsed_json["current"]["weather"]["0"]["description"];
-    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
-    let icon = parsed_json["daily"][0]["weather"]["0"]["icon"];
 
     setLocationData3({
       locate: location,
       temp: temp_c,
-      cond: conditions,
-      i: icon,
-      idd : id
     });
   };
 
