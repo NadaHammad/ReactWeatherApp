@@ -126,7 +126,6 @@ export default function EditMenu(props){
             setLocDisplay(locationData3.locate);        
         }
         localStorage.setItem("nickname", '');
-        console.log(locVal);
     });
     
 
