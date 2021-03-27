@@ -301,6 +301,39 @@ const Iphone = () => {
 
   // formats date to display info
 
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  let day2 = new Date();
+  const [today2] = useState(day2);
+  //variable for day number and month
+let datesArray = new Array(7);
+let tempDate = today2;                                                                                                                                                                                                                             
+for (let i = 0; i<7;i++){
+
+  datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
+  tempDate.setDate(tempDate.getDate()+1)
+}
+
+const formatData= data.dailyRain ? data.dailyRain.map((data)=>(data*=100)) : [];
+
+const graph1=[{
+  type: 'Chance of Rain',
+  x: datesArray,
+  y: formatData
+},
+{
+  type: 'Humidity',
+  x: datesArray,
+  y: data.dailyHumidity
+}
+]
+const graph2=[{
+type: 'Hourly Temperature',
+  x: hourtimings,
+  y: hourT
+}]
+
+
   return (
     document.body.style.backgroundImage = `url(img/${background})`,
     document.body.style.backgroundSize = '414px 100%',
@@ -398,13 +431,12 @@ const Iphone = () => {
     {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
       { displayGraph?
         <div>
-          <hourlyT.Provider value={{deet: [hourT, setH], timings: [hourtimings, setHourTimings]}}>
+          {/* <hourlyT.Provider value={{deet: [hourT, setH], timings: [hourtimings, setHourTimings]}}>
               <TempChart/>
-          </hourlyT.Provider>
-
-          
+          </hourlyT.Provider> */}
             <div>
-              <LineChart rain={data.dailyRain} humidity={data.dailyHumidity}/> 
+              <LineChart data={graph1} title="Chance of Rain and Humidity (%)"/> 
+              <LineChart data={graph2} title="Hourly Temperature (°C)"/> 
                 <br></br>
             </div>
         </div>
