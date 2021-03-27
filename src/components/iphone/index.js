@@ -19,7 +19,6 @@ const Iphone = () => {
   const [mounted, setMounted] = useState(true);
   const [data, setData] = useState([]);
   const [background, setBackground] = useState("container");
-  const [tempStyles, setTempStyles] = useState("");
 
 
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
@@ -280,7 +279,6 @@ const Iphone = () => {
 
   useEffect(() => {
     if (data.temp) {
-      setTempStyles(`${"temperature"} ${"filled"}`);
 
       //change background depending on what the current weather is like. This is so that the background 
       //represents the current weather.
@@ -300,8 +298,6 @@ const Iphone = () => {
       } else if (data && data.wid.charAt(0) == 6) {
         setBackground("/snow.jpg");
       }
-    } else {
-      setTempStyles("temperature");
     }
     
   }, [data]);
