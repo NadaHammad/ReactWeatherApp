@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   const classes = useStyles();
 
   let day = new Date();
-  const [today] = useState(day);
+  
   var [listItems,setListItems] = useState(<table></table>);
 
 
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
     //variable for day number and month
     let datesArray = new Array(14);
-    let tempDate = today;                                                                                                                                                                                                                             
+    let tempDate = day;                                                                                                                                                                                                                             
     for (let i = 0; i<7;i++){
 
       datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
@@ -71,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
   }
 
-  },[dataArray, title, today]);
+  },[dataArray, title, day]);
 
   children = listItems;
 
