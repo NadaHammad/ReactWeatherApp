@@ -3,10 +3,8 @@ import $ from "jquery";
 // import the Button component
 import DayView from "../dayview";
 import Notification from "../notification";
-//import Notifications, {notify} from 'react-notify-toast';
 import React, { useState, useEffect, useCallback } from "react";
 // import ReactDOM from "react-dom";
-import TempChart from "../tempChart";
 import LineChart from "../lineChart";
 
 // IMPORTS AND EXPORTS FOR LOCATION
@@ -29,8 +27,9 @@ const Iphone = () => {
 	{/* -------------------------------------------    LOCATION DATA FETCHING    ------------------------------------------------------------ */}
 	
   const [hourtimings, setHourTimings] = useState();
+  //Today's date
   let day = new Date();
-  const [today] = useState(day);
+ 
   const [hourT, setH] = useState(); // This is the constant value, that is passed as context to TempChart. This displays the hourly temperature
   const [displayGraph, setDisplayGraph] = useState(false);
 
@@ -151,99 +150,105 @@ const Iphone = () => {
 
 
 
-  const parseResponse = (parsed_json) => {
-
-    //name not available in one call we could hard code it?
-    setMounted(false);
-
-    //var location = parsed_json['name'];
-    let location = "London";
-    let temp_c = Math.round(parsed_json["current"]["temp"]);
-    let conditions = parsed_json["current"]["weather"]["0"]["description"];
-    conditions = conditions.charAt(0).toUpperCase() + conditions.slice(1);
-    let id = parsed_json["current"]["weather"][`0`][`id`].toString();
-    let currentRain = parsed_json["hourly"][0]["pop"];
-    currentRain = (<b style ={{fontSize: "200%"}}>{currentRain*100 + "%"}</b>);
-    currentRain = (<div>Current chance of rain: {currentRain}</div>);
-    let ii = parsed_json["current"]["weather"]["0"]["icon"];
-
-    let iconArray = new Array(7);
-    for (let i = 0; i < 7; i++) {
-      iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
-    }
-
-    // THIS LINE OF CODE, IS ONLY FOR TEMPCHART
-    // Setting the hourly temperatures for 12 hours only
-    let hourlyTemp = parsed_json["hourly"];
-    let hArray = new Array(12);
-    for (let i = 0; i < 12; i++) {
-      hArray[i] = parsed_json["hourly"][i]["temp"];
-    }
-    setH(hArray);
-
-    let timeArray = new Array(12);
-    let num = today.getHours();
-    for(let i = 0; i < 12; i++){
-      let A = num + i;
-      if(A  < 24){ 
-        timeArray[i] = A + ":00";
-      } else {
-        if(A == 0){
-
-        }
-        timeArray[i] = (A - 24) + ":00";
-      }
-    }
-    setHourTimings(timeArray);
-    // THIS IS THE END OF THE LINE FOR TEMPCHART CODE
-
-
-    //daily chance of rain
-    let dailyRain = new Array(7);
-    for (let i = 0; i < 7; i++) {
-      dailyRain[i] = parsed_json["daily"][i]["pop"];
-    }
-
-    //daily humidity
-    let dailyHumidity = new Array(7);
-    for (let i = 0; i < 7; i++) {
-      dailyHumidity[i] = parsed_json["daily"][i]["humidity"];
-    }
-
-    //daily wind speed
-    let dailyWindSpeed = new Array(7);
-    for (let i = 0; i < 7; i++) {
-      dailyWindSpeed[i] = parsed_json["daily"][i]["wind_speed"];
-    }
-
-    //daily temperature
-    let dailyTemp = new Array(7);
-    for (let i = 0; i < 7; i++) {
-      dailyTemp[i] = parsed_json["daily"][i]["temp"]["day"];
-    }
-
-    
-    setR(ii);
-    //console.log(iconPath+iconR+"@2x.png");
-    // set states for fields so they could be rendered later on
-    setData({
-      locate: location,
-      temp: temp_c,
-      cond: conditions,
-      wid: id,
-      dailyRain,
-      dailyTemp,
-      iconArray,
-      dailyHumidity,
-      dailyWindSpeed,
-      currentRain,
-      hourlyTemp
-    });
-  };
+  
 
 
   // a call to fetch weather data via wunderground
   const fetchWeatherData = useCallback(() => {
+
+    const parseResponse = (parsed_json) => {
+
+      //name not available in one call we could hard code it?
+      setMounted(false);
+  
+      //var location = parsed_json['name'];
+      let location = "London";
+      let temp_c = Math.round(parsed_json["current"]["temp"]);
+      let conditions = parsed_json["current"]["weather"]["0"]["description"];
+      conditions = conditions.charAt(0).toUpperCase() + conditions.slice(1);
+      let id = parsed_json["current"]["weather"][`0`][`id`].toString();
+      let currentRain = parsed_json["hourly"][0]["pop"];
+      currentRain = (<b style ={{fontSize: "200%"}}>{currentRain*100 + "%"}</b>);
+      currentRain = (<div>Current chance of rain: {currentRain}</div>);
+      let ii = parsed_json["current"]["weather"]["0"]["icon"];
+  
+      let iconArray = new Array(7);
+      for (let i = 0; i < 7; i++) {
+        iconArray[i] = parsed_json["daily"][i]["weather"]["0"]["icon"];
+      }
+  
+      // THIS LINE OF CODE, IS ONLY FOR TEMPCHART
+      // Setting the hourly temperatures for 12 hours only
+      let hourlyTemp = parsed_json["hourly"];
+      let hArray = new Array(12);
+      for (let i = 0; i < 12; i++) {
+        hArray[i] = parsed_json["hourly"][i]["temp"];
+      }
+      setH(hArray);
+  
+      let timeArray = new Array(12);
+      let num = day.getHours();
+      for(let i = 0; i < 12; i++){
+        let A = num + i;
+        if(A  < 24){ 
+          timeArray[i] = A + ":00";
+        } else {
+          if(A == 0){
+  
+          }
+          timeArray[i] = (A - 24) + ":00";
+        }
+      }
+      setHourTimings(timeArray);
+      // THIS IS THE END OF THE LINE FOR TEMPCHART CODE
+  
+  
+      //finds daily chance of rain from parsed data from API
+      let dailyRain = new Array(7);
+      for (let i = 0; i < 7; i++) {
+        dailyRain[i] = parsed_json["daily"][i]["pop"];
+      }
+  
+      //finds daily humidity from parsed data from API
+      let dailyHumidity = new Array(7);
+      for (let i = 0; i < 7; i++) {
+        dailyHumidity[i] = parsed_json["daily"][i]["humidity"];
+      }
+  
+      //finds daily wind speed from parsed data from API
+      let dailyWindSpeed = new Array(7);
+      for (let i = 0; i < 7; i++) {
+        dailyWindSpeed[i] = parsed_json["daily"][i]["wind_speed"];
+      }
+  
+      //finds daily temperature from parsed data from API
+      let dailyTemp = new Array(7);
+      for (let i = 0; i < 7; i++) {
+        dailyTemp[i] = parsed_json["daily"][i]["temp"]["day"];
+      }
+  
+      
+      setR(ii);
+  
+      // set states for fields so they could be rendered later on
+      setData({
+        locate: location,
+        temp: temp_c,
+        cond: conditions,
+        wid: id,
+        dailyRain,
+        dailyTemp,
+        iconArray,
+        dailyHumidity,
+        dailyWindSpeed,
+        currentRain,
+        hourlyTemp
+      });
+    };
+
+
+
+
     let url =
       "https://api.openweathermap.org/data/2.5/onecall?lat=51.5074&lon=0.1278&units=metric&appid=79782262247ddb1d61a5a42406f46966";
     $.ajax({
@@ -259,7 +264,7 @@ const Iphone = () => {
     setMounted(false);
 
     
-  }, []);
+  }, [day]);
 
   useEffect(() => {
     if (mounted) {
@@ -277,6 +282,8 @@ const Iphone = () => {
     if (data.temp) {
       setTempStyles(`${"temperature"} ${"filled"}`);
 
+      //change background depending on what the current weather is like. This is so that the background 
+      //represents the current weather.
       if (data && data.wid == "800") {
         setBackground("/clear.jpg");
       } else if (data && data.wid == "801") {
@@ -301,6 +308,40 @@ const Iphone = () => {
 
   // formats date to display info
 
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+  //variable for day number and month
+  let datesArray = new Array(7);
+  let tempDate = day;                                                                                                                                                                                                                             
+  for (let i = 0; i<7;i++){
+    datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
+    tempDate.setDate(tempDate.getDate()+1)
+  }
+
+  //data in daily rain is a decimal. Here we change it to a percentage (if it is defined)
+  const formatData= data.dailyRain ? data.dailyRain.map((data)=>(data*=100)) : [];
+
+  //creating the graphs we will be displaying in the app. Graphs are lists of objects. Each object represents a line
+  //in the line chart
+  const graph1=[{
+    type: 'Chance of Rain',
+    x: datesArray,
+    y: formatData
+  },
+  {
+    type: 'Humidity',
+    x: datesArray,
+    y: data.dailyHumidity
+  }
+  ]
+  const graph2=[{
+  type: 'Hourly Temperature',
+    x: hourtimings,
+    y: hourT
+  }]
+
+
+  //displaying everything
   return (
     document.body.style.backgroundImage = `url(img/${background})`,
     document.body.style.backgroundSize = '414px 100%',
@@ -364,7 +405,7 @@ const Iphone = () => {
         
           <div className="Banner">
             <div className="mngbttn">
-              <button onClick={displayGraphsFX}> {displayGraph? "Normal View" :  "Graph View" } </button>
+              <button onClick={displayGraphsFX}> {displayGraph? "Normal View" : "Graph View"} </button>
             </div>
           </div>
 	{/* ---------- END END -----------------------    LOCATION BUTTONS OR BANNERS    ----------------------------------- END END----------------- */}
@@ -398,19 +439,15 @@ const Iphone = () => {
     {/* Displays the Accordions or the Graphs, whenever the "Graph Display" button is clicked on */}
       { displayGraph?
         <div>
-          <hourlyT.Provider value={{deet: [hourT, setH], timings: [hourtimings, setHourTimings]}}>
-              <TempChart/>
-          </hourlyT.Provider>
-
-          
-            <div>
-              <LineChart rain={data.dailyRain} humidity={data.dailyHumidity}/> 
-                <br></br>
-            </div>
+            {/* line charts rendered here */}
+            <LineChart data={graph1} title="Chance of Rain and Humidity (%)"/> 
+            <LineChart data={graph2} title="Hourly Temperature (°C)"/> 
+            <br></br>
         </div>
       : 
       
         <div style={{textAlign: "center"}}>
+          {/* Accordions rendered here with data passed into them */}
           <SimpleAccordion title='Chance of Rain' dataArray={data.dailyRain}/>
           <SimpleAccordion title='Wind' dataArray={data.dailyWindSpeed}/>
           <SimpleAccordion title='Humidity' dataArray={data.dailyHumidity}/>

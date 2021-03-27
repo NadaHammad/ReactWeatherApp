@@ -4,7 +4,7 @@ import './dayview.css';
 
 const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
   let day = new Date();
-  const [today] = useState(day);
+  const [today] = useState(day); 
   var [listItems,setListItems] = useState(<table></table>);
   var [hourlyTable,setHourlyTable] = useState(<table></table>);
   var [hourDisplay,setHourDisplay] =useState(false);

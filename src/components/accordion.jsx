@@ -8,6 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { useState, useEffect } from "react";
 import './accordionstyle.css';
 
+//styling for the accordion
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -28,55 +29,60 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+//calling the component itself - like a drop down which displays data based on what the user chooses to see
+//the data itself is dependent on what is passed into the accordion.
  const SimpleAccordion=({children, title, text, dataArray})=> {
   const classes = useStyles();
 
-  let day = new Date();
-  const [today] = useState(day);
-  var [listItems,setListItems] = useState(<table></table>);
+  let [listItems,setListItems] = useState(<table></table>);
 
 
   useEffect(() => {
-  if (dataArray) {
 
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    //find current day and create an array of dates for the upcoming week as according to today
+    let day = new Date();
+    if (dataArray) {
+      let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let datesArray = new Array(7);
+      let tempDate = day;                                                                                                                                                                                                                             
+      for (let i = 0; i<7;i++){
+        //gets month of temp date and adds the date number to it. The array of dates will be updated with these values.
+        datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
+        //increment tempDate by 1 to go to the next day
+        tempDate.setDate(tempDate.getDate()+1)
+      }
+      //create a row of dates to be included in the table inside the accordion.
+      let dateRow = datesArray.map((date) =>
+        <th key = {date}>{date}</th>
+      );
+      dateRow = (<tr key= "dates">{dateRow}</tr>);
 
-    //variable for day number and month
-    let datesArray = new Array(14);
-    let tempDate = today;                                                                                                                                                                                                                             
-    for (let i = 0; i<7;i++){
-
-      datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
-      
-      tempDate.setDate(tempDate.getDate()+1)
-    }
-    let dateRow = datesArray.map((date) =>
-      <th  key= {date}>{date}</th>
-    );
-    dateRow = (<tr key= "dates">{dateRow}</tr>);
-
-    //Row of data
-    if (title==="Wind") {
+      //creates a row for the data values
+      if (title==="Wind") {
+        //if the title prop is wind, then round each value and add "m/s" to the end (units)
         var dataRow = dataArray.map((metresPerSec,index) =>
-            <th key= {index}>{Math.round(metresPerSec)}m/s</th>
+          <th key= {index}>{Math.round(metresPerSec)}m/s</th>
         );
         dataRow = (<tr key= "temp">{dataRow}</tr>);
-    } else {
+      } else {
+        //if data is chance of rain or humidity (the only other two options), then round values and add % units
         dataRow = dataArray.map((percentData,index) =>
-            <th  key= {index}>{Math.round(percentData)}%</th>
+          <th key= {index}>{Math.round(percentData)}%</th>
         );
         dataRow = (<tr key= "temp">{dataRow}</tr>);
-    }    
-    setListItems(<table className="t4" cellPadding="0" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
+      }    
+      //add rows to table body
+      setListItems(<table className="t4" cellPadding="0" cellSpacing="0"><tbody>{dataRow}{dateRow}</tbody></table>)
+    }
+    //dependencies
+  },[dataArray, title]);
 
-  }
-
-  },[dataArray, title, today]);
-
+  //set children to listItems so that children can be returned
   children = listItems;
 
   return (
-      <div  className={classes.root}>
+    //classnames for styling purposes
+      <div className={classes.root}>
         <Accordion className={classes.accordion}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -90,8 +96,8 @@ const useStyles = makeStyles((theme) => ({
             {text}
             </Typography>
             <br></br>
+            {/* Table with data is displayed here */}
             {children}
-            
           </AccordionDetails>
         </Accordion>
       </div>

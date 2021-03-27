@@ -1,94 +1,57 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
+import { Line , Chart} from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
-import { useState, useEffect, useCallback } from "react";
-import {Chart} from 'react-chartjs-2';
 
-const LineChart= ({rain, humidity, temp}) => {
-  Chart.defaults.global.defaultFontColor = 'white';
+//A generic line graph. Uses any data provided to it through props
+const LineGraph=({data, title})=> {
 
-  let day = new Date();
-  const [today] = useState(day);
-  let [listItems,setListItems] = useState(<table></table>);
+    //default font colour - a styling choice
+Chart.defaults.global.defaultFontColor = 'white';
 
-  let datesArray = new Array(7);
- 
-//   useEffect(() => {
-  if (rain) {
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    //variable for day number and month
-    //var datesArray = new Array(7);
-    let tempDate = today;                                                                                                                                                                                                                             
-    for (let i = 0; i<7;i++){
-      datesArray[i] = (months[tempDate.getMonth()] +" " + tempDate.getDate());
-      tempDate.setDate(tempDate.getDate()+1)
+//structured so that data prop is a list of objects where each object is a line in the line graph. This is so that
+//we can generalise the graph. Doesn't matter if the x axis or y axis is different because this will be specified
+//in the object itself elsewhere. The lineChart itself will use any type of data provided to it.
+const formatData= data.map((element)=>(
+    {
+        //each line in the line graph will be given the following attributes:
+        //element.type is the name of the data series for the current line
+        //element.y is the y axis data series
+        label: element.type,
+        fill: true,
+        lineTension: 0.3,
+        backgroundColor: element.type==="Humidity" ? "rgba(225, 204,230, .3)" : "rgba(184, 185, 210, .3)",
+        borderColor: element.type==="Humidity" ? "rgb(205, 130, 158)": "rgb(35, 26, 136)",
+        borderCapStyle: "butt",
+        orderDash: [],
+        borderDashOffset: 0.0,
+        borderJoinStyle: "miter",
+        pointBorderColor: element.type==="Humidity" ? "rgb(205, 130,1 58)" : "rgb(35, 26, 136)",
+        pointBackgroundColor: "rgb(255, 255, 255)",
+        pointBorderWidth: 10,
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: "rgb(0, 0, 0)",
+        pointHoverBorderColor: "rgba(220, 220, 220,1)",
+        pointHoverBorderWidth: 2,
+        pointRadius: 1,
+        pointHitRadius: 10,
+        data: element.y        
     }
-    
-  }
-  const rainFormat = rain ? rain.map((data) => (data*100)) : []
-    
-  console.log(rain)
-  console.log(humidity)
-  console.log(datesArray)
-//  },[rain, today, datesArray, humidity]);
+))
 
-  const state = {
-    dataLine: {
-      labels: datesArray,
-      datasets: [
-        {
-          label: "Chance of Rain",
-          fill: true,
-          lineTension: 0.3,
-          backgroundColor: "rgba(225, 204,230, .3)",
-          borderColor: "rgb(205, 130, 158)",
-          borderCapStyle: "butt",
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: "miter",
-          pointBorderColor: "rgb(205, 130,1 58)",
-          pointBackgroundColor: "rgb(255, 255, 255)",
-          pointBorderWidth: 10,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgb(0, 0, 0)",
-          pointHoverBorderColor: "rgba(220, 220, 220,1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: rainFormat
-        },
-        {
-          label: "Humidity",
-          fill: true,
-          lineTension: 0.3,
-          backgroundColor: "rgba(184, 185, 210, .3)",
-          borderColor: "rgb(35, 26, 136)",
-          borderCapStyle: "butt",
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: "miter",
-          pointBorderColor: "rgb(35, 26, 136)",
-          pointBackgroundColor: "rgb(255, 255, 255)",
-          pointBorderWidth: 10,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: "rgb(0, 0, 0)",
-          pointHoverBorderColor: "rgba(220, 220, 220, 1)",
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: humidity
+    const state={
+        dataLine: {
+        labels: data[0].x, //data[0].x will give the x axis for the first object in the list of objects in data
+        datasets: formatData
         }
-      ]
     }
-  };
-
-  
     return (
-      <MDBContainer className="lineC">
-        <h3 id="hTemp" className="mt-5">Chance of Rain and Humidity data</h3>
-        <Line data={state.dataLine} options={{ responsive: true }} />
-      </MDBContainer>
+      <>
+      <MDBContainer> 
+          {/* the title prop is used to give each chart a different title */}
+        <h3 className="mt-5">{title}</h3>        
+        {data? <Line data={state.dataLine} options={{ responsive: true }} /> :""}      
+        </MDBContainer>
+      </>    
     );
-  
 }
-export default LineChart
+export default LineGraph
