@@ -272,7 +272,7 @@ const Iphone = () => {
     }
   }, [mounted, fetchWeatherData, fetchWeatherLocation1, fetchWeatherLocation2, fetchWeatherLocation3]);
 
-  // Once data [weather condtions] have been set. Then set tje BACKGROUND depending on weather condition ID 
+  // Once data [weather condtions] have been set. Then set the BACKGROUND depending on weather condition ID 
   useEffect(() => {
     if (data.temp) {
 

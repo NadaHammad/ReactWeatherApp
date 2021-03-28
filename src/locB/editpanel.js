@@ -65,8 +65,6 @@ export default function EditMenu(props){
         let location =  localStorage.getItem("nickname");
         let temp_c = Math.round(parsed_json["current"]["temp"] * 10)/10;
 
-        console.log(locVal);
-        console.log("testing");
 
         if(locVal == 1){
             setLocationData1({
@@ -94,8 +92,7 @@ export default function EditMenu(props){
         const fetchweth =  useCallback(() => {
             var inp = document.getElementById("boroughOptions").value;
             let url = "https://api.openweathermap.org/data/2.5/onecall?lat=" + b[inp][1] + "&lon=" + b[inp][2]  +"&units=metric&appid=79782262247ddb1d61a5a42406f46966";
-            console.log("hi");
-            console.log(locVal);
+
             $.ajax({
             url,
             dataType: "jsonp",
@@ -135,7 +132,7 @@ export default function EditMenu(props){
                                 </section>
                                 <form >
                                     {/* DISPLAYS THE BOROUGHS OF LONDON */}
-                                    <select className="f" id="boroughOptions">
+                                    <select className="f" id="boroughOptions" placeholder="">
                                         <option value="0" >Camden</option>
                                         <option value="1" >Brent</option>
                                         <option value="2" >Croydon</option>
