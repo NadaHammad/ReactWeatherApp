@@ -1,0 +1,200 @@
+/* // Styles for Location BTTNS or BANNERS
+// THE STYLING for the banners in the index.js is on the other stylesheet called
+// STYLE.LESS
+// Banner classes are named as div.Banner! */
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro.ttf") format("opentype");
+}
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro-Display-Black.otf") format("opentype");
+    src: url("../util/SF-Pro-Rounded-Black.otf") format("opentype");
+    color: black;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro-Display-Bold.otf") format("opentype");
+    src: url("../util/SF-Pro-Rounded-Bold.otf") format("opentype");
+    font-weight: bold;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("../util/SF-Pro-Display-Medium.otf") format("opentype");
+    font-size: medium
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.locbanner {
+  font-family: "SFPro";
+  font-size: medium;
+  font-weight: bold;
+  background: white;
+  border-radius: 2ex 0 0 2ex;
+  width: 160px;
+  color: rgb(0, 31, 204);
+  padding: 1px 3px 1px 20px;
+  float: right;
+  margin-left: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+.locbanner p{
+  margin: 0;
+  padding: 0;
+}
+.locbttn {
+  width: 70%;
+  display: inline;
+}
+.area, .temp {
+	display: inline;
+}
+.temp {
+  position: relative;
+  right: 5px;
+  margin-left: 10px;
+}
+
+/* // MANAGE LOCATIONS BUTTON */
+.mngbttn button{
+	width: 130px;
+	background: white;
+  font-family: "SFPro";
+	font-size:medium;
+	font-weight: bold;
+	color: rgb(0, 31, 204);
+	border-radius: 1ex 0 0 1ex;
+	border-color: none;
+	border-width: 5ch;
+	border-left: 1ch;
+  transition: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+	display: inline;
+	box-shadow: 0 2px rgb(122, 122, 122);
+}
+.mngbttn button:hover{
+    color: rgb(255, 13, 13);
+}
+.mngbttn button:active{
+	color: aliceblue;
+	background-color: #005eb6;
+	box-shadow: 0 2px rgb(187, 187, 187);
+}
+.locP {
+	padding: 0;
+	margin: 2px;
+	font-size: small;
+}
+
+/* // MENU BOX */
+.MenuBox {
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
+  border: 2pt solid rgb(212, 212, 212);
+  border-radius: 10px;
+  display: block;
+  position: absolute;
+  left: 35%;
+  top: -10%;
+  width: 65%;
+  text-align: left;
+  box-shadow: -3px 3px rgba(0, 0, 0, 0.603);
+}
+.MenuBox section,
+h4 {
+  text-align: center;
+  color: black;
+  padding: 0;
+  margin: 0;
+}
+p.titleP {
+  color: black;
+  font-family: "SFPro";
+  font-size: small;
+  text-align: left;
+  margin: 10px 0 3px 0;
+}
+.areaP {
+  display: flex;
+  justify-content: space-between;
+}
+.areaP button {
+  border: none;
+  background-color: transparent;
+}
+.areaP p {
+  text-align: left;
+  color: black;
+  border: 1px solid rgb(211, 211, 211);
+  width: 80%;
+  height: 100%;
+  padding: 1px;
+  margin: 0 0 0 5px;
+}
+.concanMain {
+  /* border:1px solid rgb(31, 31, 31); */
+  padding: 10px 40px 5px 40px;
+  margin: 0 15px 0 15px;
+}
+.concan {
+  display: flex;
+  justify-content: space-between;
+}
+.canonly {
+  text-align: center;
+}
+
+.can {
+  border: none;
+  background-color: transparent;
+  color: rgb(255, 0, 0);
+  text-decoration: underline;
+  font-weight: 700;
+}
+.canonly button:hover{
+	color: aliceblue;
+	background-color: #005eb6;
+	box-shadow: 0 2px rgb(187, 187, 187);
+}
+.con {
+  border: none;
+  background-color: transparent;
+  color: rgb(0, 3, 192);
+  text-decoration: underline;
+  font-weight: 700;
+}
+.editB {
+  padding: 0;
+  color: rgb(4, 0, 255);
+  text-decoration: underline;
+  margin-right: 15px;
+}
+
+/* STYLING FOR THE EDIT PANEL */
+.editPanel{
+  color: black;
+}
+.titleE{
+  font-size: small;
+}
+.areaP textarea {
+  resize: none;
+  color: black;
+  margin: 10px;
+  margin-top: 0"";
+}
+.f{
+  text-align: left;
+  margin-left: 10px;
+  display: block;
+  float: inline-start;
+}

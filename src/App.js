@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css"; // import required Components from 'components/'
 import Iphone from "./components/iphone/index.js";
 import React from "react";

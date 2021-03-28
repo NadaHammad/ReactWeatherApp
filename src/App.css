@@ -1,17 +1,42 @@
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro.ttf") format("opentype");
+}
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Black.otf") format("opentype");
+    src: url("util/SF-Pro-Rounded-Black.otf") format("opentype");
+    color: black;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Bold.otf") format("opentype");
+    src: url("util/SF-Pro-Rounded-Bold.otf") format("opentype");
+    font-weight: bold;
+  }
+
+@font-face {
+    font-family: SFPro;
+    src: url("util/SF-Pro-Display-Medium.otf") format("opentype");
+    font-size: medium
+}
+
 .App {
+  font-family: "SFPro";
   text-align: center;
+  box-sizing: border-box;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* Uncomment the next few lines to see which
+components are going out of the body display */
+/* *{
+  border:1px solid rgb(31, 31, 31);
+} */
 
 .App-header {
   background-color: #282c34;
@@ -33,6 +58,6 @@
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(180deg);
   }
 }
