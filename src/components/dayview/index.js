@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
+//style import
 import './dayview.css';
 
 
 const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
+  //gets the current date
   let day = new Date();
   const [today] = useState(day); 
+
+  //used to store and display the items for the current week
   var [listItems,setListItems] = useState(<table></table>);
+  //used to store and display the items for the selected day
   var [hourlyTable,setHourlyTable] = useState(<table></table>);
+  //State of the current view mode(weekly or hourly)
   var [hourDisplay,setHourDisplay] =useState(false);
+
+  //function to get the day string depending on the current day integer
   const dayString = (dayint) => {
     if (dayint % 7 === 0) {
       return "Sun";
@@ -28,7 +36,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
   };
 
 
-
+  //eliminates excess time from certain operations(makes it 24 hours)
   function formatTime(hour){
     return hour >= 24 ? hour-24 :hour;
   }
@@ -36,34 +44,40 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
   function hourlyInfo(index){
     //TIME OF START OF THE DAY
     const start = 6;
+    //time difference from the current tinme until the start of the next day
     let timeDifference = today.getHours();
     timeDifference = 24 + start - timeDifference;
+
+    //arrays for storing time,hourly weather, icon IDs and icon-styiling variable for the day separtion styling (vertical line on the current day)
     let timeArray = [];
     let hourArray = [];
     let iconArray = [];
-
     let iconStart = "";
 
 
-    //shows the current days hourly temp
+    //shows the current days hourly temp(index is the table colum tapped on the main index)
     if (index == 0){ 
       for(let i = 0;i < timeDifference;i++){
+        //gets all the data according to the selected day and puts in arrays
         timeArray.push(formatTime(today.getHours()+i));
         hourArray.push(hourlyTemp[i]["temp"]);
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
+        //if its the start of a new day set the iconstart as the pointer to know when the day starts
         if(formatTime(today.getHours()+i) == 0){
           iconStart = i;
         }
       }
 
-
+      //row for showing the table header
       let dayRow = (<thead key= "thead"><tr><th className="twoday" colSpan ={timeDifference - start}>Today</th><th className="tomtom3" colSpan ={start}>Tomorrow</th></tr></thead>);
+
       //row for showing time
       let timeRow = timeArray.map((time,index) =>
       <th  className="timess" id={(time == 0) ?"startTime": "none"} key= {index}>{time}:00</th>
       );
       timeRow = (<tr key= "timeRow">{timeRow}</tr>);
       ;
+
       //row for showing time
       const iconPath = 'http://openweathermap.org/img/wn/';
       let iconRow = iconArray.map((icon,index) =>
@@ -87,20 +101,22 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
     //shows tomorrows hourly temp
     else{
       for(let i = timeDifference;i<=timeDifference+24-start;i++){
+         //gets all the data according to the selected day and puts in arrays
         timeArray.push(formatTime(today.getHours()+i));
         hourArray.push(hourlyTemp[i]["temp"]);
         iconArray.push(hourlyTemp[i]["weather"][0]["icon"]);
 
       }
+      //row for showing the header for tomorrow
       let dayRow = (<thead key= "thead"><tr><th className="tomtom2" key= "dayRow" colSpan ={timeArray.length-1} >Tomorrow</th></tr></thead>);
       let timeRow = timeArray.map((time,index) =>
       <th className="timess" key= {index}>{time}:00</th>
       );
 
-      //row for showing tomorrow
+      //row for showing times
       timeRow = (<tr key= "timeRow">{timeRow}</tr>);
 
-      //row for showing time
+      //row for showing icons
       const iconPath = 'http://openweathermap.org/img/wn/';
       let iconRow = iconArray.map((icon,index) =>
       <th className="tableIcon"  key ={index} onClick={() => hourlyInfo(index)} ><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
@@ -130,6 +146,8 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
     for (let i =0; i<7;i++){
       days[i] = dayString(today.getDay()+i);
     }
+
+    //for for showing day names
     let dayRow = days.map((day,index) =>
       <th key= {index}>{day}</th>
     );
@@ -144,20 +162,20 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
       
       tempDate.setDate(tempDate.getDate()+1)
     }
+    //row for the dates displayed
     let dateRow = datesArray.map((date,index) =>
       <th className="tableDates" key= {index} onClick={() => hourlyInfo(index)}>{date}</th>
     );
     dateRow = (<tr key= "dateRow" >{dateRow}</tr>);
 
-    //iconrow
-    //keys = [0,1,2,3,4,5,6];
+    //icon row for the weekview
     const iconPath = 'http://openweathermap.org/img/wn/';
     let iconRow = iconArray.map((icon,index) =>
     <th  key ={index} onClick={() => hourlyInfo(index)} ><img style = {{ width: "100%" }} src = {(iconPath + icon + "@2x.png")}></img></th>
     );
     iconRow = (<tr key= "iconRow">{iconRow}</tr>);
 
-    //tempRow
+    //temperature row for the weekview
     let tempRow = tempArray.map((temp,index) =>
     <th key= {index}>{Math.round(temp)}°C</th>
     );
@@ -170,7 +188,7 @@ const DayView = ({ iconArray, rainArray, tempArray,hourlyTemp}) => {
 
   },[iconArray, rainArray, tempArray, today]);
   
-  //console.log(rainArray);
+  //render of the dayview element depending on the hourDisplay variable (to show hourly or weekly)
   return (hourDisplay ? <div>{hourlyTable}</div> : <div>{listItems}</div>);
 };
 
